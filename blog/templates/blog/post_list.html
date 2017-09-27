@@ -1,21 +1,33 @@
+{% load staticfiles %}
 <html>
     <head>
-        <title>Here is first view of this site</title>
+        <title>MgeliOS blog</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" >
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" >
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}" >
     </head>
     <body>
-        <h1>Hello!</h1>
-        {% for post in posts %}
-            <article>
-                <header>
-                    <h3><a href="">{{post.title}}</a></h3>
-                </header>
-                <div>
-                    <p>{{post.text|linebreaksbr}}</p>
+        <div class="page-header">
+            <h1>MGeliOS blog</h1>
+        </div>
+        <div class="content container">
+            <div class="row">
+                <div class="col-md-8">
+                    {% for post in posts %}
+                        <article class="post">
+                            <header>
+                                <h3><a href="">{{post.title}}</a></h3>
+                            </header>
+                            <div>
+                                <p>{{post.text|linebreaksbr}}</p>
+                            </div>
+                            <footer class="date">
+                                <p>published: {{post.published_date}}</p>
+                            </footer>
+                        </article>
+                    {% endfor %}
                 </div>
-                <footer>
-                    <p>published: {{post.published_date}}</p>
-                </footer>
-            </article>
-        {% endfor %}
+            </div>
+        </div>
     </body>
 </html>

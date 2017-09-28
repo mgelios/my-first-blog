@@ -1,33 +1,17 @@
-{% load staticfiles %}
-<html>
-    <head>
-        <title>MgeliOS blog</title>
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" >
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" >
-        <link rel="stylesheet" href="{% static 'css/blog.css' %}" >
-    </head>
-    <body>
-        <div class="page-header">
-            <h1>MGeliOS blog</h1>
-        </div>
-        <div class="content container">
-            <div class="row">
-                <div class="col-md-8">
-                    {% for post in posts %}
-                        <article class="post">
-                            <header>
-                                <h3><a href="">{{post.title}}</a></h3>
-                            </header>
-                            <div>
-                                <p>{{post.text|linebreaksbr}}</p>
-                            </div>
-                            <footer class="date">
-                                <p>published: {{post.published_date}}</p>
-                            </footer>
-                        </article>
-                    {% endfor %}
-                </div>
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    {% for post in posts %}
+        <article class="post">
+            <header>
+                <h3><a href="{% url 'post_detail' pk=post.pk %}">{{post.title}}</a></h3>
+            </header>
+            <div>
+                <p>{{post.text|linebreaksbr}}</p>
             </div>
-        </div>
-    </body>
-</html>
+            <footer class="date">
+                <p>published: {{post.published_date}}</p>
+            </footer>
+        </article>
+    {% endfor %}
+{% endblock %}

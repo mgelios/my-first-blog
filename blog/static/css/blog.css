@@ -44,12 +44,12 @@ h2, h3, h4 {
     float: right;
 }
 
-.delete {
+.post_controls {
     float: right;
     width: 100%;
 }
 
-.delete .btn{
+.post_controls .btn{
     float: right;
 }
 

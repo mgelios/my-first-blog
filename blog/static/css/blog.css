@@ -40,6 +40,20 @@ h2, h3, h4 {
     float: right;
 }
 
+.publish {
+    float: right;
+}
+
+.delete {
+    float: right;
+    width: 100%;
+}
+
+.delete .btn{
+    float: right;
+}
+
+
 .post-form textarea, .post-form input{
     width: 100%;
 }

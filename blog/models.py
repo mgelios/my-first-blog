@@ -3,6 +3,7 @@ from django.utils import timezone
 
 class Post(models.Model):
     author = models.ForeignKey('auth.User')
+    category = models.ForeignKey('blog.Category', default=None, null=True)
     title = models.CharField(max_length=200)
     text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
@@ -31,3 +32,10 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.text
+
+class Category(models.Model):
+    parent = models.ForeignKey('blog.Category')
+    name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name

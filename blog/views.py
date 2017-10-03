@@ -6,6 +6,8 @@ from django.utils import timezone
 from .models import Post, Comment
 from .forms import PostForm, CommentForm
 
+#Post actions section
+
 def post_list(request):
     posts = Post.objects.filter(published_date__isnull=False).order_by('-published_date')
     return render(request, 'blog/post_list.html', {'posts': posts})
@@ -58,6 +60,8 @@ def post_edit(request, pk):
         form = PostForm(instance=post)
     return render(request, 'blog/post_edit.html', {'form': form})
 
+#comment actions section
+
 def add_comment_to_post(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
@@ -82,3 +86,9 @@ def comment_remove(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
     comment.delete()
     return redirect('post_detail', pk=comment.post.pk)
+
+#category actions section
+@login_required
+def category_new(request, pk):
+    parent_category = get_object_or_404(Category, pk=pk)
+    

@@ -34,8 +34,9 @@ class Comment(models.Model):
         return self.text
 
 class Category(models.Model):
-    parent = models.ForeignKey('blog.Category')
+    parent = models.ForeignKey('blog.Category', blank=True , default=None , null=True)
     name = models.CharField(max_length=200)
+    created_date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.name

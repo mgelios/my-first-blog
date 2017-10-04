@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.shortcuts import render, get_object_or_404
 from django.shortcuts import redirect
 from django.utils import timezone
-from .models import Post, Comment
+from .models import Post, Comment, Category
 from .forms import PostForm, CommentForm
 
 #Post actions section
@@ -92,3 +92,7 @@ def comment_remove(request, pk):
 def category_new(request, pk):
     parent_category = get_object_or_404(Category, pk=pk)
     
+def category_list(request):
+    categories = Category.objects.order_by('-created_date')
+    return render(request, 'blog/category_list.html', {'categories': categories})
+

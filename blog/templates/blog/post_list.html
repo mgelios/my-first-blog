@@ -6,7 +6,7 @@
             <header>
                 <h3><a href="{% url 'post_detail' pk=post.pk %}">{{post.title}}</a></h3>
             </header>
-            <div>
+            <div class="main-content">
                 <p>{{post.text|linebreaksbr}}</p>
             </div>
             <footer class="date">
@@ -14,5 +14,6 @@
                 <p>published: {{post.published_date}}</p>
             </footer>
         </article>
+        <div class="line"></div>
     {% endfor %}
 {% endblock %}

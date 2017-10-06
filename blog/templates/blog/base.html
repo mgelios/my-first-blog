@@ -7,23 +7,96 @@
         <link rel="stylesheet" href="{% static 'css/blog.css' %}" >
     </head>
     <body>
-        <div class="page-header">
-            {% if user.is_authenticated %}
-                <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
-                <a href="{% url 'post_draft_list' %}" class="top-menu" ><span class="glyphicon glyphicon-edit"></span></a>
-                <p class="top-menu">Hello {{ user.username }} <small>(<a href="{% url 'logout' %}">Log out</a>)</small> </p>
-            {% else %}
-                <a href="{% url 'login' %}" class="top-menu" ><span class="glyphicon glyphicon-lock" ></span></a>
-            {% endif %}
-            <h1><a href="/">MGeliOS's blog</a></h1>
-        </div>
-        <div class="content container">
-            <div class="row">
-                <div class="col-md-8">
-                    {% block content %}
-                    {% endblock %}
+        <div class="wrapper">
+            <!-- Sidebar Holder -->
+            <nav id="sidebar">
+                <div class="sidebar-header">
+                    <h3>MGeiOS's blog</h3>
                 </div>
+
+                <ul class="list-unstyled components">
+                    <p>Hello {{user.username}}</p>
+                    <li class="active">
+                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Home</a>
+                        <ul class="collapse list-unstyled" id="homeSubmenu">
+                            <li><a href="#">Home 1</a></li>
+                            <li><a href="#">Home 2</a></li>
+                            <li><a href="#">Home 3</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">About</a>
+                        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Pages</a>
+                        <ul class="collapse list-unstyled" id="pageSubmenu">
+                        </ul>
+                    </li>
+                </ul>
+
+                <ul class="list-unstyled CTAs">
+                    <li><a href="#" class="download">Some button</a></li>
+                    <li><a href="#" class="article">Another button</a></li>
+                </ul>
+            </nav>
+
+            <!-- Page Content Holder -->
+            <div id="content">
+
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+
+                        <div class="navbar-header">
+                            <button type="button" id="sidebarCollapse" class="navbar-btn">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </button>
+                        </div>
+
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav navbar-right">
+                            {% if user.is_authenticated %}
+                                <li>
+                                    <a href="{% url 'post_new' %}">Add post</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'post_draft_list' %}">Approve posts</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'logout' %}">Log out</a>
+                                </li>
+                            {% else %}
+                                <li>
+                                    <a href="{% url 'login' %}">Log in</a>
+                                </li>
+                            {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+
+                {% block content %}
+                {% endblock %}
+
             </div>
         </div>
+
+
+
+
+
+        <!-- jQuery CDN -->
+         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+         <!-- Bootstrap Js CDN -->
+         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+         <script type="text/javascript">
+             $(document).ready(function () {
+                 $('#sidebarCollapse').on('click', function () {
+                     $('#sidebar').toggleClass('active');
+                     $(this).toggleClass('active');
+                 });
+             });
+         </script>
+
     </body>
 </html>

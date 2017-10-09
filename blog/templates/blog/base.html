@@ -16,26 +16,34 @@
 
                 <ul class="list-unstyled components">
                     <p>Hello {{user.username}}</p>
-                    <li class="active">
-                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Home</a>
-                        <ul class="collapse list-unstyled" id="homeSubmenu">
-                            <li><a href="#">Home 1</a></li>
-                            <li><a href="#">Home 2</a></li>
-                            <li><a href="#">Home 3</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">About</a>
-                        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Pages</a>
-                        <ul class="collapse list-unstyled" id="pageSubmenu">
-                        </ul>
-                    </li>
+                    {% for category in categories %}
+                        {% if not category.parent %}
+                            <li class="active">
+                                <a href="#submenu{{category.id}}" data-toggle="collapse" aria-expanded="false">
+                                    {{category.name}}
+                                </a>
+                                <ul class="collapse list-unstyled" id="submenu{{category.id}}">
+                                    {% for sub_category in categories %}
+                                        {% if sub_category.parent == category %}
+                                        <li>
+                                            <a href="#">
+                                                {{sub_category.name}}
+                                            </a>
+                                        </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
                 </ul>
 
                 <ul class="list-unstyled CTAs">
                     <li><a href="#" class="download">Some button</a></li>
                     <li><a href="#" class="article">Another button</a></li>
                 </ul>
+
+
             </nav>
 
             <!-- Page Content Holder -->

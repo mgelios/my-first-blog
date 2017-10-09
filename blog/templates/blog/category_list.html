@@ -3,7 +3,9 @@
 {% block content %}
     <div class="wrapper">
         {% for category in categories %}
-            <h3>{{ category.name }}</h3>
+            <div>
+                <h3>{{ category.name }}</h3>
+            </div>
         {% endfor %}
     </div>
 {% endblock %}

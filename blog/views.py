@@ -6,6 +6,7 @@ from django.utils import timezone
 from .models import Post, Comment, Category
 from .forms import PostForm, CommentForm
 
+
 #Post actions section
 
 def post_list(request):
@@ -93,6 +94,25 @@ def category_new(request, pk):
     parent_category = get_object_or_404(Category, pk=pk)
     
 def category_list(request):
-    categories = Category.objects.order_by('-created_date')
+    categories = get_category_list()
     return render(request, 'blog/category_list.html', {'categories': categories})
 
+def get_category_list():
+    categories = list(Category.objects.order_by('created_date'))
+    result = []
+    for category in categories:
+        if (category.parent is None):
+            result.append(category)
+            categories.remove(category)
+    i = 0
+    while i < result.__len__():
+        flag = False
+        for category in categories:
+            if (category.parent == result[i]):
+                result.insert(i+1, category)
+                categories.remove(category)
+                flag = True
+                break
+        if (not flag):
+            i += 1
+    return result

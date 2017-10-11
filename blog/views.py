@@ -3,22 +3,28 @@ from django.shortcuts import render
 from django.shortcuts import render, get_object_or_404
 from django.shortcuts import redirect
 from django.utils import timezone
-from .models import Post, Comment, Category
+from .models import Post, Comment, Category, CategoryBundle
 from .forms import PostForm, CommentForm
 
 
 #Post actions section
 
 def post_list(request):
+    categories = get_category_list()
+    bundles = get_category_bundle_list()
     posts = Post.objects.filter(published_date__isnull=False).order_by('-published_date')
-    return render(request, 'blog/post_list.html', {'posts': posts})
+    return render(request, 'blog/post_list.html', {'posts': posts, 'categories': categories, 'category_bundles': bundles})
 
 def post_detail(request, pk):
+    categories = get_category_list()
+    bundles = get_category_bundle_list()
     post = get_object_or_404(Post, pk=pk)
-    return render(request, 'blog/post_detail.html', {'post': post})
+    return render(request, 'blog/post_detail.html', {'post': post, 'categories': categories, 'category_bundles': bundles})
 
 @login_required
 def post_new(request):
+    categories = get_category_list()
+    bundles = get_category_bundle_list()
     if request.method == "POST":
         form = PostForm(request.POST)
         if (form.is_valid):
@@ -32,8 +38,10 @@ def post_new(request):
 
 @login_required
 def post_draft_list(request):
+    categories = get_category_list()
+    bundles = get_category_bundle_list()
     posts = Post.objects.filter(published_date__isnull=True).order_by('-created_date')
-    return render(request, 'blog/post_draft_list.html', {'posts': posts})
+    return render(request, 'blog/post_draft_list.html', {'posts': posts, 'categories': categories, 'category_bundles': bundles})
 
 @login_required
 def post_publish(request, pk):
@@ -50,6 +58,8 @@ def post_remove(request, pk):
 @login_required
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)
+    categories = get_category_list()
+    bundles = get_category_bundle_list()
     if request.method == "POST":
         form = PostForm(request.POST, instance=post)
         if (form.is_valid()):
@@ -59,12 +69,15 @@ def post_edit(request, pk):
             return redirect('post_detail', pk=post.pk)
     else:
         form = PostForm(instance=post)
-    return render(request, 'blog/post_edit.html', {'form': form})
+    return render(request, 'blog/post_edit.html', {'form': form, 'categories': categories, 'category_bundles': bundles})
 
 #comment actions section
 
 def add_comment_to_post(request, pk):
     post = get_object_or_404(Post, pk=pk)
+    categories = get_category_list()
+    bundles = get_category_bundle_list()
+
     if request.method == "POST":
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -74,7 +87,7 @@ def add_comment_to_post(request, pk):
             return redirect('post_detail', pk=post.pk)
     else:
         form = CommentForm()
-    return render(request, 'blog/add_comment_to_post.html', {'form': form})
+    return render(request, 'blog/add_comment_to_post.html', {'form': form, 'categories': categories, 'category_bundles': bundles})
 
 @login_required
 def comment_approve(request, pk):
@@ -95,24 +108,13 @@ def category_new(request, pk):
     
 def category_list(request):
     categories = get_category_list()
-    return render(request, 'blog/category_list.html', {'categories': categories})
+    bundles = get_category_bundle_list()
+    return render(request, 'blog/category_list.html', {'categories': categories, 'category_bundles': bundles})
 
 def get_category_list():
     categories = list(Category.objects.order_by('created_date'))
-    result = []
-    for category in categories:
-        if (category.parent is None):
-            result.append(category)
-            categories.remove(category)
-    i = 0
-    while i < result.__len__():
-        flag = False
-        for category in categories:
-            if (category.parent == result[i]):
-                result.insert(i+1, category)
-                categories.remove(category)
-                flag = True
-                break
-        if (not flag):
-            i += 1
-    return result
+    return categories
+
+def get_category_bundle_list():
+    bundles = list(CategoryBundle.objects.order_by('created_date'))
+    return bundles

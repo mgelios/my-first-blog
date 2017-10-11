@@ -16,25 +16,23 @@
 
                 <ul class="list-unstyled components">
                     <p>Hello {{user.username}}</p>
-                    {% for category in categories %}
-                        {% if not category.parent %}
-                            <li class="active">
-                                <a href="#submenu{{category.id}}" data-toggle="collapse" aria-expanded="false">
-                                    {{category.name}}
-                                </a>
-                                <ul class="collapse list-unstyled" id="submenu{{category.id}}">
-                                    {% for sub_category in categories %}
-                                        {% if sub_category.parent == category %}
+                    {% for category_bundle in category_bundles %}
+                        <li class="active">
+                            <a href="#submenu-{{category_bundle.id}}" data-toggle="collapse" aria-expanded="false">
+                                {{category_bundle.name}}
+                            </a>
+                            <ul class="collapse list-unstyled" id="submenu-{{category_bundle.id}}">
+                                {% for category in categories %}
+                                    {% if category.bundle == category_bundle %}
                                         <li>
                                             <a href="#">
-                                                {{sub_category.name}}
+                                                {{category.name}}
                                             </a>
                                         </li>
-                                        {% endif %}
-                                    {% endfor %}
-                                </ul>
-                            </li>
-                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </li>
                     {% endfor %}
                 </ul>
 

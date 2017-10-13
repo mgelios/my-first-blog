@@ -1,0 +1,21 @@
+@font-face{
+    font-family: 'Lobster';
+    src: url('./fonts/Lobster.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    background-color: maroon;
+    font-family: Lobster;
+}
+
+body a:visited, body a:hover, body a{
+    text-decoration: none;
+    color: white;
+    text-align: center;
+}
+
+body a p{
+    font-size: 30pt;
+}

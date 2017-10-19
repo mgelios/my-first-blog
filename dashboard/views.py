@@ -9,7 +9,7 @@ from dashboard.dashes.weather import OpenWeather
 #Post actions section
 
 def dash_list(request):
-    content = OpenWeather.forecast()
-    return render(request, 'base.html', {'content': content})
+    contents = OpenWeather.forecast()
+    return render(request, 'base.html', {'contents': contents})
 
 

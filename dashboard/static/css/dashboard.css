@@ -24,6 +24,10 @@ body a {
     text-align: center;
 }
 
+.wg-weather, .wg-currencies{
+    border: 1px solid white;
+}
+
 #dashboard-header {
     font-size: 30pt;
     padding-top: 30px;

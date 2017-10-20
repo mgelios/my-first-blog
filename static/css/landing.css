@@ -12,24 +12,26 @@
     font-style: normal;
 }
 
+
 body {
-    background-color: darkgreen;
-    font-family: Ubuntu;
-    color: white;
+    background-color: maroon;
+    font-family: Lobster;
 }
 
-body a {
+body a:visited, body a:hover, body a{
     text-decoration: none;
     color: white;
     text-align: center;
 }
 
-#dashboard-header {
+body a p{
     font-size: 30pt;
-    padding-top: 30px;
-    padding-bottom: 30px;
 }
 
-.wg-weather img{
-    filter: invert(1);
+#landing-header {
+    font-family: Ubuntu;
+    color: white;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 40px;
 }

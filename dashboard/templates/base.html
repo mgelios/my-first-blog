@@ -5,17 +5,20 @@
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" >
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" >
         <link rel="stylesheet" href="{% static 'css/dashboard.css' %}" >
+        <meta name="theme-color" content="darkgreen">
     </head>
     <body>
-        <div class="row" id="dashboard-header">
-            <div class="col-xs-4">
-                <a href="/">
-                    <span class="glyphicon glyphicon-home"></span>
-                </a>
+        <div class="container">
+            <div class="row" id="dashboard-header">
+                <div class="col-xs-4">
+                    <a href="/">
+                        <span class="glyphicon glyphicon-home"></span>
+                    </a>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            {% include './weather/widget.html' %}
+            <div class="row">
+                {% include './weather/widget.html' %}
+            </div>
         </div>
     </body>
 </html>

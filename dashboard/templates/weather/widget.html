@@ -1,20 +1,30 @@
+{% load staticfiles %}
+
 {% for content in contents%}
-<div class="col-xs-6">
-    <div class="row">
-        <div class="col-xs-12">
-            <h1>{{content.name}}</h1>
+    <div class="col-xs-6 wg-weather">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>{{content.name}}</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <h1>{{content.main.temp}}&deg;C</h1>
+                <h3>{{content.main.temp_min}}&deg;C .. {{content.main.temp_max}}&deg;C</h3>
+            </div>
+            <div class="col-xs-3">
+                {% for weather in content.weather %}
+                    <img src="../../static/img/weather/{{weather.icon}}.svg">
+                    <h3>{{weather.description}}</h3>
+                {% endfor %}
+            </div>
+            <div class="col-xs-3">
+                <p>Humidity: {{content.main.humidity}}%</p>
+                <p>Pressure: {{content.main.pressure}}</p>
+                {% if content.visibility %}
+                    <p>Visibility: {{content.visibility}} m</p>
+                {% endif %}
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-xs-6">
-            <h1>{{content.main.temp}}&deg;C</h1>
-            <h3>{{content.main.temp_min}}&deg;C - {{content.main.temp_max}}&deg;C</h3>
-        </div>
-        <div class="col-xs-6">
-            <p>Humidity: {{content.main.humidity}}%</p>
-            <p>Pressure: {{content.main.pressure}}</p>
-            <p>Visibility: {{content.visibility}} m</p>
-        </div>
-    </div>
-</div>
 {% endfor %}

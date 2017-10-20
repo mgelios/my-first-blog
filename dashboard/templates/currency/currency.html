@@ -6,13 +6,15 @@
             <h2>Курсы валют НБРБ к BYN</h2>
         </div>
     </div>
-    {% for currency in currencies %}
-        <div class="row">
-            <div class="col-xs-12">
-                <h3>
-                    {{currency.Cur_Scale}} {{currency.Cur_Abbreviation}} = {{currency.Cur_OfficialRate}} BYN
-                </h3>
+    {% if currencies %}
+        {% for currency in currencies %}
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3>
+                        {{currency.Cur_Scale}} {{currency.Cur_Abbreviation}} = {{currency.Cur_OfficialRate}} BYN
+                    </h3>
+                </div>
             </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
+    {% endif %}
 </div>

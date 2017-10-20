@@ -4,9 +4,18 @@ import urllib
 def get_currencies():
     json_content = []
 
-    json_content.append(json.loads(get_currency('298')))
-    json_content.append(json.loads(get_currency('292')))
-    json_content.append(json.loads(get_currency('145')))
+    currency = get_currency('298')
+    if currency and currency != '':
+        json_content.append(json.loads(currency))
+
+    currency = get_currency('292')
+    if currency and currency != '':
+        json_content.append(json.loads(currency))
+
+    currency = get_currency('145')
+    if currency and currency != '':
+        json_content.append(json.loads(currency))
+        
     return json_content
 
 def get_currency(id):

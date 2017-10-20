@@ -12,5 +12,8 @@ def get_currencies():
 def get_currency(id):
     base_url = 'http://nbrb.by/API/'
     query = 'ExRates/Rates/' + id
-    content = urllib.request.urlopen(base_url + query).read().decode('utf-8')
+    try:
+        content = urllib.request.urlopen(base_url + query).read().decode('utf-8')
+    except urllib.error.HTTPError:
+        print("error during fetching currency")
     return content

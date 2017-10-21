@@ -19,7 +19,7 @@ def get_currencies():
     return json_content
 
 def get_currency(id):
-    base_url = 'http://nbrb.by/API/'
+    base_url = 'http://www.nbrb.by/API/'
     query = 'ExRates/Rates/' + id
     content = ''
     try:

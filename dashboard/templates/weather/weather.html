@@ -4,7 +4,14 @@
     <div class="col-md-6 wg-weather">
         <div class="row">
             <div class="col-xs-12">
-                <h1>{{content.name}}</h1>
+                <h1>
+                    {{content.name}}
+                </h1>
+                <h2>
+                    {% for weather in content.weather %}
+                        {{weather.description}}
+                    {% endfor %}
+                </h2>
             </div>
         </div>
         <div class="row">
@@ -15,7 +22,6 @@
             <div class="col-xs-3">
                 {% for weather in content.weather %}
                     <img src="../../static/img/weather/{{weather.icon}}.svg">
-                    <h3>{{weather.description}}</h3>
                 {% endfor %}
             </div>
             <div class="col-xs-3">

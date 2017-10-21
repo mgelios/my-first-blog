@@ -5,13 +5,14 @@
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" >
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" >
         <link rel="stylesheet" href="{% static 'css/blog.css' %}" >
+        <meta name="theme-color" content="#7386D5">
     </head>
     <body>
         <div class="wrapper">
             <!-- Sidebar Holder -->
             <nav id="sidebar">
                 <div class="sidebar-header">
-                    <h3><a href="/">MGeliOS's blog</a></h3>
+                    <h3><a href="/">MG's home</a></h3>
                 </div>
 
                 <ul class="list-unstyled components">
@@ -57,8 +58,12 @@
                                 <span></span>
                             </button>
                         </div>
-
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav navbar-left">
+                                <li>
+                                    <a href="/blog/">BLOG HOME</a>
+                                </li>
+                            </ul>
                             <ul class="nav navbar-nav navbar-right">
                             {% if user.is_authenticated %}
                                 <li>

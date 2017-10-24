@@ -2,23 +2,23 @@ from rest_framework import serializers
 from articles.models import Article
 
 
-class ArticlePreivewSerializer(serializers.ModelSerializer):
+class ArticlePreviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
         fields = [
-        'id',
-        'title',
-        'created_at',
-        'announce',
-        'url',
+            'id',
+            'title',
+            'created_at',
+            'announce',
+            'url',
         ]
 
 class ArticleDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
         fields = [
-        'title',
-        'created_at',
-        'text',
+            'title',
+            'created_at',
+            'text',
         ]
 

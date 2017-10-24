@@ -25,7 +25,7 @@ SECRET_KEY = '2)@)1%ug25fohu&5hyv5y$_ak)1a@n_2i1^&#3#k7xa)us3q7#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['XX.XX.XX.XX']
+ALLOWED_HOSTS = ['XX.XX.XX.XX', 'mgelios.pythonanywhere.com']
 
 
 # Application definition

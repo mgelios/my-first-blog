@@ -10,5 +10,4 @@ urlpatterns = [
     url(r'', include('blog.urls')),
     url(r'', include('landing.urls')),
     url(r'', include('dashboard.urls')),
-    url(r'', include('articles.urls')),
 ]

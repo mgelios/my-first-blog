@@ -42,7 +42,6 @@ INSTALLED_APPS = (
     'blog',
     'landing',
     'dashboard',
-    'telegrambot',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -109,6 +108,3 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = '/'
-
-TELEGRAM_BOT_HANDLERS_CONF = "dashboard.dashes.telegram_bot.handlers"
-SITE_ID='3'

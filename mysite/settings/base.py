@@ -19,12 +19,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '2)@)1%ug25fohu&5hyv5y$_ak)1a@n_2i1^&#3#k7xa)us3q7#'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
+SECRET_KEY='2)@)1%ug25fohu&5hyv5y$_ak)1a@n_2i1^&#3#k7xa)us3q7#'
 ALLOWED_HOSTS = ['XX.XX.XX.XX', 'mgelios.pythonanywhere.com', 'localhost']
 
 
@@ -109,4 +104,3 @@ STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = '/'
 
-SECURE_SSL_REDIRECT = True

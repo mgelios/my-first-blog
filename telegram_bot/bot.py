@@ -7,6 +7,8 @@ bot = telebot.TeleBot(config.token)
 def repeat_all_messages(message):
     bot.send_message(message.chat.id, message.text)
 
+bot.set_webhook()
+
 if __name__ == '__main__':
     bot.polling(none_stop=True)
 

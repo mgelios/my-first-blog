@@ -108,3 +108,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = '/'
+
+SECURE_SSL_REDIRECT = True

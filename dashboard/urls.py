@@ -4,6 +4,6 @@ from . import views
 
 urlpatterns = [
     url(r'^dashboard/$', views.dash_list, name='dash_list'),
-    url(r'^', include('django_telegrambot.urls')),
+#    url(r'^', include('django_telegrambot.urls')),
 ]
 

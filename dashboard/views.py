@@ -9,10 +9,12 @@ from dashboard.dashes.currency import NBRBCurrency
 
 #Post actions section
 
-def dash_list(request):
+def weather_info(request):
     forecasts = OpenWeather.forecast()
-    currencies = NBRBCurrency.get_currencies()
+    return render(request, 'weather.html', {'forecasts': forecasts})
 
-    return render(request, 'weather.html', {'forecasts': forecasts, 'currencies': currencies})
+def currency_info(request):
+    currencies = NBRBCurrency.get_currencies()
+    return render(request, 'currency.html', {'currencies': currencies})
 
 

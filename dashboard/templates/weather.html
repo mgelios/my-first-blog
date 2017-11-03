@@ -1,4 +1,6 @@
-{% load staticfiles %}
+{% extends './base.html' %}
+
+{% block content %}
 
 {% for content in forecasts %}
     <div class="col-md-6 wg-weather">
@@ -34,3 +36,5 @@
         </div>
     </div>
 {% endfor %}
+
+{% endblock %}

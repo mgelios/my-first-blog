@@ -1,13 +1,25 @@
-@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+@font-face{
+    font-family: 'Lobster';
+    src: url('./fonts/Lobster.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face{
+    font-family: 'Ubuntu';
+    src: url('./fonts/Ubuntu.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 
 
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
     background: #fafafa;
 }
 
 p {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
     font-size: 1.1em;
     font-weight: 300;
     line-height: 1.7em;

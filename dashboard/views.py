@@ -13,6 +13,6 @@ def dash_list(request):
     forecasts = OpenWeather.forecast()
     currencies = NBRBCurrency.get_currencies()
 
-    return render(request, 'base.html', {'forecasts': forecasts, 'currencies': currencies})
+    return render(request, 'weather.html', {'forecasts': forecasts, 'currencies': currencies})
 
 

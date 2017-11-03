@@ -8,20 +8,22 @@
         <meta name="theme-color" content="darkgreen">
     </head>
     <body>
-        <div class="container">
+        <div class="container-fluid">
             <div class="row" id="dashboard-header">
-                <div class="col-xs-4">
+                <div class="col-xs-1">
                     <a href="/">
                         <span class="glyphicon glyphicon-home"></span>
                     </a>
                 </div>
+                <div class="col-xs-1">
+                    <a href="/">
+                        <span class="glyphicon glyphicon-cloud"></span>
+                    </a>
+                </div>
             </div>
             <div class="row">
-                {% include './ya_music/music.html' %}
-                {% include './currency/currency.html' %}
-            </div>
-            <div class="row">
-                {% include './weather/weather.html' %}
+                {% block content %}
+                {% endblock %}
             </div>
         </div>
     </body>

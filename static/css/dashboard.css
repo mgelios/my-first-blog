@@ -24,8 +24,14 @@ body a {
     text-align: center;
 }
 
-.wg-weather, .wg-currencies{
-    border: 1px solid white;
+.weather-city{
+    border-top: 1px solid white;
+    margin-top: 20px;
+}
+
+.wg-forecast {
+    border-left: 1px solid white;
+    padding-top: 10px;
 }
 
 #dashboard-header {
@@ -36,7 +42,8 @@ body a {
     padding-right: 20px;
 }
 
-.wg-weather img{
+.wg-weather img, .wg-forecast img{
     filter: invert(1);
+    max-width: 100%;
 }
 

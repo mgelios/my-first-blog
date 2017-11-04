@@ -5,7 +5,7 @@
     <div class="col-md-12 weather-city">
         <div class="row">
 
-            <div class="col-md-6 wg-weather">
+            <div class="col-md-6 col-xs-12 wg-weather">
                 <div class="row">
                     <div class="col-xs-12">
                         <h1>
@@ -39,7 +39,7 @@
             </div>
 
             {% for forecast in content.1.list|slice:":6" %}
-                <div class="col-md-1 wg-forecast">
+                <div class="col-md-1 col-xs-2 wg-forecast">
                     <p>{{forecast.dt|date:"D H:i"}}</p>
                     <p>{{forecast.weather.0.main}}<p>
                     <img src="../../static/img/weather/{{forecast.weather.0.icon}}.svg">

@@ -35,3 +35,11 @@ body a p{
     margin-top: 20px;
     margin-bottom: 40px;
 }
+
+#landing-header-left{
+    text-align: left;
+}
+
+#landing-header-right{
+    text-align: right;
+}

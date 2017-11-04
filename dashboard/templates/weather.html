@@ -1,38 +1,52 @@
 {% extends './base.html' %}
-
 {% block content %}
 
 {% for content in forecasts %}
-    <div class="col-md-6 wg-weather">
+    <div class="col-md-12 weather-city">
         <div class="row">
-            <div class="col-xs-12">
-                <h1>
-                    {{content.name}}
-                </h1>
-                <h2>
-                    {% for weather in content.weather %}
-                        {{weather.description}}
-                    {% endfor %}
-                </h2>
+
+            <div class="col-md-6 wg-weather">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h1>
+                            {{content.0.name}}
+                        </h1>
+                        <h2>
+                            {% for weather in content.0.weather %}
+                                {{weather.description}}
+                            {% endfor %}
+                        </h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <h1>{{content.0.main.temp}}&deg;C</h1>
+                        <h3>{{content.0.main.temp_min}}&deg;C .. {{content.0.main.temp_max}}&deg;C</h3>
+                    </div>
+                    <div class="col-xs-3">
+                        {% for weather in content.0.weather %}
+                            <img src="../../static/img/weather/{{weather.icon}}.svg">
+                        {% endfor %}
+                    </div>
+                    <div class="col-xs-3">
+                        <p>Humidity: {{content.0.main.humidity}}%</p>
+                        <p>Pressure: {{content.0.main.pressure}}</p>
+                        {% if content.0.visibility %}
+                            <p>Visibility: {{content.0.visibility}} m</p>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-6">
-                <h1>{{content.main.temp}}&deg;C</h1>
-                <h3>{{content.main.temp_min}}&deg;C .. {{content.main.temp_max}}&deg;C</h3>
-            </div>
-            <div class="col-xs-3">
-                {% for weather in content.weather %}
-                    <img src="../../static/img/weather/{{weather.icon}}.svg">
-                {% endfor %}
-            </div>
-            <div class="col-xs-3">
-                <p>Humidity: {{content.main.humidity}}%</p>
-                <p>Pressure: {{content.main.pressure}}</p>
-                {% if content.visibility %}
-                    <p>Visibility: {{content.visibility}} m</p>
-                {% endif %}
-            </div>
+
+            {% for forecast in content.1.list|slice:":6" %}
+                <div class="col-md-1 wg-forecast">
+                    <p>{{forecast.dt|date:"D H:i"}}</p>
+                    <p>{{forecast.weather.0.main}}<p>
+                    <img src="../../static/img/weather/{{forecast.weather.0.icon}}.svg">
+                    <p>{{forecast.main.temp}}&deg;C</p>
+                </div>
+            {% endfor %}
+
         </div>
     </div>
 {% endfor %}

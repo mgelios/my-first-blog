@@ -19,6 +19,12 @@
                         <span class="glyphicon glyphicon-log-in"></span>
                     </a>
                 </h1>
+            {% else %}
+                <h1>
+                    <a href="{% url 'logout' %}">
+                        <span class="glyphicon glyphicon-log-out"></span>
+                    </a>
+                </h1>
             {% endif %}
         </div>
     </div>

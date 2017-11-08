@@ -4,17 +4,15 @@
 {% block content %}
     <div class="row" id="landing-header">
         {% if not user.is_authenticated %}
-            <div class="col-md-4 col-xs-4" id="landing-header-left">
+            <div class="col-md-6 col-xs-6" id="landing-header-left">
                 <h1>Hello there, stranger</h1>
             </div>
         {% else %}
-            <div class="col-md-4 col-xs-4" id="landing-header-left">
+            <div class="col-md-6 col-xs-6" id="landing-header-left">
                 <h1>Hello there, {{user.first_name}}</h1>
             </div>
         {% endif %}
-        <div class="col-md-4 col-xs-4">
-        </div>
-        <div class="col-md-4 col-xs-4" id="landing-header-right">
+        <div class="col-md-6 col-xs-6" id="landing-header-right">
             {% if not user.is_authenticated %}
                 <h1>
                     <a href="{% url 'login' %}">
@@ -25,12 +23,12 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4 ">
+        <div class="col-md-4 col-xs-4">
             <a href="/blog/">
                 <p><span class="glyphicon glyphicon-book"></span> MG's blog</p>
             </a>
         </div>
-        <div class="col-md-4 ">
+        <div class="col-md-4 col-xs-4">
             <a href="/dashboard/weather/">
                 <p><span class="glyphicon glyphicon-th"></span> MG's dashboard</p>
             </a>

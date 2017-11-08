@@ -6,18 +6,26 @@
     {% endif %}
     <form method="POST" action="{% url 'login' %}">
         {% csrf_token %}
-        <table>
-            <tr>
-                <td>{{ form.username.label_tag }}</td>
-                <td>{{ form.username }}</td>
-            </tr>
-            <tr>
-                <td>{{ form.password.label_tag }}</td>
-                <td>{{ form.password }}</td>
-            </tr>
-        </table>
+        <div class="row" id="login-header">
+        </div>
+        
+        <div class="row" id="login-content">
+            <div class="col-md-2 col-xs-2">
+            </div>
 
-        <input type="submit" value="login" />
-        <input type="hidden" name="next" value="{{ next }}" />
+            <div class="col-md-8 col-xs-8">
+                <p>{{ form.username.label_tag }}</p>
+                <p>{{ form.username }}</p>
+                <p>{{ form.password.label_tag }}</p>
+                <p>{{ form.password }}</p>
+
+                <input type="submit" value="login" />
+                <input type="hidden" name="next" value="{{ next }}" />
+            </div>
+
+            <div class="col-md-2 col-xs-2">
+            </div>
+        </div>
+
     </form>
 {% endblock %}

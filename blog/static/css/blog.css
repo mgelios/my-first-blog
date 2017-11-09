@@ -237,3 +237,11 @@ a.article, a.article:hover {
 /* ---------------------------------------------------
     ARTICLES
 ----------------------------------------------------- */
+.date {
+    text-align: right;
+    width: 100%;
+}
+
+.wrapper div {
+    display: block;
+}

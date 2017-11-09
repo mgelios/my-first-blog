@@ -238,10 +238,15 @@ a.article, a.article:hover {
     ARTICLES
 ----------------------------------------------------- */
 .date {
+    padding-top: 20px;
     text-align: right;
     width: 100%;
 }
 
 .wrapper div {
     display: block;
+}
+
+.post {
+    padding-top: 25px;
 }

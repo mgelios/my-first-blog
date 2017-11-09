@@ -116,7 +116,6 @@ a[data-toggle="collapse"] {
 }
 
 a[aria-expanded="false"]::before, a[aria-expanded="true"]::before {
-    content: '\e259';
     display: block;
     position: absolute;
     right: 20px;
@@ -124,7 +123,6 @@ a[aria-expanded="false"]::before, a[aria-expanded="true"]::before {
     font-size: 0.6em;
 }
 a[aria-expanded="true"]::before {
-    content: '\e260';
 }
 
 
@@ -239,15 +237,3 @@ a.article, a.article:hover {
 /* ---------------------------------------------------
     ARTICLES
 ----------------------------------------------------- */
-.main-content {
-    width: 100%;
-}
-
-.date {
-    text-align: right;
-    width: 100%;
-}
-
-.wrapper div {
-    display: block;
-}

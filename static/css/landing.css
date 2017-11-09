@@ -43,3 +43,17 @@ body a p{
 #landing-header-right{
     text-align: right;
 }
+
+#login-header {
+    min-height: 50px;
+}
+
+#login-content{
+    text-align: center;
+    font-size: 24pt;
+    font-family: 'Ubuntu';
+}
+
+#login-content label {
+    color: white;
+}

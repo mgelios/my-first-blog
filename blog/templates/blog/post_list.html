@@ -1,19 +1,21 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-    {% for post in posts %}
-        <article class="post">
-            <header>
-                <h3><a href="{% url 'post_detail' pk=post.pk %}">{{post.title}}</a></h3>
-            </header>
-            <div class="main-content">
-                <p>{{post.text|linebreaksbr}}</p>
-            </div>
-            <footer class="date">
-                <a href="{% url 'post_detail' pk=post.pk %}">Comments: {{ post.approved_comments.count }}</a>
-                <p>published: {{post.published_date}}</p>
-            </footer>
-        </article>
-        <div class="line"></div>
-    {% endfor %}
+    <div class="container-fluid">
+        {% for post in posts %}
+            <article class="post">
+                <header>
+                    <h3><a href="{% url 'post_detail' pk=post.pk %}">{{post.title}}</a></h3>
+                </header>
+                <div class="main-content">
+                    <p>{{post.text|linebreaksbr}}</p>
+                </div>
+                <footer class="date">
+                    <a href="{% url 'post_detail' pk=post.pk %}">Comments: {{ post.approved_comments.count }}</a>
+                    <p>published: {{post.published_date}}</p>
+                </footer>
+            </article>
+            <div class="line"></div>
+        {% endfor %}
+    </div>
 {% endblock %}

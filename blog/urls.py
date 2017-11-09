@@ -13,4 +13,5 @@ urlpatterns = [
     url(r'^blog/comment/(?P<pk>\d+)/approve/$', views.comment_approve, name='comment_approve'),
     url(r'^blog/comment/(?P<pk>\d+)/remove/$', views.comment_remove, name='comment_remove'),
     url(r'^blog/categories/$', views.category_list, name='category_list'),
+    url(r'^blog/category/(?P<pk>\d+)/$', views.category_posts, name='category'),
 ]

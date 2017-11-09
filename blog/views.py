@@ -118,3 +118,10 @@ def get_category_list():
 def get_category_bundle_list():
     bundles = list(CategoryBundle.objects.order_by('created_date'))
     return bundles
+
+def category_posts(request, pk):
+    categories = get_category_list()
+    bundles = get_category_bundle_list()
+    category = get_object_or_404(Category, pk=pk)
+    posts = Post.objects.filter(category=category,published_date__isnull=False).order_by('-published_date')
+    return render(request, 'blog/post_list.html', {'categories': categories, 'category_bundles': bundles, 'posts': posts})

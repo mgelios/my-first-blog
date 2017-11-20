@@ -38,7 +38,10 @@ def weather(bot, update):
 
 def currency(bot, update):
     currencies = NBRBCurrency.get_currencies()
-    bot.sendMessage(update.message.chat_id, text="some currencies")
+    final_string = 'Курсы валют от НБРБ: \n'
+    for currency in currencies:
+        final_string = final_string + '{0} {1} = {2} BYN \n'.format(currency.get('Cur_Scale'), currency.get('Cur_Abbreviation'), currency.get('Cur_OfficialRate'))
+    bot.sendMessage(update.message.chat_id, text=final_string)
 
 
 def main():
@@ -48,6 +51,9 @@ def main():
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("help", help))
     dp.add_handler(CommandHandler("weather", weather))
+    dp.add_handler(CommandHandler("погода", weather))
+    dp.add_handler(CommandHandler("currency", currency))
+    dp.add_handler(CommandHandler("курсы", currency))
 
     dp.add_handler(MessageHandler([Filters.text], echo))
 

@@ -15,7 +15,10 @@ def weather_info(request):
 
 def currency_info(request):
     currencies = NBRBCurrency.get_currencies()
-    print(currencies)
+    final_string = 'Курсы валют от НБРБ: \n'
+    for currency in currencies:
+        final_string = final_string + '{0} {1} = {2} BYN \n'.format(currency.get('Cur_Scale'), currency.get('Cur_Abbreviation'), currency.get('Cur_OfficialRate'))
+    print(final_string)
     return render(request, 'currency.html', {'currencies': currencies})
 
 

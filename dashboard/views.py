@@ -15,6 +15,7 @@ def weather_info(request):
 
 def currency_info(request):
     currencies = NBRBCurrency.get_currencies()
+    print(currencies)
     return render(request, 'currency.html', {'currencies': currencies})
 
 

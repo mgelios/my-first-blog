@@ -22,7 +22,7 @@ INSTALLED_APPS = (
 
 DJANGO_TELEGRAMBOT = {
     'MODE': 'WEBHOOK',
-    'WEBHOOK_SITE': 'mgelios.pythonanywhere.com',
+    'WEBHOOK_SITE': 'https://mgelios.pythonanywhere.com',
     'BOTS': [{
         'TOKEN': '460933242:AAEh67xQVBeT37EwN84iudv80tbYBsOY1QA'
     }]

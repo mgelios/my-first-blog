@@ -1,5 +1,7 @@
 from .base import *
 
+MG_APP_LOCATION = 'local'
+
 DEBUG = True
 
 SECRET_KEY = 'local secret key'
@@ -16,6 +18,7 @@ INSTALLED_APPS = (
     'landing',
     'dashboard',
     'django_telegrambot',
+    'viberbot',
 )
 
 DJANGO_TELEGRAMBOT = {

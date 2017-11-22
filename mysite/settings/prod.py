@@ -1,5 +1,7 @@
 from .base import *
 
+MG_APP_LOCATION = 'prod'
+
 DEBUG=False
 
 SECRET_KEY = 'prod secret key'
@@ -18,6 +20,7 @@ INSTALLED_APPS = (
     'landing',
     'dashboard',
     'django_telegrambot',
+    'viberbot',
 )
 
 DJANGO_TELEGRAMBOT = {

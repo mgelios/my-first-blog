@@ -23,8 +23,6 @@ bot_configuration = BotConfiguration(
 )
 
 viber = Api(bot_configuration)
-if (settings.MG_APP_LOCATION == 'prod'):
-    viber.set_webhook('https://mgelios.pythonanywhere.com/viber/mgbot')
 
 def weather_info(request):
     forecasts = OpenWeather.forecast()

@@ -18,7 +18,6 @@ INSTALLED_APPS = (
     'landing',
     'dashboard',
     'django_telegrambot',
-    'viberbot',
 )
 
 DJANGO_TELEGRAMBOT = {

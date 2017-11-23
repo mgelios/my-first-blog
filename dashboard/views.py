@@ -9,6 +9,7 @@ from django.http import HttpResponse
 
 from dashboard.dashes.weather import OpenWeather
 from dashboard.dashes.currency import NBRBCurrency
+from dashboard.dashes.crypto_currency import CryptoCurrency
 
 from viberbot import Api
 from viberbot.api.messages.text_message import TextMessage
@@ -30,7 +31,8 @@ def weather_info(request):
 
 def currency_info(request):
     currencies = NBRBCurrency.get_currencies()
-    return render(request, 'currency.html', {'currencies': currencies})
+    crypto_currencies = CryptoCurrency.get_currencies()
+    return render(request, 'currency.html', {'currencies': currencies, 'crypto_currencies': crypto_currencies})
 
 def viber_mgbot(request):
     if request.method == "POST":

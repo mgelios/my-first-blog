@@ -4,14 +4,17 @@
 {% block content %}
     <div class="row" id="landing-header">
         {% if not user.is_authenticated %}
-            <div class="col-md-6 col-xs-6" id="landing-header-left">
+            <div class="col-md-8 col-xs-8" id="landing-header-left">
                 <h1>Hello there, stranger</h1>
             </div>
         {% else %}
             <div class="col-md-1 col-xs-1">
-                <h1><a href="{% url 'messages' %}"><span class="glyphicon glyphicon-envelope"></span></a></h1>
+                <h1><a href="/"><span class="glyphicon glyphicon-home"></span></a></h1>
             </div>
-            <div class="col-md-7 col-xs-7" id="landing-header-left">
+            <div class="col-md-1 col-xs-1">
+                <h1><a href="#"><span class="glyphicon glyphicon-pencil"></span></a></h1>
+            </div>
+            <div class="col-md-6 col-xs-6" id="landing-header-left">
                 <h1>Hello there, {{user.first_name}}</h1>
             </div>
         {% endif %}
@@ -29,18 +32,6 @@
                     </a>
                 </h1>
             {% endif %}
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4 col-xs-4">
-            <a href="/blog/">
-                <p><span class="glyphicon glyphicon-book"></span>  Blog</p>
-            </a>
-        </div>
-        <div class="col-md-4 col-xs-4">
-            <a href="/dashboard/weather/">
-                <p><span class="glyphicon glyphicon-th"></span>  Dashboard</p>
-            </a>
         </div>
     </div>
 {% endblock %}

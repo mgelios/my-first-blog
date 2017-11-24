@@ -19,3 +19,6 @@ def secret_message_new(request):
 @login_required
 def secret_message_list(request):
     return render(request, 'landing/main.html')
+
+def messages(request):
+    return render(request, 'landing/messages.html')

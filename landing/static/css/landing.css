@@ -24,6 +24,10 @@ body a:visited, body a:hover, body a{
     text-align: center;
 }
 
+.message {
+    color: white;
+}
+
 body a p{
     font-size: 30pt;
 }

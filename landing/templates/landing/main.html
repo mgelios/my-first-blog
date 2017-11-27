@@ -9,7 +9,7 @@
             </div>
         {% else %}
             <div class="col-md-1 col-xs-1">
-                <h1><a href="{% url 'messages' %}"><span class="glyphicon glyphicon-envelope"></span></a></h1>
+                <h1><a href="{% url 'secret_message_list' %}"><span class="glyphicon glyphicon-envelope"></span></a></h1>
             </div>
             <div class="col-md-7 col-xs-7" id="landing-header-left">
                 <h1>Hello there, {{user.first_name}}</h1>

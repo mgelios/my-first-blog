@@ -34,4 +34,18 @@
             {% endif %}
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-2 col-xs-1">
+            
+        </div>
+        <div class="col-md-8 col-xs-10 message">
+            {% for secret_message in secret_messages %}
+                <h3>{{secret_message.text}}</h3>
+            {% endfor %}
+        </div>
+        <div class="col-md-2 col-xs-1">
+            
+        </div>
+    </div>
 {% endblock %}

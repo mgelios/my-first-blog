@@ -18,7 +18,5 @@ def secret_message_new(request):
 
 @login_required
 def secret_message_list(request):
-    return render(request, 'landing/main.html')
-
-def messages(request):
-    return render(request, 'landing/messages.html')
+    messages = SecretMessage.objects.filter(text__isnull=False).order_by('date')
+    return render(request, 'landing/messages.html', {'secret_messages': messages})

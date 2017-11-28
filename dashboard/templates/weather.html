@@ -29,10 +29,10 @@
                         {% endfor %}
                     </div>
                     <div class="col-xs-3">
-                        <p>Humidity: {{content.0.main.humidity}}%</p>
-                        <p>Pressure: {{content.0.main.pressure}}</p>
+                        <h3>Humidity: {{content.0.main.humidity}}%</h3>
+                        <h3>Pressure: {{content.0.main.pressure}}</h3>
                         {% if content.0.visibility %}
-                            <p>Visibility: {{content.0.visibility}} m</p>
+                            <h3>Visibility: {{content.0.visibility}} m</h3>
                         {% endif %}
                     </div>
                 </div>
@@ -40,10 +40,10 @@
 
             {% for forecast in content.1.list|slice:":6" %}
                 <div class="col-md-1 col-xs-2 wg-forecast">
-                    <p>{{forecast.dt|date:"D H:i"}}</p>
-                    <p>{{forecast.weather.0.main}}<p>
+                    <h3>{{forecast.dt|date:"D H:i"}}</h3>
+                    <h3>{{forecast.weather.0.main}}<h3>
                     <img src="../../static/img/weather/{{forecast.weather.0.icon}}.svg">
-                    <p>{{forecast.main.temp}}&deg;C</p>
+                    <h3>{{forecast.main.temp}}&deg;C</h3>
                 </div>
             {% endfor %}
 

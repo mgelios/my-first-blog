@@ -16,16 +16,13 @@
 body {
     background-color: maroon;
     font-family: Lobster;
+    color: #C08656;
 }
 
 body a:visited, body a:hover, body a{
     text-decoration: none;
-    color: white;
     text-align: center;
-}
-
-.message {
-    color: white;
+    color: #C08656;
 }
 
 body a p{
@@ -34,7 +31,6 @@ body a p{
 
 #landing-header {
     font-family: Ubuntu;
-    color: white;
     text-align: center;
     padding-top: 20px;
     padding-bottom: 20px;
@@ -62,4 +58,8 @@ body a p{
 
 #login-content label {
     color: white;
+}
+
+input {
+    color: black;
 }

@@ -31,8 +31,7 @@ def weather_info(request):
 
 def currency_info(request):
     currencies = NBRBCurrency.get_currencies()
-    crypto_currencies = CryptoCurrency.get_currencies()
-    return render(request, 'currency.html', {'currencies': currencies, 'crypto_currencies': crypto_currencies})
+    return render(request, 'currency.html', {'currencies': currencies })
 
 def viber_mgbot(request):
     if request.method == "POST":
@@ -44,6 +43,9 @@ def viber_mgbot(request):
             ])
     return HttpResponse(status=200)
 
+def crypto_currency_info(request):
+    crypto_currencies = CryptoCurrency.get_currencies()
+    return render(request, 'crypto_currency.html', {'crypto_currencies': crypto_currencies})
 
 
 

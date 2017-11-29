@@ -56,3 +56,16 @@ body a {
 .currencies-header h2{
     text-align: center;
 }
+
+.wg-crypto-list>.row:nth-child(even){
+    background-color: #134B13;
+}
+
+.wg-crypto-change-column{
+    text-align: center;
+}
+
+.wg-crypto-header {
+    background-color: #0E3838;
+    padding-bottom: 15px;
+}

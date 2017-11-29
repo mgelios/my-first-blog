@@ -1,9 +1,10 @@
 {% load staticfiles %}
 <html>
     <head>
+        <meta charset="utf-8">
         <title>mgelios's dashboard</title>
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" >
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" >
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" >
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css" >
         <link rel="stylesheet" href="{% static 'css/dashboard.css' %}" >
         <meta name="theme-color" content="darkgreen">
     </head>
@@ -23,6 +24,11 @@
                 <div class="col-xs-1">
                     <a href="/dashboard/currencies/">
                         <span class="glyphicon glyphicon-euro"></span>
+                    </a>
+                </div>
+                <div class="col-xs-1">
+                    <a href="/dashboard/crypto_currencies/">
+                        <span class="glyphicon glyphicon-bitcoin" aria-hidden="true"></span>
                     </a>
                 </div>
             </div>

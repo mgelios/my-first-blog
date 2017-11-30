@@ -1,4 +1,4 @@
-{% extends './base.html' %}
+ {% extends './base.html' %}
 
 {% block content %}
 
@@ -23,6 +23,28 @@
             </div>
         {% endfor %}
     {% endif %}
+</div>
+
+
+<div class="row">
+    <div class="col-xs-1 col-md-1">
+    </div>
+    <div class="col-xs-10 col-md-10">
+        <div class="ct-chart ct-major-seventh"></div>
+    </div>
+    <div class="col-xs-1 col-md-1">
+    </div>
+    <script>
+        var data={
+            series: [[
+                {% for data in statistics %}
+                    {{data.Cur_OfficialRate}},
+                {% endfor %}
+            ]]
+        };
+
+        new Chartist.Line('.ct-chart', data);
+    </script>
 </div>
 
 {% endblock %}

@@ -77,3 +77,16 @@ body a {
 .wg-list>.row:nth-child(even)>.wg-crypto-change-alert{
     background-color: #BE3030;
 }
+
+
+.ct-series-a .ct-line, .ct-series-a .ct-point {
+    stroke: #BE8555;
+}
+
+.ct-grids .ct-grid {
+    stroke: white;
+}
+
+.ct-labels .ct-label {
+    color: white;
+}

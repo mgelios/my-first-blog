@@ -7,7 +7,7 @@
     <h2>Курсы криптовалют:</h2>
 </div>
 
-<div class="col-md-12 col-xs-12 wg-crypto-header">
+<div class="col-md-12 col-xs-12 wg-header">
     <div class="row">
         <div class="col-xs-1 col-md-1">
             <h3>Rank</h3>
@@ -30,7 +30,7 @@
     </div>
 </div>
 
-<div class="col-md-12 col-xs-12 wg-crypto-list">
+<div class="col-md-12 col-xs-12 wg-list">
     {% if crypto_currencies %}
         {% for crypto_currency in crypto_currencies.0 %}
             <div class="row">
@@ -49,9 +49,15 @@
                 <div class="col-xs-2 col-md-2">
                     <h3>{{crypto_currency.price_btc}}</h3>
                 </div>
-                <div class="col-xs-2 col-md-2 wg-crypto-change-column">
-                    <h3>{{crypto_currency.percent_change_24h}} %</h3>
-                </div>
+                {% if crypto_currency.percent_change_24h.0 == '-' %}
+                    <div class="col-xs-2 col-md-2 wg-crypto-change-column wg-crypto-change-alert">
+                        <h3>{{crypto_currency.percent_change_24h}} %</h3>
+                    </div>
+                {% else %}
+                    <div class="col-xs-2 col-md-2 wg-crypto-change-column">
+                        <h3>{{crypto_currency.percent_change_24h}} %</h3>
+                    </div>
+                {% endif %}
             </div>
         {% endfor %}
     {% endif %}

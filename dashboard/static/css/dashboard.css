@@ -61,11 +61,19 @@ body a {
     text-align: center;
 }
 
-.wg-crypto-header {
+.wg-crypto-change-alert{
+    background-color: #BE5555;
+}
+
+.wg-header {
     background-color: #0E3838;
     padding-bottom: 15px;
 }
 
-.wg-crypto-list>.row:nth-child(even){
+.wg-list>.row:nth-child(even){
     background-color: #134B13;
+}
+
+.wg-list>.row:nth-child(even)>.wg-crypto-change-alert{
+    background-color: #BE3030;
 }

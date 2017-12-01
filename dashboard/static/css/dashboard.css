@@ -79,6 +79,10 @@ body a {
 }
 
 
+.ct-chart {
+    background-color: #004B4B;
+}
+
 .ct-series-a .ct-line, .ct-series-a .ct-point {
     stroke: #BE8555;
 }
@@ -88,7 +92,7 @@ body a {
 }
 
 .ct-grids .ct-grid {
-    stroke: white;
+    stroke: #4AA5A5;
 }
 
 .ct-labels .ct-label {

@@ -31,7 +31,7 @@ def weather_info(request):
 
 def currency_info(request):
     currencies = NBRBCurrency.get_currencies()
-    statistics = NBRBCurrency.get_statistics()
+    statistics = NBRBCurrency.get_statistics_list()
     return render(request, 'currency.html', {'currencies': currencies, 'statistics': statistics })
 
 def viber_mgbot(request):

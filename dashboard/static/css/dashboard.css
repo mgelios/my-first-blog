@@ -83,6 +83,10 @@ body a {
     stroke: #BE8555;
 }
 
+.ct-series-b .ct-line, .ct-series-b .ct-point {
+    stroke: #BE5555;
+}
+
 .ct-grids .ct-grid {
     stroke: white;
 }

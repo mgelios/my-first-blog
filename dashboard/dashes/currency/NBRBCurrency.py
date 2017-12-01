@@ -39,13 +39,21 @@ def get_currency(id):
         print(e)
     return content
 
-def get_statistics():
+def get_statistics_list():
+    json_content = []
+    id='145'
+    json_content.append(get_statistics(id))
+    id='292'
+    json_content.append(get_statistics(id))
+    return json_content
+
+
+def get_statistics(id):
     to_date = datetime.now()
     delta = timedelta(days=30)
     from_date = to_date - delta
     end_date = to_date.strftime('%d+%b+%Y')
     start_date = from_date.strftime('%d+%b+%Y')
-    id='145'
 
     base_url = 'http://www.nbrb.by/API/'
     query = 'ExRates/Rates/Dynamics/' + id + '?startDate='+ start_date + '&endDate=' + end_date

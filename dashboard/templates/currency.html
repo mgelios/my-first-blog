@@ -30,25 +30,51 @@
         <h2>График курсов</h2>
     </div>
     <div class="row">
-        <div class="col-xs-12 col-md-12 chart-wrapper">
+        <div class="col-xs-12 col-md-6 chart-wrapper">
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    <h2>График USD:</h2>
+                </div>
+            </div>
             <div class="ct-chart ct-major-seventh"></div>
         </div>
+
+        <div class="col-xs-12 col-md-6 chart-wrapper">
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    <h2>График EUR:</h2>
+                </div>
+            </div>
+            <div class="ct-chart-2 ct-major-seventh"></div>
+        </div>
+
         <script>
-            var data={
+            var data_0={
                 series: [[
                     {% for data in statistics.0 %}
                         {{data.Cur_OfficialRate}},
                     {% endfor %}
-                ],[
+                ]],
+            };
+
+            var data_1={
+                series: [[
                     {% for data in statistics.1 %}
                         {{data.Cur_OfficialRate}},
                     {% endfor %}
-                    ]],
+                ]],
             };
 
             new Chartist.Line(
                 '.ct-chart', 
-                data, 
+                data_0, 
+                {
+                    showArea: true
+                });
+
+            new Chartist.Line(
+                '.ct-chart-2', 
+                data_1, 
                 {
                     showArea: true
                 });

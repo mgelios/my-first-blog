@@ -25,6 +25,26 @@
     {% endif %}
 </div>
 
+<div class="col-md-6 col-xs-6 wg-currencies">
+    <div class="row">
+        <div class="col-xs-12">
+            <h2>Конверсия:</h2>
+        </div>
+    </div>
+    {% if conversions %}
+        {% for conversion in conversions %}
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3>
+                        {{conversion.0}} : {{conversion.1}}
+                    </h3>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+
 <div class="col-xs-12 col-md-12">
     <div class="row currencies-header">
         <h2>График курсов</h2>

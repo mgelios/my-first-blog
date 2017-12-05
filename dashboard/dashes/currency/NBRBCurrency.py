@@ -3,28 +3,35 @@ import urllib
 from datetime import timedelta
 from datetime import datetime
 
+currency_list = ['USD', 'EUR', 'RUB', 'UAH', 'CNY']
+
+currency_values = {'USD': 0, 'EUR': 0, 'RUB': 0, 'UAH': 0, 'CNY': 0}
+
+currency_conversion = [
+    ['USD','EUR'],
+    ['EUR','USD'],
+    ['USD','RUB'],
+    ['USD','UAH'],
+    ['USD','CNY']
+]
+
+def get_conversions():
+    result = []
+    for conversion in currency_conversion:
+        value = []
+        value.append(conversion[0] + ' / ' + conversion[1])
+        value.append(currency_values[conversion[0]] / currency_values[conversion[1]])
+        result.append(value)
+    return result
+
 def get_currencies():
     json_content = []
-
-    currency = get_currency('RUB')
-    if currency and currency != '':
-        json_content.append(json.loads(currency))
-
-    currency = get_currency('USD')
-    if currency and currency != '':
-        json_content.append(json.loads(currency))
-
-    currency = get_currency('EUR')
-    if currency and currency != '':
-        json_content.append(json.loads(currency))
-        
-    currency = get_currency('UAH')
-    if currency and currency != '':
-        json_content.append(json.loads(currency))
-
-    currency = get_currency('CNY')
-    if currency and currency != '':
-        json_content.append(json.loads(currency))
+    for currency_id in currency_list:
+        currency = get_currency(currency_id)
+        if currency and currency != '':
+            value = json.loads(currency)
+            json_content.append(value)
+            currency_values[value['Cur_Abbreviation']] = value['Cur_OfficialRate']/value['Cur_Scale']
 
     return json_content
 

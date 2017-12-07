@@ -45,6 +45,11 @@ body a p{
     margin-bottom: 20px;
     background-color: var(--red-main-color);
     color: var(--paper-main-color);
+
+    outline-color: var(--red-main-color);
+    outline-style: dashed;
+    outline-width: thick;
+    outline-offset: 0.2em; 
 }
 
 #landing-header a:visited, #landing-header a:hover, #landing-header a{
@@ -78,7 +83,12 @@ input {
     color: var(--text-main-color);
 }
 
+#landing-content {
+    margin-top: 5em;
+}
+
 #landing-content .landing-content-unit{
+    text-align: center;
     height: 20em;
 }
 

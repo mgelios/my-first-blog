@@ -92,6 +92,7 @@ input {
     height: 20em;
 }
 
-#landing-content .landing-content-unit img{
+#landing-content .landing-content-unit .landing-image{
     height: 100%;
 }
+

@@ -1,5 +1,6 @@
 {% extends 'landing/base.html' %}
 
+{% load staticfiles %}
 
 {% block content %}
     <div class="row" id="landing-header">
@@ -31,15 +32,15 @@
             {% endif %}
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-4 col-xs-4">
+    <div class="row" id="landing-content">
+        <div class="col-md-4 col-xs-6 landing-content-unit">
             <a href="/blog/">
-                <p><span class="glyphicon glyphicon-book"></span>  Blog</p>
+                <img src="{% static 'img/blog_01.svg' %}">
             </a>
         </div>
-        <div class="col-md-4 col-xs-4">
+        <div class="col-md-4 col-xs-6 landing-content-unit">
             <a href="/dashboard/weather/">
-                <p><span class="glyphicon glyphicon-th"></span>  Dashboard</p>
+                <img src="{% static 'img/dashboard_01.svg' %}">
             </a>
         </div>
     </div>

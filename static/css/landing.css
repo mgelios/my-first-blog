@@ -1,3 +1,11 @@
+:root {
+    --paper-main-color: #ffeedd;
+    --paper-darker-color: #ccbbaa;
+    --text-main-color: #665555;
+    --red-main-color: #cc4444;
+    --red-darker-color: #aa4444;
+}
+
 @font-face{
     font-family: 'Lobster';
     src: url('./fonts/Lobster.ttf') format('truetype');
@@ -14,15 +22,15 @@
 
 
 body {
-    background-color: maroon;
+    background-color: var(--paper-main-color);
     font-family: Lobster;
-    color: #C08656;
+    color: var(--text-main-color);
 }
 
 body a:visited, body a:hover, body a{
     text-decoration: none;
     text-align: center;
-    color: #C08656;
+    color: var(--text-main-color);
 }
 
 body a p{
@@ -35,8 +43,14 @@ body a p{
     padding-top: 20px;
     padding-bottom: 20px;
     margin-bottom: 20px;
-    background-color: #500000;
+    background-color: var(--red-main-color);
+    color: var(--paper-main-color);
 }
+
+#landing-header a:visited, #landing-header a:hover, #landing-header a{
+    color: var(--paper-main-color);
+}
+
 
 #landing-header-left{
     text-align: left;
@@ -57,9 +71,17 @@ body a p{
 }
 
 #login-content label {
-    color: white;
+    color: var(--text-main-color);
 }
 
 input {
-    color: black;
+    color: var(--text-main-color);
+}
+
+#landing-content .landing-content-unit{
+    height: 20em;
+}
+
+#landing-content .landing-content-unit img{
+    height: 100%;
 }

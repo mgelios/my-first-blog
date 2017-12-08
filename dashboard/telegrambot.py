@@ -28,6 +28,8 @@ def get_weather_message():
 
 def start(bot, update):
     chat_ids.add(update.message.chat_id)
+    print('!!!!')
+    print(update.job_queue)
     bot.sendMessage(update.message.chat_id, text='Hi!')
 
 def help(bot, update):
@@ -68,7 +70,7 @@ def main():
     dp.add_handler(MessageHandler([Filters.text], echo))
 
     dp.job_queue = JobQueue(bot=dp.bot)
-    dp.job_queue.run_repeating(weather_job_callback, interval=5, first=0)
+    dp.job_queue.run_repeating(weather_job_callback, interval=65, first=0)
 
 
     dp.add_error_handler(error)

@@ -66,7 +66,7 @@ def main():
 
     dp.add_handler(MessageHandler([Filters.text], echo))
 
-    updater = DjangoTelegramBot.getUpdater()
+    updater = DjangoTelegramBot.updater
     job_queue = updater.job_queue
     job_queue.run_repeating(weather_job_callback, interval=60, first=0)
 

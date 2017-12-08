@@ -67,7 +67,7 @@ def main():
     dp.add_handler(MessageHandler([Filters.text], echo))
 
     dp.job_queue = JobQueue(bot=dp.bot)
-    #run_repeating(weather_job_callback, interval=60, first=0)
+    dp.job_queue.run_repeating(weather_job_callback, interval=60, first=0)
 
 
     dp.add_error_handler(error)

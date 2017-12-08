@@ -50,6 +50,7 @@ def currency(bot, update):
     bot.sendMessage(update.message.chat_id, text=final_string)
 
 def weather_job_callback(bot, update):
+    print("Here is!!!")
     for chat_id in chat_ids:
         bot.sendMessage(chat_id, text=get_weather_message())
 
@@ -67,7 +68,7 @@ def main():
     dp.add_handler(MessageHandler([Filters.text], echo))
 
     dp.job_queue = JobQueue(bot=dp.bot)
-    dp.job_queue.run_repeating(weather_job_callback, interval=60, first=0)
+    dp.job_queue.run_repeating(weather_job_callback, interval=5, first=0)
 
 
     dp.add_error_handler(error)

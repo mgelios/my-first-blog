@@ -1,26 +1,17 @@
-from telegram.ext import CommandHandler, MessageHandler, Filters
+from telegram.ext import CommandHandler, MessageHandler, Filters, Updater
 from django_telegrambot.apps import DjangoTelegramBot
 from dashboard.dashes.weather import OpenWeather
 from dashboard.dashes.currency import NBRBCurrency
+
 
 
 import logging
 
 logger = logging.getLogger(__name__)
 
-def start(bot, update):
-    bot.sendMessage(update.message.chat_id, text='Hi!')
+chat_ids = set()
 
-def help(bot, update):
-    bot.sendMessage(update.message.chat_id, text='wow, somebody needs help!')
-
-def echo(bot, update):
-    bot.sendMessage(update.message.chat_id, text=update.message.text)
-
-def error(bot, update, error):
-    logger.warn('Update "%s" caused error "%s"' % (update, error))
-
-def weather(bot, update):
+def get_weather_message():
     forecasts = OpenWeather.forecast()
     final_string = ''
     for forecast in forecasts:
@@ -33,8 +24,23 @@ def weather(bot, update):
             weather_string = weather_string + weather.get("description") + ', '
         weather_string = weather_string + weathers[-1].get("description") + '\n'
         final_string = final_string + header_string + temperature_string + humidity_string + weather_string
+    return final_string
 
-    bot.sendMessage(update.message.chat_id, text=final_string)
+def start(bot, update):
+    chat_ids.add(update.message.chat_id)
+    bot.sendMessage(update.message.chat_id, text='Hi!')
+
+def help(bot, update):
+    bot.sendMessage(update.message.chat_id, text='wow, somebody needs help!')
+
+def echo(bot, update):
+    bot.sendMessage(update.message.chat_id, text=update.message.text)
+
+def error(bot, update, error):
+    logger.warn('Update "%s" caused error "%s"' % (update, error))
+
+def weather(bot, update):
+    bot.sendMessage(update.message.chat_id, text=get_weather_message())
 
 def currency(bot, update):
     currencies = NBRBCurrency.get_currencies()
@@ -43,6 +49,9 @@ def currency(bot, update):
         final_string = final_string + '{0} {1} = {2} BYN \n'.format(currency.get('Cur_Scale'), currency.get('Cur_Abbreviation'), currency.get('Cur_OfficialRate'))
     bot.sendMessage(update.message.chat_id, text=final_string)
 
+def weather_job_callback(bot, update):
+    for chat_id in chat_ids:
+        bot.sendMessage(chat_id, text=get_weather_message())
 
 def main():
     logger.info("Loading handlers for telegram bot")
@@ -56,6 +65,11 @@ def main():
     dp.add_handler(CommandHandler("курсы", currency))
 
     dp.add_handler(MessageHandler([Filters.text], echo))
+
+    updater = DjangoTelegramBot.updater
+    job_queue = updater.job_queue
+    job_queue.run_repeating(weather_job_callback, interval=60, first=0)
+
 
     dp.add_error_handler(error)
 

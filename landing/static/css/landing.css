@@ -46,17 +46,13 @@ body {
     background-color: var(--paper-main-color);
     color: var(--text-main-color);
     font-family: Gabriola;
-    font-size: 100%;
-}
-
-body, h1, h2, h3, h4, h5, h6 {
-  font-size-adjust: 0.5;
+    font-size: 12px;
 }
 
 /* Message Content */
 /* Scalable fonts */
 .message p{
-  font-size: 1.5em;
+  font-size: 2em;
   line-height: 1.25;
 }
 
@@ -80,9 +76,9 @@ h4 {
   line-height: 1.11111111;
 }
 
-@media (min-width: 43.75em) {
+@media (min-width: 525px) {
   .message p{
-    font-size: 2em;
+    font-size: 2.5em;
     line-height: 1.375;
   }
 
@@ -106,7 +102,7 @@ h4 {
   }
 }
 
-@media (min-width: 56.25em) {
+@media (min-width: 675px) {
   h1 {
     font-size: 3em;
     line-height: 1.05;
@@ -174,7 +170,7 @@ body a p{
     font-size: 1.75em;
 }
 
-@media (min-width: 43.75em) {
+@media (min-width: 525px) {
     #login-content{
         font-size: 2.75em;
     }
@@ -197,13 +193,13 @@ input {
     text-align: center;
 }
 
-@media (min-width: 43.75em) {
+@media (min-width: 525px) {
     #landing-content .landing-content-unit{
         height: 20em;
     }
 }
 
-@media (min-width: 56.25em) {
+@media (min-width: 675px) {
     #landing-content .landing-content-unit{
         height: 25em;
     }

@@ -60,7 +60,7 @@ def currency_conversions(bot, update):
     conversions = NBRBCurrency.get_conversions()
     final_string = 'Конверсия курсов валют от НБРБ\n'
     for conversion in conversions:
-        final_string = final_string + conversion[0] + ': ' + conversion[1] + '\n'
+        final_string = final_string + str(conversion[0]) + ': ' + str(conversion[1]) + '\n'
     bot.sendMessage(update.message.chat_id, text=final_string)
 
 def crypto(bot, update):

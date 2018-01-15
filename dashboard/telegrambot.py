@@ -66,7 +66,7 @@ def crypto(bot, update):
     currencies = CryptoCurrency.get_currencies()[0]
     final_string = 'Курсы криптовалют:\n'
     for currency in currencies:
-        final_string = final_string + currency.rank + '. ' + currency.name + ': ' + price_usd + '$\n'
+        final_string = final_string + currency.get('rank') + '. ' + currency.get('name') + ': ' + currency.get('price_usd') + '$\n'
     bot.sendMessage(update.message.chat_id, text=final_string)
 
 def weather_job_callback(bot, update):

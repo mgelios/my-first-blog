@@ -2,12 +2,16 @@ from telegram.ext import CommandHandler, MessageHandler, Filters, JobQueue
 from django_telegrambot.apps import DjangoTelegramBot
 from dashboard.dashes.weather import OpenWeather
 from dashboard.dashes.currency import NBRBCurrency
+from dashboard.dashes.crypto_currency import CryptoCurrency
 
 
 
 import logging
 
 logger = logging.getLogger(__name__)
+
+help_message = 'Добро пожаловать в гости к mgbot!\nПо сути - это бот-комбайн\nПоясню. Одной тематикой он не ограничен. Информация, которая здесь может быть получена довольно разнообразна.\n'
+help_message_commands = 'На данный момент присутствуют следующие комманды:\nweather - информация о погоде\ncurrency - курсы валют НБРБ\nconversion - конверсия валют\ncrypto - курсы криптовалют'
 
 chat_ids = set()
 
@@ -27,13 +31,13 @@ def get_weather_message():
     return final_string
 
 def start(bot, update):
-    chat_ids.add(update.message.chat_id)
-    print('!!!!')
-    print(update.job_queue)
+    # chat_ids.add(update.message.chat_id)
+    # print('!!!!')
+    # print(update.job_queue)
     bot.sendMessage(update.message.chat_id, text='Hi!')
 
 def help(bot, update):
-    bot.sendMessage(update.message.chat_id, text='wow, somebody needs help!')
+    bot.sendMessage(update.message.chat_id, text=help_message + help_message_commands)
 
 def echo(bot, update):
     bot.sendMessage(update.message.chat_id, text=update.message.text)
@@ -51,8 +55,21 @@ def currency(bot, update):
         final_string = final_string + '{0} {1} = {2} BYN \n'.format(currency.get('Cur_Scale'), currency.get('Cur_Abbreviation'), currency.get('Cur_OfficialRate'))
     bot.sendMessage(update.message.chat_id, text=final_string)
 
+def currency_conversions(bot, update):
+    conversions = NBRBCurrency.get_conversions()
+    final_string = 'Конверсия курсов валют от НБРБ\n'
+    for conversion in conversions:
+        final_string = final_string + conversion[0] + ': ' + conversion[1] + '\n'
+    bot.sendMessage(update.message.chat_id, text=final_string)
+
+def crypto(bot, update):
+    currencies = CryptoCurrency.get_currencies()
+    final_string = 'Курсы криптовалют:\n'
+    for currency in currencies:
+        final_string = final_string + currency.rank + '. ' + currency.name + ': ' + price_usd + '$\n'
+    bot.sendMessage(update.message.chat_id, text=final_string)
+
 def weather_job_callback(bot, update):
-    print("Here is!!!")
     for chat_id in chat_ids:
         bot.sendMessage(chat_id, text=get_weather_message())
 
@@ -66,6 +83,10 @@ def main():
     dp.add_handler(CommandHandler("погода", weather))
     dp.add_handler(CommandHandler("currency", currency))
     dp.add_handler(CommandHandler("курсы", currency))
+    dp.add_handler(CommandHandler("crypto", crypto))
+    dp.add_handler(CommandHandler("криптовалюты", crypto))
+    dp.add_handler(CommandHandler("conversion", currency_conversions))
+    dp.add_handler(CommandHandler("конверсия", currency_conversions))
 
     dp.add_handler(MessageHandler([Filters.text], echo))
 

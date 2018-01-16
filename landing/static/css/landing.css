@@ -4,6 +4,8 @@
     --text-main-color: #665555;
     --red-main-color: #cc4444;
     --red-darker-color: #aa4444;
+    --footer-main-color: #665555;
+    --footer-text-color: #ffeedd;
 }
 
 @font-face{
@@ -186,6 +188,7 @@ input {
 
 #landing-content {
     margin-top: 5em;
+    min-height: 65em;
 }
 
 #landing-content .landing-content-unit{
@@ -194,12 +197,22 @@ input {
 }
 
 @media (min-width: 525px) {
+    #landing-content {
+        margin-top: 5em;
+        min-height: 50em;
+    }
+
     #landing-content .landing-content-unit{
         height: 20em;
     }
 }
 
 @media (min-width: 675px) {
+    #landing-content {
+        margin-top: 5em;
+        min-height: 50em;
+    }
+
     #landing-content .landing-content-unit{
         height: 25em;
     }
@@ -207,4 +220,27 @@ input {
 
 #landing-content .landing-content-unit img{
     height: 100%;
+}
+
+footer {
+    font-family: HelveticaNeueCyr-Roman;
+    background-color: var(--footer-main-color);
+    min-height: 20em;
+
+    outline-color: var(--footer-main-color);
+    outline-style: dashed;
+    outline-width: thick;
+    outline-offset: 0.2em;
+
+    color: var(--footer-text-color);
+
+    padding-top: 2em;
+}
+
+footer a {
+    color: var(--footer-text-color);
+}
+
+footer h1 {
+    text-align: center;
 }

@@ -189,6 +189,7 @@ input {
 #landing-content {
     margin-top: 5em;
     min-height: 65em;
+    height: 80%;
 }
 
 #landing-content .landing-content-unit{
@@ -200,6 +201,7 @@ input {
     #landing-content {
         margin-top: 5em;
         min-height: 50em;
+        height: 80%;
     }
 
     #landing-content .landing-content-unit{
@@ -211,6 +213,7 @@ input {
     #landing-content {
         margin-top: 5em;
         min-height: 50em;
+        height: 80%;
     }
 
     #landing-content .landing-content-unit{

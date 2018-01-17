@@ -5,6 +5,7 @@ from django.shortcuts import redirect
 from django.utils import timezone
 
 from .models import SecretMessage
+from .common_settings import versions
 
 import urllib.request
 
@@ -20,3 +21,6 @@ def secret_message_new(request):
 def secret_message_list(request):
     messages = SecretMessage.objects.filter(text__isnull=False).order_by('date')
     return render(request, 'landing/messages.html', {'secret_messages': messages})
+
+def info_about(request):
+    return  render(request, 'about/base.html', {'versions' : versions})

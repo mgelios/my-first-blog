@@ -7,6 +7,8 @@
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" >
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css" >
         <link rel="stylesheet" href="{% static 'css/chartist.min.css' %}" >
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="{% static 'js/chartist.min.js' %}"></script>
         
         <link rel="stylesheet" href="{% static 'css/dashboard.css' %}" >
@@ -14,7 +16,7 @@
     </head>
     <body>
         <div class="container-fluid">
-            <div class="row" id="dashboard-header">
+<!--             <div class="row" id="dashboard-header">
                 <div class="col-xs-1">
                     <a href="/">
                         <span class="glyphicon glyphicon-home"></span>
@@ -32,14 +34,62 @@
                 </div>
                 <div class="col-xs-1">
                     <a href="/dashboard/crypto_currencies/">
-                        <span class="glyphicon glyphicon-bitcoin" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-bitcoin"></span>
+                    </a>
+                </div>
+            </div>
+ -->
+            <div class="dashboard-sidebar">
+                <div>
+                    <a href="/">
+                        <span class="glyphicon glyphicon-home"></span>
+                    </a>
+                </div>
+                <div>
+                    <a href="/dashboard/weather/">
+                        <span class="glyphicon glyphicon-cloud"></span>
+                    </a>
+                </div>
+                <div>
+                    <a href="/dashboard/currencies/">
+                        <span class="glyphicon glyphicon-euro"></span>
+                    </a>
+                </div>
+                <div>
+                    <a href="/dashboard/crypto_currencies/">
+                        <span class="glyphicon glyphicon-bitcoin"></span>
+                    </a>
+                </div>
+            </div>
+            <div class="row" id="dashboard-header">
+                <div class="col-xs-1">
+                    <a href="#" id="header__icon">
+                        <span class="glyphicon glyphicon-th-list"></span>
                     </a>
                 </div>
             </div>
             <div class="row">
-                {% block content %}
-                {% endblock %}
+                <div class="dashboard-content">
+                    {% block content %}
+                    {% endblock %}
+                </div>
             </div>
         </div>
+
     </body>
 </html>
+
+<script>
+    $(document).ready(function(){
+        (function($) {
+            $('#header__icon').click(function(e){
+                e.preventDefault();
+                $('.container-fluid').toggleClass('dashboard-with-sidebar');
+            });
+        
+            $('#site-cache').click(function(e){
+              $('body').removeClass('dashboard-with-sidebar');
+            });
+        })(jQuery);
+    });
+</script>

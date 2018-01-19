@@ -16,29 +16,6 @@
     </head>
     <body>
         <div class="container-fluid">
-<!--             <div class="row" id="dashboard-header">
-                <div class="col-xs-1">
-                    <a href="/">
-                        <span class="glyphicon glyphicon-home"></span>
-                    </a>
-                </div>
-                <div class="col-xs-1">
-                    <a href="/dashboard/weather/">
-                        <span class="glyphicon glyphicon-cloud"></span>
-                    </a>
-                </div>
-                <div class="col-xs-1">
-                    <a href="/dashboard/currencies/">
-                        <span class="glyphicon glyphicon-euro"></span>
-                    </a>
-                </div>
-                <div class="col-xs-1">
-                    <a href="/dashboard/crypto_currencies/">
-                        <span class="glyphicon glyphicon-bitcoin"></span>
-                    </a>
-                </div>
-            </div>
- -->
             <div class="dashboard-sidebar">
                 <div>
                     <a href="/">
@@ -67,6 +44,8 @@
                         <span class="glyphicon glyphicon-th-list"></span>
                     </a>
                 </div>
+                {% block header %}
+                {% endblock %}
             </div>
             <div class="row">
                 <div class="dashboard-content">
@@ -88,7 +67,7 @@
             });
         
             $('#site-cache').click(function(e){
-              $('body').removeClass('dashboard-with-sidebar');
+              $('.container-fluid').removeClass('dashboard-with-sidebar');
             });
         })(jQuery);
     });

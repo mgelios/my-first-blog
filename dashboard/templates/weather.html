@@ -1,54 +1,60 @@
 {% extends './base.html' %}
-{% block content %}
 
-{% for content in forecasts %}
-    <div class="col-md-12 weather-city">
-        <div class="row">
 
-            <div class="col-md-6 col-xs-12 wg-weather">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <h1>
-                            {{content.0.name}}
-                        </h1>
-                        <h2>
-                            {% for weather in content.0.weather %}
-                                {{weather.description}}
-                            {% endfor %}
-                        </h2>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-6">
-                        <h1>{{content.0.main.temp}}&deg;C</h1>
-                        <h3>{{content.0.main.temp_min}}&deg;C .. {{content.0.main.temp_max}}&deg;C</h3>
-                    </div>
-                    <div class="col-xs-3">
-                        {% for weather in content.0.weather %}
-                            <img src="../../static/img/weather/{{weather.icon}}.svg">
-                        {% endfor %}
-                    </div>
-                    <div class="col-xs-3">
-                        <h3>Humidity: {{content.0.main.humidity}}%</h3>
-                        <h3>Pressure: {{content.0.main.pressure}}</h3>
-                        {% if content.0.visibility %}
-                            <h3>Visibility: {{content.0.visibility}} m</h3>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-
-            {% for forecast in content.1.list|slice:":6" %}
-                <div class="col-md-1 col-xs-2 wg-forecast">
-                    <h3>{{forecast.dt|date:"D H:i"}}</h3>
-                    <h3>{{forecast.weather.0.main}}<h3>
-                    <img src="../../static/img/weather/{{forecast.weather.0.icon}}.svg">
-                    <h3>{{forecast.main.temp}}&deg;C</h3>
-                </div>
-            {% endfor %}
-
-        </div>
+{% block header %}
+    <div class="col-xs-8 col-md-8">
+        <h1>Weather</h1>
     </div>
-{% endfor %}
+{% endblock %}
 
+{% block content %}
+    {% for content in forecasts %}
+        <div class="col-md-12 weather-city">
+            <div class="row">
+
+                <div class="col-md-6 col-xs-12 wg-weather">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h1>
+                                {{content.0.name}}
+                            </h1>
+                            <h2>
+                                {% for weather in content.0.weather %}
+                                    {{weather.description}}
+                                {% endfor %}
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <h1>{{content.0.main.temp}}&deg;C</h1>
+                            <h3>{{content.0.main.temp_min}}&deg;C .. {{content.0.main.temp_max}}&deg;C</h3>
+                        </div>
+                        <div class="col-xs-3">
+                            {% for weather in content.0.weather %}
+                                <img src="../../static/img/weather/{{weather.icon}}.svg">
+                            {% endfor %}
+                        </div>
+                        <div class="col-xs-3">
+                            <h3>Humidity: {{content.0.main.humidity}}%</h3>
+                            <h3>Pressure: {{content.0.main.pressure}}</h3>
+                            {% if content.0.visibility %}
+                                <h3>Visibility: {{content.0.visibility}} m</h3>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                {% for forecast in content.1.list|slice:":6" %}
+                    <div class="col-md-1 col-xs-2 wg-forecast">
+                        <h3>{{forecast.dt|date:"D H:i"}}</h3>
+                        <h3>{{forecast.weather.0.main}}<h3>
+                        <img src="../../static/img/weather/{{forecast.weather.0.icon}}.svg">
+                        <h3>{{forecast.main.temp}}&deg;C</h3>
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}

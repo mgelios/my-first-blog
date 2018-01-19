@@ -39,23 +39,28 @@ body a {
 }
 
 .container-fluid {
-    transition-duration: 0.3s;
     min-height: 100vh;
 }
 
 .dashboard-with-sidebar{
-    transform: translateX(10em);
     min-height: 100vh;
+}
+
+.dashboard-with-sidebar .dashboard-sidebar{
+    transform: translateX(0em);
+    z-index: 10;
 }
 
 .dashboard-sidebar {
     background-color: #0A3B07;
     position: absolute;
     left: 0;
-    top: 0;
+    top: 8em;
     bottom: 0;
-    transform: translateX(-10em);
     width: 10em;
+    transform: translateX(-10em);
+    transition-duration: 0.3s;
+    z-index: 10;
 }
 
 .dashboard-sidebar div {
@@ -64,15 +69,20 @@ body a {
     text-align: center;
 }
 
-#dashboard-header{
+#dashboard-header {
     background-color: #0A3B07;
     font-size: 3em;
     padding-top: 30px;
     padding-bottom: 30px;
     padding-left: 20px;
     padding-right: 20px;
+    line-height: 1.2em;
 }
 
+#dashboard-header h1 {
+    line-height: 1.2em;
+    margin: 0;
+}
 
 .weather-city{
     border-top: 1px solid white;
@@ -83,14 +93,6 @@ body a {
 .wg-forecast {
     border-left: 1px solid white;
     padding-top: 10px;
-}
-
-#dashboard-header {
-    background-color: #0A3B07;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    padding-left: 20px;
-    padding-right: 20px;
 }
 
 .wg-weather img, .wg-forecast img{
@@ -127,6 +129,7 @@ body a {
     background-color: #BE3030;
 }
 
+/* charts styling */
 
 .ct-chart, .ct-chart-2 {
     background-color: #004B4B;

@@ -1,109 +1,110 @@
  {% extends './base.html' %}
 
+{% block header %}
+    <div class="col-xs-8 col-md-8">
+        <h1>Currencies</h1>
+    </div>
+{% endblock %}
+
 {% block content %}
-
-
-<div class="col-md-12 col-xs-12 currencies-header ">
-    <h2>Курсы традиционных валют</h2>
-</div>
-<div class="col-md-6 col-xs-6 wg-currencies">
-    <div class="row">
-        <div class="col-xs-12 wg-header">
-            <h2>... к BYN:</h2>
+    <div class="col-md-6 col-xs-6 wg-currencies">
+        <div class="row">
+            <div class="col-xs-12 wg-header">
+                <h2>... к BYN:</h2>
+            </div>
+        </div>
+        <div class="wg-list">
+            {% if currencies %}
+                {% for currency in currencies %}
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h3>
+                                {{currency.Cur_Scale}} {{currency.Cur_Abbreviation}} = {{currency.Cur_OfficialRate}} BYN
+                            </h3>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
         </div>
     </div>
-    <div class="wg-list">
-        {% if currencies %}
-            {% for currency in currencies %}
+
+    <div class="col-md-6 col-xs-6 wg-currencies">
+        <div class="row">
+            <div class="col-xs-12 wg-header">
+                <h2>Конверсия:</h2>
+            </div>
+        </div>
+        <div class="wg-list">
+            {% if conversions %}
+                {% for conversion in conversions %}
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h3>
+                                {{conversion.0}} : {{conversion.1}}
+                            </h3>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+
+
+    <div class="col-xs-12 col-md-12">
+        <div class="row currencies-header">
+            <h2>График курсов</h2>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-6 chart-wrapper">
                 <div class="row">
-                    <div class="col-xs-12">
-                        <h3>
-                            {{currency.Cur_Scale}} {{currency.Cur_Abbreviation}} = {{currency.Cur_OfficialRate}} BYN
-                        </h3>
+                    <div class="col-xs-12 col-md-12">
+                        <h2>График USD:</h2>
                     </div>
                 </div>
-            {% endfor %}
-        {% endif %}
-    </div>
-</div>
+                <div class="ct-chart ct-major-seventh"></div>
+            </div>
 
-<div class="col-md-6 col-xs-6 wg-currencies">
-    <div class="row">
-        <div class="col-xs-12 wg-header">
-            <h2>Конверсия:</h2>
-        </div>
-    </div>
-    <div class="wg-list">
-        {% if conversions %}
-            {% for conversion in conversions %}
+            <div class="col-xs-12 col-md-6 chart-wrapper">
                 <div class="row">
-                    <div class="col-xs-12">
-                        <h3>
-                            {{conversion.0}} : {{conversion.1}}
-                        </h3>
+                    <div class="col-xs-12 col-md-12">
+                        <h2>График EUR:</h2>
                     </div>
                 </div>
-            {% endfor %}
-        {% endif %}
-    </div>
-</div>
-
-
-<div class="col-xs-12 col-md-12">
-    <div class="row currencies-header">
-        <h2>График курсов</h2>
-    </div>
-    <div class="row">
-        <div class="col-xs-12 col-md-6 chart-wrapper">
-            <div class="row">
-                <div class="col-xs-12 col-md-12">
-                    <h2>График USD:</h2>
-                </div>
+                <div class="ct-chart-2 ct-major-seventh"></div>
             </div>
-            <div class="ct-chart ct-major-seventh"></div>
+
+            <script>
+                var data_0={
+                    series: [[
+                        {% for data in statistics.0 %}
+                            {{data.Cur_OfficialRate}},
+                        {% endfor %}
+                    ]],
+                };
+
+                var data_1={
+                    series: [[
+                        {% for data in statistics.1 %}
+                            {{data.Cur_OfficialRate}},
+                        {% endfor %}
+                    ]],
+                };
+
+                new Chartist.Line(
+                    '.ct-chart', 
+                    data_0, 
+                    {
+                        showArea: true
+                    });
+
+                new Chartist.Line(
+                    '.ct-chart-2', 
+                    data_1, 
+                    {
+                        showArea: true
+                    });
+            </script>
         </div>
-
-        <div class="col-xs-12 col-md-6 chart-wrapper">
-            <div class="row">
-                <div class="col-xs-12 col-md-12">
-                    <h2>График EUR:</h2>
-                </div>
-            </div>
-            <div class="ct-chart-2 ct-major-seventh"></div>
-        </div>
-
-        <script>
-            var data_0={
-                series: [[
-                    {% for data in statistics.0 %}
-                        {{data.Cur_OfficialRate}},
-                    {% endfor %}
-                ]],
-            };
-
-            var data_1={
-                series: [[
-                    {% for data in statistics.1 %}
-                        {{data.Cur_OfficialRate}},
-                    {% endfor %}
-                ]],
-            };
-
-            new Chartist.Line(
-                '.ct-chart', 
-                data_0, 
-                {
-                    showArea: true
-                });
-
-            new Chartist.Line(
-                '.ct-chart-2', 
-                data_1, 
-                {
-                    showArea: true
-                });
-        </script>
     </div>
-</div>
 
 {% endblock %}

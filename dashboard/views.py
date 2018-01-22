@@ -50,7 +50,7 @@ def viber_mgbot(request):
     return HttpResponse(status=200)
 
 def crypto_currency_info(request):
-    crypto_currencies = CryptoCurrency.get_currencies()
+    crypto_currencies = CryptoCurrency.get_info()
     return render(request, 'crypto_currency.html', {'crypto_currencies': crypto_currencies})
 
 

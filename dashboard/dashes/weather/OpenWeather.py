@@ -27,3 +27,4 @@ def forecast():
         json_content.append([weather_content, forecast_content])
 
     return json_content
+

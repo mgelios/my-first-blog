@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 
 class Currency(models.Model):
-    scale = 0
+    scale = models.FloatField(default=0.0)
 
 class Weather(models.Model):
     main_info = models.CharField(max_length=200)

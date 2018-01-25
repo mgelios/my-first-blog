@@ -1,6 +1,7 @@
 import json
 import urllib
 import datetime
+from dashboard.models import Weather
 
 base_context = 'http://api.openweathermap.org/data/2.5/'
 weather_suffix = 'weather'
@@ -28,3 +29,12 @@ def forecast():
 
     return json_content
 
+def get_current_weather():
+    json_content = []
+
+    Weather.objects.filter(main_info__isnull=False).delete()
+    weather = Weather.objects.create()
+    weather.main_info = "info"
+    weather.save()
+
+    return Weather.objects

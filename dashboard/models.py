@@ -21,6 +21,7 @@ class Weather(models.Model):
     sunrise = models.DateTimeField(default=timezone.now)
     sunset = models.DateTimeField(default=timezone.now)
 
+
 class WeatherForecast(models.Model):
     temperature = models.IntegerField(default=0)
     temperature_min = models.IntegerField(default=0)

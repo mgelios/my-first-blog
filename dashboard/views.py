@@ -27,6 +27,7 @@ viber = Api(bot_configuration)
 
 def weather_info(request):
     forecasts = OpenWeather.forecast()
+    print(OpenWeather.get_current_weather())
     return render(request, 'weather.html', {'forecasts': forecasts})
 
 def currency_info(request):

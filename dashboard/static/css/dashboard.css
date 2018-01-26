@@ -84,24 +84,21 @@ body a {
     margin: 0;
 }
 
-.weather-city{
-    border-top: 1px solid white;
-    padding-top: 20px;
-    padding-bottom: 20px;
+.wg-weather {
+    padding-top: 3em;
+    padding-bottom: 2em;
+    padding-left: 2em;
+    padding-right: 2em;
 }
 
-.wg-forecast {
-    border-left: 1px solid white;
-    padding-top: 10px;
+.wg-weather .image-wrapper, .wg-weather .temperature-wrapper {
+    text-align: center;
 }
 
 .wg-weather img, .wg-forecast img{
     filter: invert(1);
     max-width: 100%;
-}
-
-.wg-forecast {
-    text-align: center;
+    width: 70%;
 }
 
 .currencies-header h2{

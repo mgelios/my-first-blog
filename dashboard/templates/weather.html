@@ -3,12 +3,38 @@
 
 {% block header %}
     <div class="col-xs-8 col-md-8">
-        <h1>Weather</h1>
+        <h1>Weather  {{weather.city_name}}: {{weather.description}}, {{weather.temperature}}&deg;</h1>
     </div>
 {% endblock %}
 
 {% block content %}
-    {% for content in forecasts %}
+    <div class="col-xs-12 col-md-12 wg-weather">
+        <div class="col-xs-4 col-md-4">
+            <div class="temperature-wrapper">
+                <h2>Сейчас:</h2>
+                <h2>{{weather.date|date:"l j N Y"}}</h2>
+                <h2>{{weather.date|date:"H:i"}}</h2>
+                <h2>{{weather.temperature_min}}&deg;..{{weather.temperature_max}}&deg;</h2>
+            </div>
+        </div>
+        <div class="col-xs-4 col-md-4">
+            <div class="image-wrapper">
+                <img src="../../static/img/weather/{{weather.icon_name}}.svg">
+            </div>
+        </div>
+
+        <div class="col-xs-4 col-md-4">
+            <h3>Влажность: {{weather.humidity}}%</h3>
+            <h3>Давление: {{weather.pressure}} hPa</h3>
+            <h3>Видимость: {{weather.visibility}} m</h3>
+            <h3>Скорость ветра: {{weather.wind_speed}} m/sec</h3>
+            <h3>Рассвет: {{weather.sunrise|date:"H:i"}}</h3>
+            <h3>Закат: {{weather.sunset|date:"H:i"}}</h3>
+        </div>
+    </div>
+
+
+<!--     {% for content in forecasts %}
         <div class="col-md-12 weather-city">
             <div class="row">
 
@@ -57,4 +83,7 @@
             </div>
         </div>
     {% endfor %}
-{% endblock %}
+ -->
+
+
+ {% endblock %}

@@ -11,7 +11,7 @@ from dashboard.dashes.weather import OpenWeather
 from dashboard.dashes.currency import NBRBCurrency
 from dashboard.dashes.crypto_currency import CryptoCurrency
 
-from .models import Weather
+from .models import Weather, WeatherForecast
 
 from viberbot import Api
 from viberbot.api.messages.text_message import TextMessage
@@ -30,8 +30,10 @@ viber = Api(bot_configuration)
 def weather_info(request):
     forecasts = OpenWeather.forecast()
     OpenWeather.get_current_weather()
+    OpenWeather.get_db_forecast()
     weather = get_object_or_404(Weather, city_name='Minsk')
-    return render(request, 'weather.html', {'forecasts': forecasts, 'weather': weather})
+    forecast = WeatherForecast.objects.filter(date_time__isnull=False).order_by('date_time')
+    return render(request, 'weather.html', {'forecast': forecast, 'weather': weather})
 
 def currency_info(request):
     currencies = NBRBCurrency.get_currencies()

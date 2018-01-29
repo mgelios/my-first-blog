@@ -101,6 +101,10 @@ body a {
     width: 70%;
 }
 
+.wg-forecast-unit {
+    text-align: center;
+}
+
 .currencies-header h2{
     text-align: center;
 }

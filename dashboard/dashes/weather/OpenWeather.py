@@ -1,7 +1,7 @@
 import json
 import urllib
 import datetime
-from dashboard.models import Weather
+from dashboard.models import Weather, WeatherForecast
 
 base_context = 'http://api.openweathermap.org/data/2.5/'
 weather_suffix = 'weather'
@@ -42,8 +42,21 @@ def get_current_weather_raw():
 
     return raw_object
 
+def get_forecast_raw():
+    context = base_context + forecast_suffix
+    city = cities[0]
+    query = '?' + 'q=' + city + '&appid=' + api_key + '&units=' + units + '&lang=' + lang
+    json_content = urllib.request.urlopen(context + query).read().decode('utf-8')
+    raw_list = json.loads(json_content)['list']
+
+    for list_unit in raw_list:
+        list_unit['dt'] = datetime.datetime.fromtimestamp(list_unit['dt'])
+
+    return raw_list
+
 def get_current_weather():
     weather_raw = get_current_weather_raw()
+    get_forecast_raw()
 
     Weather.objects.filter(main_info__isnull=False).delete()
     weather = Weather.objects.create()
@@ -66,3 +79,26 @@ def get_current_weather():
     weather.save()
 
     return Weather.objects
+
+def get_db_forecast():
+    forecasts_raw = get_forecast_raw()
+
+    WeatherForecast.objects.filter(main_info__isnull=False).delete()
+    for forecast_raw in forecasts_raw:
+        forecast = WeatherForecast.objects.create()
+
+        forecast.main_info = forecast_raw['weather'][0]['main']
+        forecast.description = forecast_raw['weather'][0]['description']
+        forecast.icon_name = forecast_raw['weather'][0]['icon']
+        forecast.temperature = forecast_raw['main']['temp']
+        forecast.temperature_min = forecast_raw['main']['temp_min']
+        forecast.temperature_max = forecast_raw['main']['temp_max']
+        forecast.pressure = forecast_raw['main']['pressure']
+        forecast.humidity = forecast_raw['main']['humidity']
+        forecast.wind_speed = forecast_raw['wind']['speed']
+        forecast.wind_deg = forecast_raw['wind']['deg']
+        forecast.date_time = forecast_raw['dt']
+
+        forecast.save()
+
+    return WeatherForecast.objects

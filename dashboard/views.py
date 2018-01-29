@@ -7,6 +7,8 @@ from django.utils import timezone
 
 from django.http import HttpResponse
 
+import datetime
+
 from dashboard.dashes.weather import OpenWeather
 from dashboard.dashes.currency import NBRBCurrency
 from dashboard.dashes.crypto_currency import CryptoCurrency
@@ -29,8 +31,13 @@ viber = Api(bot_configuration)
 
 def weather_info(request):
     forecasts = OpenWeather.forecast()
-    OpenWeather.get_current_weather()
-    OpenWeather.get_db_forecast()
+    weather = get_object_or_404(Weather, city_name='Minsk')
+    last_update = weather.last_updated
+    from_last_update = (datetime.datetime.now(timezone.utc) - weather.last_updated).total_seconds()
+    if weather == None or  from_last_update > OpenWeather.LATENCY:
+        OpenWeather.get_current_weather()
+        OpenWeather.get_db_forecast()
+
     weather = get_object_or_404(Weather, city_name='Minsk')
     forecast = WeatherForecast.objects.filter(date_time__isnull=False).order_by('date_time')
     return render(request, 'weather.html', {'forecast': forecast, 'weather': weather})

@@ -10,6 +10,7 @@ cities = ['Minsk,by' ,'Kapyl,by']
 api_key = '0502d0f1f744a28dd8065598094fa1db'
 units = 'metric'
 lang = 'ru'
+LATENCY = 600
 
 
 def forecast():

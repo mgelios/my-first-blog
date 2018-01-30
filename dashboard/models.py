@@ -3,6 +3,18 @@ from django.utils import timezone
 
 class Currency(models.Model):
     scale = models.FloatField(default=0.0)
+    rate = models.FloatField(default=0.0)
+    abbreviation = models.CharField(default='', max_length=200)
+    last_updated = models.DateTimeField(default=timezone.now)
+
+class CurrencyConversion(models.Model):
+    value = models.FloatField(default=0.0)
+    currency_from = models.CharField(default='', max_length=200)
+    currency_to = models.CharField(default='', max_length=200)
+
+class CurrencyStatistics(models.Model):
+    abbreviation = models.CharField(default='', max_length=200)
+    rate = models.FloatField(default=0.0)
 
 class Weather(models.Model):
     main_info = models.CharField(max_length=200, default='')

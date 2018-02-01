@@ -1,6 +1,23 @@
 from django.db import models
 from django.utils import timezone
 
+
+class CryptoMarket(models.Model):
+    total_usd = models.IntegerField(default=0.0)
+    total_usd_day_volume = models.IntegerField(default=0.0)
+    active_markets = models.IntegerField(default=0.0)
+    active_currencies = models.IntegerField(default=0)
+    bitcoin_percent = models.FloatField(default=0.0)
+    last_updated = models.DateTimeField(default=timezone.now)
+
+class CryptoCurrency(models.Model):
+    name = models.CharField(max_length=200, default='')
+    symbol = models.CharField(max_length=200, default='')
+    rank = models.IntegerField(default=0)
+    price_usd = models.FloatField(default=0.0)
+    price_btc = models.FloatField(default=0.0)
+    change_24h = models.FloatField(default=0.0)
+
 class Currency(models.Model):
     scale = models.FloatField(default=0.0)
     rate = models.FloatField(default=0.0)

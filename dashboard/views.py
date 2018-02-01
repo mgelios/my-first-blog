@@ -11,9 +11,11 @@ import datetime
 
 from dashboard.dashes.weather import OpenWeather
 from dashboard.dashes.currency import NBRBCurrency
-from dashboard.dashes.crypto_currency import CryptoCurrency
+from dashboard.dashes.crypto_currency import CryptoCurrencyInfo
 
-from .models import Weather, WeatherForecast, Currency, CurrencyStatistics, CurrencyConversion
+from .models import Weather, WeatherForecast
+from .models import Currency, CurrencyStatistics, CurrencyConversion
+from .models import CryptoCurrency, CryptoMarket
 
 from viberbot import Api
 from viberbot.api.messages.text_message import TextMessage
@@ -69,8 +71,14 @@ def viber_mgbot(request):
     return HttpResponse(status=200)
 
 def crypto_currency_info(request):
-    crypto_currencies = CryptoCurrency.get_info()
-    return render(request, 'crypto_currency.html', {'crypto_currencies': crypto_currencies})
+    CryptoCurrencyInfo.update_info()
+    crypto_currencies = CryptoCurrency.objects.order_by('rank')
+    crypto_market = CryptoMarket.objects.get()
+    return render(request, 'crypto_currency.html', 
+        {
+            'crypto_currencies': crypto_currencies,
+            'crypto_market': crypto_market
+        })
 
 
 

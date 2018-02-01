@@ -50,13 +50,13 @@
                     <div class="col-xs-2 col-md-2">
                         <h3>{{crypto_currency.price_btc}}</h3>
                     </div>
-                    {% if crypto_currency.percent_change_24h.0 == '-' %}
+                    {% if crypto_currency.change_24h < 0.0 %}
                         <div class="col-xs-2 col-md-2 wg-crypto-change-column wg-crypto-change-alert">
-                            <h3>{{crypto_currency.percent_change_24h}} %</h3>
+                            <h3>{{crypto_currency.change_24h}} %</h3>
                         </div>
                     {% else %}
                         <div class="col-xs-2 col-md-2 wg-crypto-change-column">
-                            <h3>{{crypto_currency.percent_change_24h}} %</h3>
+                            <h3>{{crypto_currency.change_24h}} %</h3>
                         </div>
                     {% endif %}
                 </div>

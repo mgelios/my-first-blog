@@ -56,7 +56,7 @@ def currency_info(request):
         'statistics_eur': statistics_eur,
         'statistics_usd': statistics_usd,
         'conversions': conversions 
-        })
+    })
 
 def viber_mgbot(request):
     if request.method == "POST":

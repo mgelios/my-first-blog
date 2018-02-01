@@ -13,7 +13,7 @@ from dashboard.dashes.weather import OpenWeather
 from dashboard.dashes.currency import NBRBCurrency
 from dashboard.dashes.crypto_currency import CryptoCurrency
 
-from .models import Weather, WeatherForecast
+from .models import Weather, WeatherForecast, Currency, CurrencyStatistics, CurrencyConversion
 
 from viberbot import Api
 from viberbot.api.messages.text_message import TextMessage
@@ -31,9 +31,13 @@ viber = Api(bot_configuration)
 
 def weather_info(request):
     weather = get_object_or_404(Weather, city_name='Minsk')
-    last_update = weather.last_updated
-    from_last_update = (datetime.datetime.now(timezone.utc) - last_updated).total_seconds()
-    if weather == None or  from_last_update > OpenWeather.LATENCY:
+    if (weather != None):
+        last_update = weather.last_updated
+        from_last_update = (datetime.datetime.now(timezone.utc) - last_update).total_seconds()
+        if from_last_update > OpenWeather.LATENCY:
+            OpenWeather.get_current_weather()
+            OpenWeather.get_db_forecast()
+    else:
         OpenWeather.get_current_weather()
         OpenWeather.get_db_forecast()
 
@@ -42,12 +46,15 @@ def weather_info(request):
     return render(request, 'weather.html', {'forecast': forecast, 'weather': weather})
 
 def currency_info(request):
-    currencies = NBRBCurrency.get_currencies()
-    statistics = NBRBCurrency.get_statistics_list()
-    conversions = NBRBCurrency.get_conversions()
+    NBRBCurrency.update_info()
+    currencies = Currency.objects.filter(scale__isnull=False)
+    statistics_eur = CurrencyStatistics.objects.filter(abbreviation='EUR').order_by('date')
+    statistics_usd = CurrencyStatistics.objects.filter(abbreviation='USD').order_by('date')
+    conversions = CurrencyConversion.objects.filter(value__isnull=False)
     return render(request, 'currency.html', {
         'currencies': currencies, 
-        'statistics': statistics,
+        'statistics_eur': statistics_eur,
+        'statistics_usd': statistics_usd,
         'conversions': conversions 
         })
 

@@ -1,7 +1,7 @@
 import json
 import urllib
 from datetime import timedelta
-from datetime import datetime
+from datetime import datetime, timezone
 
 from django.shortcuts import get_object_or_404
 
@@ -25,7 +25,7 @@ SECONDS_IN_DAY=86400
 def update_info():
     checkable_currency = get_object_or_404(Currency, abbreviation='USD')
     last_updated = checkable_currency.last_updated
-    from_last_update = (datetime.datetime.now(timezone.utc) - last_updated).total_seconds()
+    from_last_update = (datetime.now(timezone.utc) - last_updated).total_seconds()
     from_last_update = int(from_last_update / SECONDS_IN_DAY)
     if (from_last_update >= LATENCY_DAYS):
         get_currencies()
@@ -40,29 +40,29 @@ def get_statistics_list():
         currency_statistics = CurrencyStatistics.objects.create()
         currency_statistics.rate = content['Cur_OfficialRate']
         currency_statistics.abbreviation = 'USD'
-        currency_statistics.date = 
+        currency_statistics.date = datetime.strptime(content['Date'], '%Y-%m-%dT%H:%M:%S')
         currency_statistics.save()
 
     for content in raw_content[1]:
         currency_statistics = CurrencyStatistics.objects.create()
         currency_statistics.rate = content['Cur_OfficialRate']
         currency_statistics.abbreviation = 'EUR'
-        currency_statistics.date = 
+        currency_statistics.date = datetime.strptime(content['Date'], '%Y-%m-%dT%H:%M:%S')
         currency_statistics.save()
 
 
 def get_conversions():
     CurrencyConversion.objects.filter(value__isnull=False).delete()
     for conversion in currency_conversion:
-        currency_conversion = CurrencyConversion.objects.create()
-        currency_conversion.value = currency_values[conversion[0]] / currency_values[conversion[1]]
-        currency_conversion.currency_from = conversion[0]
-        currency_conversion.currency_to = conversion[1]
-        currency_conversion.save()
+        conversion_db = CurrencyConversion.objects.create()
+        conversion_db.value = currency_values[conversion[0]] / currency_values[conversion[1]]
+        conversion_db.currency_from = conversion[0]
+        conversion_db.currency_to = conversion[1]
+        conversion_db.save()
 
 def get_currencies():
     raw_content = get_raw_currencies()
-    Currency.objects.filter(scaele__isnull=False).delete()
+    Currency.objects.filter(scale__isnull=False).delete()
     for content in raw_content:
         currency = Currency.objects.create()
         currency.scale = content['Cur_Scale']

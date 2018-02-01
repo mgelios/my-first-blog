@@ -19,7 +19,7 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <h3>
-                                {{currency.Cur_Scale}} {{currency.Cur_Abbreviation}} = {{currency.Cur_OfficialRate}} BYN
+                                {{currency.scale}} {{currency.abbreviation}} = {{currency.rate}} BYN
                             </h3>
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <h3>
-                                {{conversion.0}} : {{conversion.1}}
+                                {{conversion.currency_from}} / {{conversion.currency_to}} : {{conversion.value}}
                             </h3>
                         </div>
                     </div>
@@ -76,16 +76,16 @@
             <script>
                 var data_0={
                     series: [[
-                        {% for data in statistics.0 %}
-                            {{data.Cur_OfficialRate}},
+                        {% for data in statistics_usd %}
+                            {{data.rate}},
                         {% endfor %}
                     ]],
                 };
 
                 var data_1={
                     series: [[
-                        {% for data in statistics.1 %}
-                            {{data.Cur_OfficialRate}},
+                        {% for data in statistics_eur %}
+                            {{data.rate}},
                         {% endfor %}
                     ]],
                 };

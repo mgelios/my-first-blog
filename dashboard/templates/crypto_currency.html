@@ -1,4 +1,5 @@
 {% extends './base.html' %}
+{% load humanize %}
 
 {% block header %}
     <div class="col-xs-8 col-md-8">
@@ -8,18 +9,26 @@
 
 
 {% block content %}
+    <div class="col-xs-12 col-md-12 wg-crypto-market">
+        <div class="col-xs-6 col-md-6">
+            <h2>Всего USD: {{crypto_market.total_usd|intcomma}}</h2>
+        </div>
+        <div class="col-xs-6 col-md-6">
+            <h2>USD за сутки: {{crypto_market.total_usd_day_volume|intcomma}}</h2>
+        </div>
+    </div>
     <div class="col-md-12 col-xs-12 wg-header">
         <div class="row">
             <div class="col-xs-1 col-md-1">
                 <h3>Rank</h3>
             </div>
-            <div class="col-xs-3 col-md-4">
+            <div class="col-xs-3 col-md-3">
                 <h3>Name</h3>
             </div>
-            <div class="col-xs-2 col-md-1">
+            <div class="col-xs-1 col-md-1">
                 <h3>Symbol</h3>
             </div>
-            <div class="col-xs-2 col-md-2">
+            <div class="col-xs-3 col-md-3">
                 <h3>Price(USD)</h3>
             </div>
             <div class="col-xs-2 col-md-2">
@@ -38,13 +47,13 @@
                     <div class="col-xs-1 col-md-1">
                         <h3>{{crypto_currency.rank}}</h3>
                     </div>
-                    <div class="col-xs-3 col-md-4">
+                    <div class="col-xs-3 col-md-3">
                         <h3>{{crypto_currency.name}}</h3>
                     </div>
-                    <div class="col-xs-2 col-md-1">
+                    <div class="col-xs-1 col-md-1">
                         <h3>{{crypto_currency.symbol}}</h3>
                     </div>
-                    <div class="col-xs-2 col-md-2">
+                    <div class="col-xs-3 col-md-3">
                         <h3>{{crypto_currency.price_usd}} $</h3>
                     </div>
                     <div class="col-xs-2 col-md-2">

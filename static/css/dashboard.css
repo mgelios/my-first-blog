@@ -4,6 +4,7 @@
     --blue-main-color: #7ac0c0;
     --orange-main-color: #e68966;
     --orange-dark-color: #cc7a5b;
+    --green-main-color: #82c07a;
     --dark-main-color: #4c5057;
     --text-main-color: #383a3c;
     --text-inverted-color: #f6edd8;
@@ -141,6 +142,12 @@ body a {
     text-align: center;
 }
 
+.wg-crypto-market {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    text-align: center;
+}
+
 .wg-crypto-change-column{
     text-align: center;
 }
@@ -153,11 +160,12 @@ body a {
 }
 
 .wg-header {
-    background-color: var(--paper-main-color);
+    background-color: var(--green-main-color);
     background-image: url(../img/grain.png);
     background-repeat-x: repeat;
     background-repeat-y: repeat;
     padding-bottom: 15px;
+    color: var(--text-inverted-color);
 }
 
 .wg-list>.row:nth-child(even){

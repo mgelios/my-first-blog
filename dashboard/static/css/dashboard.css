@@ -1,3 +1,14 @@
+:root, svg:root {
+    --paper-main-color: #e6e1d0;
+    --paper-dark-color: #c5c2b5;
+    --blue-main-color: #7ac0c0;
+    --orange-main-color: #e68966;
+    --orange-dark-color: #cc7a5b;
+    --dark-main-color: #4c5057;
+    --text-main-color: #383a3c;
+    --text-inverted-color: #f6edd8;
+}
+
 @font-face{
     font-family: 'Lobster';
     src: url('./fonts/Lobster.ttf') format('truetype');
@@ -27,22 +38,22 @@
 }
 
 body {
-    background-color: darkgreen;
+    background-color: var(--paper-main-color);
     font-family: HelveticaNeueCyr-Roman;
-    color: white;
+    color: var(--text-main-color);
+
+    background-image: url(../img/grain.png);
+    background-repeat-x: repeat;
+    background-repeat-y: repeat;
 }
 
 body a {
     text-decoration: none;
-    color: white;
+    color: var(--text-inverted-color);
     text-align: center;
 }
 
 .container-fluid {
-    min-height: 100vh;
-}
-
-.dashboard-with-sidebar{
     min-height: 100vh;
 }
 
@@ -52,25 +63,39 @@ body a {
 }
 
 .dashboard-sidebar {
-    background-color: #0A3B07;
+    background-color: var(--dark-main-color);
+    background-image: url(../img/grain.png);
+    background-repeat-x: repeat;
+    background-repeat-y: repeat;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.55);
+    color: var(--text-inverted-color);
     position: absolute;
     left: 0;
     top: 8em;
-    bottom: 0;
-    width: 10em;
-    transform: translateX(-10em);
+    width: 35em;
+    transform: translateX(-35em);
     transition-duration: 0.3s;
     z-index: 10;
+    padding-top: 1em;
+    padding-bottom: 1em;
 }
 
 .dashboard-sidebar div {
     padding-top: 1em;
+    padding-bottom: 1em;
     font-size: 4em;
     text-align: center;
 }
 
 #dashboard-header {
-    background-color: #0A3B07;
+    background-color: var(--blue-main-color);
+    background-image: url(../img/grain.png);
+    background-repeat-x: repeat;
+    background-repeat-y: repeat;
+    color: var(--text-inverted-color);
+    text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+    box-shadow: 0 0 5px rgba(0,0,0,0.25);
+
     font-size: 3em;
     padding-top: 30px;
     padding-bottom: 30px;
@@ -96,13 +121,20 @@ body a {
 }
 
 .wg-weather img, .wg-forecast img{
-    filter: invert(1);
     max-width: 100%;
     width: 70%;
 }
 
 .wg-forecast-unit {
     text-align: center;
+    padding-bottom: 1em;
+}
+
+.wg-weather>.wg-forecast-unit:nth-child(even){
+    background-color: var(--paper-dark-color);
+    background-image: url(../img/grain.png);
+    background-repeat-x: repeat;
+    background-repeat-y: repeat;
 }
 
 .currencies-header h2{
@@ -114,40 +146,52 @@ body a {
 }
 
 .wg-crypto-change-alert{
-    background-color: #BE5555;
+    background-color: var(--orange-main-color);
+    background-image: url(../img/grain.png);
+    background-repeat-x: repeat;
+    background-repeat-y: repeat;
 }
 
 .wg-header {
-    background-color: #0E3838;
+    background-color: var(--paper-main-color);
+    background-image: url(../img/grain.png);
+    background-repeat-x: repeat;
+    background-repeat-y: repeat;
     padding-bottom: 15px;
 }
 
 .wg-list>.row:nth-child(even){
-    background-color: #134B13;
+    background-color: var(--paper-dark-color);
+    background-image: url(../img/grain.png);
+    background-repeat-x: repeat;
+    background-repeat-y: repeat;
 }
 
 .wg-list>.row:nth-child(even)>.wg-crypto-change-alert{
-    background-color: #BE3030;
+    background-color: var(--orange-dark-color);
+    background-image: url(../img/grain.png);
+    background-repeat-x: repeat;
+    background-repeat-y: repeat;
 }
 
 /* charts styling */
 
 .ct-chart, .ct-chart-2 {
-    background-color: #004B4B;
+    background-color: var(--dark-main-color);
 }
 
 .ct-series-a .ct-line, .ct-series-a .ct-point {
-    stroke: #BE8555;
+    stroke: var(--orange-main-color);
 }
 
 .ct-series-b .ct-line, .ct-series-b .ct-point {
-    stroke: #BE5555;
+    stroke: var(--orange-main-color);
 }
 
 .ct-grids .ct-grid {
-    stroke: #4AA5A5;
+    stroke: var(--paper-main-color);
 }
 
 .ct-labels .ct-label {
-    color: white;
+    color: var(--paper-main-color);
 }

@@ -48,7 +48,7 @@ body {
     background-repeat-y: repeat;
 }
 
-body a {
+body a, body a:hover, body a:active {
     text-decoration: none;
     color: var(--text-inverted-color);
     text-align: center;

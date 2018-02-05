@@ -32,17 +32,7 @@ bot_configuration = BotConfiguration(
 viber = Api(bot_configuration)
 
 def weather_info(request):
-    weather = get_object_or_404(Weather, city_name='Minsk')
-    if (weather != None):
-        last_update = weather.last_updated
-        from_last_update = (datetime.datetime.now(timezone.utc) - last_update).total_seconds()
-        if from_last_update > OpenWeather.LATENCY:
-            OpenWeather.get_current_weather()
-            OpenWeather.get_db_forecast()
-    else:
-        OpenWeather.get_current_weather()
-        OpenWeather.get_db_forecast()
-
+    OpenWeather.update_info()
     weather = get_object_or_404(Weather, city_name='Minsk')
     forecast = WeatherForecast.objects.filter(date_time__isnull=False).order_by('date_time')
     return render(request, 'weather.html', {'forecast': forecast, 'weather': weather})

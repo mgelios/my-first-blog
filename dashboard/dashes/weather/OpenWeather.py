@@ -1,6 +1,6 @@
 import json
 import urllib
-import datetime
+from datetime import datetime, timezone
 from dashboard.models import Weather, WeatherForecast
 
 base_context = 'http://api.openweathermap.org/data/2.5/'
@@ -12,6 +12,23 @@ units = 'metric'
 lang = 'ru'
 LATENCY = 600
 
+
+def update_info():
+    test_weather = None
+    try:
+        test_weather = Weather.objects.get()
+    except Weather.DoesNotExist:
+        test_weather = None
+
+    if (test_weather == None):
+        get_current_weather()
+        get_db_forecast()
+    else:
+        last_updated = test_weather.last_updated
+        from_last_update = (datetime.now(timezone.utc) - last_updated).total_seconds()
+        if (from_last_update >= LATENCY):
+            get_current_weather()
+            get_db_forecast()
 
 def forecast():
     json_content = []
@@ -25,7 +42,7 @@ def forecast():
         weather_content = json.loads(weather_content_raw)
         forecast_content = json.loads(forecast_content_raw)
         for item in forecast_content['list']:
-            item['dt'] = datetime.datetime.fromtimestamp(item['dt'])
+            item['dt'] = datetime.fromtimestamp(item['dt'])
         json_content.append([weather_content, forecast_content])
 
     return json_content
@@ -37,9 +54,9 @@ def get_current_weather_raw():
     json_content = urllib.request.urlopen(context + query).read().decode('utf-8')
     raw_object = json.loads(json_content)
 
-    raw_object['sys']['sunrise'] = datetime.datetime.fromtimestamp(raw_object['sys']['sunrise'])
-    raw_object['sys']['sunset'] = datetime.datetime.fromtimestamp(raw_object['sys']['sunset'])
-    raw_object['dt'] = datetime.datetime.fromtimestamp(raw_object['dt'])
+    raw_object['sys']['sunrise'] = datetime.fromtimestamp(raw_object['sys']['sunrise'])
+    raw_object['sys']['sunset'] = datetime.fromtimestamp(raw_object['sys']['sunset'])
+    raw_object['dt'] = datetime.fromtimestamp(raw_object['dt'])
 
     return raw_object
 
@@ -51,7 +68,7 @@ def get_forecast_raw():
     raw_list = json.loads(json_content)['list']
 
     for list_unit in raw_list:
-        list_unit['dt'] = datetime.datetime.fromtimestamp(list_unit['dt'])
+        list_unit['dt'] = datetime.fromtimestamp(list_unit['dt'])
 
     return raw_list
 

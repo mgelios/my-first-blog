@@ -23,14 +23,24 @@ LATENCY_DAYS=1
 SECONDS_IN_DAY=86400
 
 def update_info():
-    checkable_currency = get_object_or_404(Currency, abbreviation='USD')
-    last_updated = checkable_currency.last_updated
-    from_last_update = (datetime.now(timezone.utc) - last_updated).total_seconds()
-    from_last_update = int(from_last_update / SECONDS_IN_DAY)
-    if (from_last_update >= LATENCY_DAYS):
+    test_currency = None
+    try:
+        test_currency = Currency.objects.filter(abbreviation='USD')[0]
+    except Currency.DoesNotExist:
+        test_currency = None
+
+    if (test_currency == None):
         get_currencies()
         get_statistics_list()
         get_conversions()
+    else:
+        last_updated = test_currency.last_updated
+        from_last_update = (datetime.now(timezone.utc) - last_updated).total_seconds()
+        from_last_update = int(from_last_update / SECONDS_IN_DAY)
+        if (from_last_update >= LATENCY_DAYS):
+            get_currencies()
+            get_statistics_list()
+            get_conversions()
 
 
 def get_statistics_list():

@@ -70,6 +70,7 @@ def crypto(bot, update):
 def main():
     logger.info("Loading handlers for telegram bot")
 
+    print('telegrambot init')
     dp = DjangoTelegramBot.dispatcher
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("help", help))

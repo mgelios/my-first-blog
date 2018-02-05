@@ -3,8 +3,8 @@ from django.utils import timezone
 from copy import *
 
 class Post(models.Model):
-    author = models.ForeignKey('auth.User')
-    category = models.ForeignKey('blog.Category', default=None, null=True)
+    author = models.ForeignKey('auth.User', on_delete=models.PROTECT)
+    category = models.ForeignKey('blog.Category', default=None, null=True, on_delete=models.PROTECT)
     title = models.CharField(max_length=200)
     text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
@@ -21,7 +21,7 @@ class Post(models.Model):
         return self.comments.filter(approved_comment=True)
 
 class Comment(models.Model):
-    post = models.ForeignKey('blog.Post', related_name='comments')
+    post = models.ForeignKey('blog.Post', related_name='comments', on_delete=models.PROTECT)
     author = models.CharField(max_length=200)
     text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
@@ -35,7 +35,7 @@ class Comment(models.Model):
         return self.text
 
 class Category(models.Model):
-    bundle = models.ForeignKey('blog.CategoryBundle', blank=True, default=None, null=True)
+    bundle = models.ForeignKey('blog.CategoryBundle', blank=True, default=None, null=True, on_delete=models.PROTECT)
     name = models.CharField(max_length=200)
     created_date = models.DateTimeField(default=timezone.now)
 

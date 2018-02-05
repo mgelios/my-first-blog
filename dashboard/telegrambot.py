@@ -8,9 +8,6 @@ from .model import Weather
 from .model import Currency
 from .model import CryptoCurrency
 
-
-
-
 import logging
 
 logger = logging.getLogger(__name__)
@@ -32,9 +29,6 @@ def get_weather_message():
     return final_string
 
 def start(bot, update):
-    # chat_ids.add(update.message.chat_id)
-    # print('!!!!')
-    # print(update.job_queue)
     bot.sendMessage(update.message.chat_id, text='Hi!')
 
 def help(bot, update):
@@ -73,10 +67,6 @@ def crypto(bot, update):
         final_string = final_string + currency.rank + '. ' + currency.name + ': ' + currency.price_usd + '$\n'
     bot.sendMessage(update.message.chat_id, text=final_string)
 
-def weather_job_callback(bot, update):
-    for chat_id in chat_ids:
-        bot.sendMessage(chat_id, text=get_weather_message())
-
 def main():
     logger.info("Loading handlers for telegram bot")
 
@@ -93,10 +83,6 @@ def main():
     dp.add_handler(CommandHandler("конверсия", currency_conversions))
 
     dp.add_handler(MessageHandler([Filters.text], echo))
-
-    dp.job_queue = JobQueue(bot=dp.bot)
-    dp.job_queue.run_repeating(weather_job_callback, interval=65, first=0)
-
 
     dp.add_error_handler(error)
 

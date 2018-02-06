@@ -162,6 +162,25 @@ a, a:hover, a:focus {
     margin-bottom: 1em;
 }
 
+.comment {
+    margin-left: 5em;
+    margin-right: 5em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+form {
+    margin-left: 5em;
+    margin-right: 5em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+form input, form textarea{
+    display: block;
+    width: 100%;
+}
+
 .line {
     margin-top: 2em;
     margin-bottom: 2em;
@@ -173,13 +192,29 @@ a, a:hover, a:focus {
 }
 
 #content {
-    padding: 20px;
+    padding: 2em;
     min-height: 100vh;
     transition: all 0.3s;
     width: 100%;
 }
 
+a.post-button{
+    background-color: var(--dark-lighter-color);
+    color: var(--text-inverted-color);
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    margin: 0.5em;
+    font-size: 1.3em;
+    display: inline-block;
+    border-radius: 0.5em;
+}
 
+a.post-button:hover{
+    background-color: var(--dark-main-color);
+    color: var(--text-inverted-color);
+}
 
 @media (max-width: 768px) {
     #sidebar {
@@ -214,6 +249,21 @@ a, a:hover, a:focus {
         margin-left: 0.2em;
         margin-right: 0.2em;
     }
+
+    .comment {
+        margin-left: 0.2em;
+        margin-right: 0.2em;
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+
+    form {
+        margin-left: 0.2em;
+        margin-right: 0.2em;
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+
 
 }
 

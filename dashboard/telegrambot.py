@@ -34,9 +34,6 @@ def start(bot, update):
 def help(bot, update):
     bot.sendMessage(update.message.chat_id, text=help_message + help_message_commands)
 
-def echo(bot, update):
-    bot.sendMessage(update.message.chat_id, text=update.message.text)
-
 def error(bot, update, error):
     logger.warn('Update "%s" caused error "%s"' % (update, error))
 
@@ -60,6 +57,7 @@ def currency_conversions(bot, update):
     bot.sendMessage(update.message.chat_id, text=final_string)
 
 def crypto(bot, update):
+    print('crypto debug info')
     CryptoCurrencyInfo.update_info()
     currencies = CryptoCurrency.objects.order_by('rank')
     final_string = 'Курсы криптовалют:\n'
@@ -82,8 +80,6 @@ def main():
     dp.add_handler(CommandHandler("криптовалюты", crypto))
     dp.add_handler(CommandHandler("conversion", currency_conversions))
     dp.add_handler(CommandHandler("конверсия", currency_conversions))
-
-    dp.add_handler(MessageHandler([Filters.text], echo))
 
     dp.add_error_handler(error)
 

@@ -20,6 +20,7 @@ INSTALLED_APPS = (
     'blog',
     'landing',
     'dashboard',
+    'todo',
     'django_telegrambot',
 )
 

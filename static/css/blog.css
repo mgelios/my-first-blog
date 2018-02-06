@@ -1,3 +1,13 @@
+:root, svg:root {
+    --paper-main-color: #f3efe1;
+    --paper-darker-color: #cfcaba;
+    --dark-main-color: #36322e;
+    --dark-lighter-color: #574f48;
+    --dark-darker-color: #292624;
+    --text-main-color: #504d4a;
+    --text-inverted-color: #d69a4e;
+}
+
 @font-face{
     font-family: 'Lobster';
     src: url('./fonts/Lobster.ttf') format('truetype');
@@ -13,13 +23,21 @@
 }
 
 
+@font-face{
+    font-family: 'HelveticaNeueCyr-Roman';
+    src: url('./fonts/HelveticaNeueCyr-Roman.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 body {
-    font-family: 'Ubuntu', sans-serif;
-    background: #fafafa;
+    font-family: 'HelveticaNeueCyr-Roman', sans-serif;
+    background-color: var(--paper-main-color);
 }
 
 p {
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'HelveticaNeueCyr-Roman', sans-serif;
     font-size: 1.1em;
     font-weight: 300;
     line-height: 1.7em;
@@ -57,10 +75,104 @@ a, a:hover, a:focus {
     float: left;
 }
 
+.wrapper {
+    display: flex;
+    align-items: stretch;
+    perspective: 1500px;
+    top: 0;
+    bottom: 0;
+}
+
+#sidebar{
+    background-color: var(--dark-main-color);
+    color: var(--text-inverted-color);
+    min-width: 20em;
+    transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+    transform-origin: bottom left;
+}
+
+#sidebar .sidebar-header {
+    padding: 2em;
+    background-color: var(--dark-darker-color);
+}
+
+#sidebar.active {
+    margin-left: -250px;
+    transform: rotateY(100deg);
+}
+
+#sidebar p {
+    padding: 1em;
+}
+
+#sidebar ul.components{
+    border-bottom: 1px solid var(--dark-darker-color);
+    padding-bottom: 2em;
+}
+
+#sidebar ul li a {
+    display: block;
+    padding: 1em;
+}
+
+#sidebar ul li a:hover {
+    background-color: var(--dark-lighter-color);
+}
+
+#sidebar ul li.active > a, a[aria-expanded="true"] {
+}
+
+#sidebar ul li ul {
+    background-color: var(--dark-darker-color);
+}
+
+#sidebar ul.CTAs {
+    padding: 2em;
+}
+
+#sidebar ul.CTAs a {
+    background-color: var(--dark-darker-color);
+
+    text-align: center;
+    border-radius: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+#sidebarCollapse {
+    width: 3em;
+    height: 3em;
+}
+
+
+#content {
+    padding: 2em;
+}
+
+.post {
+    margin-left: 5em;
+    margin-right: 5em;
+    max-width: 900px;
+}
+
+.post h2 {
+    margin-top: 2em;
+    margin-bottom: 1em;
+}
+
+.line {
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+.post .date {
+    width: 100%;
+    text-align: right;
+}
+
 /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */
-.wrapper {
+/*.wrapper {
     display: flex;
     align-items: stretch;
     perspective: 1500px;
@@ -155,11 +267,11 @@ a.article, a.article:hover {
 }
 
 
-
+*/
 /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */
-#content {
+/*#content {
     padding: 20px;
     min-height: 100vh;
     transition: all 0.3s;
@@ -198,12 +310,12 @@ a.article, a.article:hover {
     opacity: 1;
     margin: 5px auto;
 }
-
+*/
 
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
-@media (max-width: 768px) {
+/*@media (max-width: 768px) {
     #sidebar {
         margin-left: -250px;
         transform: rotateY(90deg);
@@ -233,11 +345,11 @@ a.article, a.article:hover {
     }
 
 }
-
+*/
 /* ---------------------------------------------------
     ARTICLES
 ----------------------------------------------------- */
-.date {
+/*.date {
     padding-top: 20px;
     text-align: right;
     width: 100%;
@@ -250,3 +362,5 @@ a.article, a.article:hover {
 .post {
     padding-top: 25px;
 }
+
+*/

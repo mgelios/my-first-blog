@@ -205,19 +205,21 @@ input {
 #landing-content {
     margin-top: 5em;
     min-height: 65em;
-    height: 80%;
+    min-height: 80%;
 }
 
 #landing-content .landing-content-unit{
     height: 12em;
     text-align: center;
+    margin-top: 1em;
+    margin-bottom: 4em;
 }
 
 @media (min-width: 525px) {
     #landing-content {
         margin-top: 5em;
         min-height: 50em;
-        height: 80%;
+        min-height: 80%;
     }
 
     #landing-content .landing-content-unit{
@@ -229,11 +231,11 @@ input {
     #landing-content {
         margin-top: 5em;
         min-height: 50em;
-        height: 80%;
+        min-height: 80%;
     }
 
     #landing-content .landing-content-unit{
-        height: 25em;
+        min-height: 25em;
     }
 }
 

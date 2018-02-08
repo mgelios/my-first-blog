@@ -1,0 +1,8 @@
+{% extends 'todo/base.html' %}
+
+
+{% block content %}
+    {% for action in actions %}
+        <h2>{{action.text}}</h2>
+    {% endfor %}
+{% endblock %}

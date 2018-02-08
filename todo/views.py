@@ -6,6 +6,8 @@ from .models import Action, ActionCategory
 
 @login_required
 def task_list(request):
-    category = ActionCategory.objects.filter()
-    actions = Actions.objects.filter('')
-    return None
+    category = None
+    if (len(ActionCategory.objects.filter(author=request.user))>0):
+        category = ActionCategory.objects.filter(author=request.user)[0]
+    actions = Action.objects.filter(category=category)
+    return render(request, 'todo/sheet.html', {'actions': actions})

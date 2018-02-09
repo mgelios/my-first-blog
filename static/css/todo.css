@@ -64,17 +64,23 @@ body {
     color: var(--blue-main-color);
 }
 
-.action-sheet-heading-column {
+.action-sheet>div{
+    padding: 0;
 }
 
-.action-sheet-heading-column:not(:first-child) {
-    border-left: 1px solid var(--gray-darker-color);
+.action-sheet-column-heading {
+    padding-left: 1em;
+}
+
+.action-sheet-column-heading:not(:first-child) {
+    border-left: 10px solid var(--gray-darker-color);
 }
 
 .action-sheet-column {
     background-color: var(--gray-main-color);
     box-shadow: inset 0 0 20px 0 var(--gray-darker-color);
     min-height: 60vh;
+    padding: 1em;
 }
 
 .action-sheet-column:not(:first-child) {

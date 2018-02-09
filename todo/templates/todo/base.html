@@ -14,7 +14,19 @@
         <meta name="theme-color" content="#0747a6">
     </head>
     <body>
-        {% block content %}
-        {% endblock %}
+        <div class="container-fluid">
+            <header id="page-header" class="row">
+                <div class="header-button">
+                    <a href="/">
+                        <span class="glyphicon glyphicon-home"></span>
+                    </a>
+                </div>
+                {% block title %}
+                {% endblock %}
+            </header>
+
+            {% block content %}
+            {% endblock %}
+        </div>
     </body>
 </html>

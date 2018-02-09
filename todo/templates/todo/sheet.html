@@ -1,8 +1,46 @@
 {% extends 'todo/base.html' %}
 
 
+{% block title %}
+<div>
+    {% if active_category != None %}
+        <h1>{{active_category.name}}</h1>
+    {% endif %}
+</div>
+{% endblock %}
+
 {% block content %}
-    {% for action in actions %}
-        <h2>{{action.text}}</h2>
-    {% endfor %}
+    <div class="col-xs-12 col-md-12 category-heading">
+        <a href="#">
+            <span class="glyphicon glyphicon-plus"></span>
+        </a>
+    </div>
+    <div class="col-xs-12 col-md-12 action-sheet-heading">
+        <div class="col-xs-4 col-md-4 action-sheet-heading-column">
+            <h2>TO DO</h2>
+        </div>
+        <div class="col-xs-4 col-md-4 action-sheet-heading-column">
+            <h2>IN PROGRESS</h2>
+        </div>
+        <div class="col-xs-4 col-md-4 action-sheet-heading-column">
+            <h2>DONE</h2>
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-12 action-sheet">
+        <div class="col-xs-4 col-md-4 action-sheet-column">
+            {% for action in actions %}
+                <div class="action-item">
+                    <h3>{{action.text}}</h3>
+                    <h4>{{action.get_status_display}}</h4>
+                    <h4>{{action.get_priority_display}}</h4>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col-xs-4 col-md-4 action-sheet-column">
+            
+        </div>
+        <div class="col-xs-4 col-md-4 action-sheet-column">
+            
+        </div>
+    </div>
 {% endblock %}

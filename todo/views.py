@@ -10,4 +10,8 @@ def task_list(request):
     if (len(ActionCategory.objects.filter(author=request.user))>0):
         category = ActionCategory.objects.filter(author=request.user)[0]
     actions = Action.objects.filter(category=category)
-    return render(request, 'todo/sheet.html', {'actions': actions})
+    return render(request, 'todo/sheet.html',
+        {
+        'actions': actions,
+        'active_category': category
+        })

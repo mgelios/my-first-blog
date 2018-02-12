@@ -14,7 +14,22 @@ API_TYPE_GLOBAL = 'global/'
 LIMIT_SUFFIX = '?limit='
 LIMIT_AMOUNT = '10'
 
-SPECIAL_IDS = ['nem', 'stellar', 'zcash', 'siacoin', 'golem-network-tokens', 'pivx', 'expanse']
+SPECIAL_IDS = [
+'nem', 
+'stellar', 
+'zcash', 
+'siacoin', 
+'golem-network-tokens', 
+'pivx', 
+'expanse',
+'ethereum-classic',
+'steem',
+'dogecoin',
+'dash',
+'omisego',
+'stratis',
+'qtum'
+]
 
 LATENCY = 300
 

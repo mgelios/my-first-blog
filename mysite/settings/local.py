@@ -23,7 +23,7 @@ INSTALLED_APPS = (
     # 'django_telegrambot',
 )
 
-TELEGRAM_BOT_ALLOWED = True
+TELEGRAM_BOT_ALLOWED = False
 
 # DJANGO_TELEGRAMBOT = {
 #     'MODE': 'POLLING',

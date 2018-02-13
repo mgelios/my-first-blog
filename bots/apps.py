@@ -28,9 +28,10 @@ class TelegramAppConfig(AppConfig):
         print(TELEGRAM_BOT_WEBHOOK_ADDR+'/'+TELEGRAM_BOT_TOKEN+'/')
         if settings.TELEGRAM_BOT_ALLOWED:
             try:
-                bot.setWebhook(url=TELEGRAM_BOT_WEBHOOK_ADDR+'/'+TELEGRAM_BOT_TOKEN+'/',
-                               allowed_updates='ALL')
+                #bot.setWebhook(url=TELEGRAM_BOT_WEBHOOK_ADDR+'/'+TELEGRAM_BOT_TOKEN+'/')
+                updater.start_polling()
             except BadRequest as er:
-                print("unsuccesful starting of webhook because of badrequest")
+                print("### unsuccesful starting of webhook because of badrequest")
+                print(str(er))
 
 

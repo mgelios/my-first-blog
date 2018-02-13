@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'landing',
     'dashboard',
     'todo',
+    'bots',
 )
 
 MIDDLEWARE = (
@@ -101,3 +102,4 @@ STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = '/'
 
+TELEGRAM_BOT_ALLOWED = False

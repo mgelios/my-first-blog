@@ -19,13 +19,16 @@ INSTALLED_APPS = (
     'landing',
     'dashboard',
     'todo',
-    'django_telegrambot',
+    'bots',
+    # 'django_telegrambot',
 )
 
-DJANGO_TELEGRAMBOT = {
-    'MODE': 'POLLING',
-    'WEBHOOK_SITE': 'localhost',
-    'BOTS': [{
-        'TOKEN': '460933242:AAEh67xQVBeT37EwN84iudv80tbYBsOY1QA'
-    }]
-}
+TELEGRAM_BOT_ALLOWED = False
+
+# DJANGO_TELEGRAMBOT = {
+#     'MODE': 'POLLING',
+#     'WEBHOOK_SITE': 'localhost',
+#     'BOTS': [{
+#         'TOKEN': '460933242:AAEh67xQVBeT37EwN84iudv80tbYBsOY1QA'
+#     }]
+# }

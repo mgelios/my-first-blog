@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'', include('landing.urls')),
     url(r'', include('dashboard.urls')),
     url(r'', include('todo.urls')),
+    url(r'', include('bots.urls')),
 ]

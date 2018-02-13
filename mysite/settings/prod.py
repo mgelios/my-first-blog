@@ -21,15 +21,18 @@ INSTALLED_APPS = (
     'landing',
     'dashboard',
     'todo',
-    'django_telegrambot',
+    'bots',
+    # 'django_telegrambot',
 )
 
-DJANGO_TELEGRAMBOT = {
-    'MODE': 'WEBHOOK',
-    'WEBHOOK_SITE': 'https://mgelios.pythonanywhere.com',
-    'WEBHOOK_PREFIX': '/telegrambot',
-    'WEBHOOK_CERTIFICATE': '',
-    'BOTS': [{
-        'TOKEN': '460933242:AAEh67xQVBeT37EwN84iudv80tbYBsOY1QA'
-    }]
-}
+TELEGRAM_BOT_ALLOWED = True
+
+# DJANGO_TELEGRAMBOT = {
+#     'MODE': 'WEBHOOK',
+#     'WEBHOOK_SITE': 'https://mgelios.pythonanywhere.com',
+#     'WEBHOOK_PREFIX': '/telegrambot',
+#     'WEBHOOK_CERTIFICATE': '',
+#     'BOTS': [{
+#         'TOKEN': '460933242:AAEh67xQVBeT37EwN84iudv80tbYBsOY1QA'
+#     }]
+# }

@@ -4,6 +4,7 @@ from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 import telegram
+import json
 from telegram.error import InvalidToken, TelegramError, BadRequest
 
 from .apps import TelegramBot
@@ -19,6 +20,12 @@ def telegram_bot(request, bot_token):
         bot = TelegramBot.bot
         updater = TelegramBot.updater
         dispatcher = TelegramBot.dispatcher
+        data = {}
+        try:
+            data = json.loads(request.body.decode("utf-8"))
+        except:
+            print('### error during fetching json data')
+
         try:
             print('### bot, updater, dispatcher recieved')
             update = telegram.Update.de_json(data, bot)

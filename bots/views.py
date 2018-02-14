@@ -14,8 +14,6 @@ my_telegram_id = '@master_gelios'
 
 @csrf_exempt
 def telegram_bot(request, bot_token):
-    print('### telegram bot endoint called')
-    print(TelegramBot.webhook_started)
     if TelegramBot.webhook_started:
         bot = TelegramBot.bot
         updater = TelegramBot.updater
@@ -27,9 +25,8 @@ def telegram_bot(request, bot_token):
             print('### error during fetching json data')
 
         try:
-            print('### bot, updater, dispatcher recieved')
             update = telegram.Update.de_json(data, bot)
             dispatcher.process_update(update)
         except TelegramError as er:
-            print('### ')
+            print('### error during dispatch')
     return JsonResponse({})

@@ -15,6 +15,9 @@ TELEGRAM_BOT_WEBHOOK_ADDR = 'https://mgelios.pythonanywhere.com/'
 def start(bot, update):
     bot.send_message(chat_id=update.message.chat_id, text='Im a bot,  bloa blaoa bloa')
 
+def callback_test(bot, job):
+    bot.send_message(chat_id='@master_gelios', text='LOLed')
+
 class TelegramBot(AppConfig):
     name = 'bots'
     verbose_name = 'Telegram bot'
@@ -33,6 +36,7 @@ class TelegramBot(AppConfig):
             try:
                 TelegramBot.bot.setWebhook(url=TELEGRAM_BOT_WEBHOOK_ADDR+TELEGRAM_BOT_SUFFIX+TELEGRAM_BOT_TOKEN+'/')
                 TelegramBot.webhook_started = True
+                TelegramBot.updater.job_queue.run_repeating(callback_test, interval=300, first=0)
                 print('### webhook successfuly started')
             except BadRequest as er:
                 print('### error occured during setting webhook')

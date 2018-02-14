@@ -14,6 +14,7 @@ logger = logging.getLogger(__name__)
 
 @csrf_exempt
 def telegram_bot(request, bot_token):
+    logger.debug('### telegram bot endoint called')
     if TelegramBot.webhook_started:
         bot = TelegramBot.bot
         updater = TelegramBot.updater

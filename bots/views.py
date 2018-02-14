@@ -4,8 +4,10 @@ from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 import telegram
+from telegram.error import InvalidToken, TelegramError, BadRequest
 
 from .apps import TelegramBot
+
 
 my_telegram_id = '@master_gelios'
 

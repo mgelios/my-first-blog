@@ -9,7 +9,8 @@ from telegram.ext import CommandHandler
 from telegram.error import InvalidToken, TelegramError, BadRequest
 
 TELEGRAM_BOT_TOKEN = '460933242:AAEh67xQVBeT37EwN84iudv80tbYBsOY1QA'
-TELEGRAM_BOT_WEBHOOK_ADDR = 'https://mgelios.pythonanywhere.com/bots/telegram'
+TELEGRAM_BOT_SUFFIX = 'bots/telegram/'
+TELEGRAM_BOT_WEBHOOK_ADDR = 'https://mgelios.pythonanywhere.com/'
 
 
 def start(bot, update):
@@ -29,10 +30,9 @@ class TelegramBot(AppConfig):
         dispatcher = updater.dispatcher
         start_handler = CommandHandler('start', start)
         dispatcher.add_handler(start_handler)
-        print(TELEGRAM_BOT_WEBHOOK_ADDR+'/'+TELEGRAM_BOT_TOKEN+'/')
         if settings.TELEGRAM_BOT_ALLOWED:
             try:
-                bot.setWebhook(url=TELEGRAM_BOT_WEBHOOK_ADDR+'/'+TELEGRAM_BOT_TOKEN+'/')
+                bot.setWebhook(url=TELEGRAM_BOT_WEBHOOK_ADDR+TELEGRAM_BOT_SUFFIX+TELEGRAM_BOT_TOKEN+'/')
                 webhook_started = True
             except BadRequest as er:
                 print("### unsuccesful starting of webhook because of badrequest")

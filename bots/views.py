@@ -12,6 +12,7 @@ my_telegram_id = '@master_gelios'
 @csrf_exempt
 def telegram_bot(request, bot_token):
     print('### telegram bot endoint called')
+    print(TelegramBot.webhook_started)
     if TelegramBot.webhook_started:
         bot = TelegramBot.bot
         updater = TelegramBot.updater

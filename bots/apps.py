@@ -24,15 +24,15 @@ class TelegramBot(AppConfig):
     webhook_started = False
 
     def ready(self):
-        updater = Updater(token=TELEGRAM_BOT_TOKEN)
-        bot = updater.bot
-        dispatcher = updater.dispatcher
+        TelegramBot.updater = Updater(token=TELEGRAM_BOT_TOKEN)
+        TelegramBot.bot = TelegramBot.updater.bot
+        TelegramBot.dispatcher = TelegramBot.updater.dispatcher
         start_handler = CommandHandler('start', start)
-        dispatcher.add_handler(start_handler)
+        TelegramBot.dispatcher.add_handler(start_handler)
         if settings.TELEGRAM_BOT_ALLOWED:
             try:
                 bot.setWebhook(url=TELEGRAM_BOT_WEBHOOK_ADDR+TELEGRAM_BOT_SUFFIX+TELEGRAM_BOT_TOKEN+'/')
-                webhook_started = True
+                TelegramBot.webhook_started = True
                 print('### webhook successfuly started')
             except BadRequest as er:
                 print('### error occured during setting webhook')

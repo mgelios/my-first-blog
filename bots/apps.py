@@ -31,7 +31,7 @@ class TelegramBot(AppConfig):
         TelegramBot.dispatcher.add_handler(start_handler)
         if settings.TELEGRAM_BOT_ALLOWED:
             try:
-                bot.setWebhook(url=TELEGRAM_BOT_WEBHOOK_ADDR+TELEGRAM_BOT_SUFFIX+TELEGRAM_BOT_TOKEN+'/')
+                TelegramBot.bot.setWebhook(url=TELEGRAM_BOT_WEBHOOK_ADDR+TELEGRAM_BOT_SUFFIX+TELEGRAM_BOT_TOKEN+'/')
                 TelegramBot.webhook_started = True
                 print('### webhook successfuly started')
             except BadRequest as er:

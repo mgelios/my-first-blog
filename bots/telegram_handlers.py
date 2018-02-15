@@ -3,7 +3,10 @@ from django.utils import timezone
 
 from dashboard.models import Weather
 from dashboard.models import Currency
+from dashboard.models import CryptoMarket
 from dashboard.models import CryptoCurrency
+from dashboard.models import CurrencyConversion
+from dashboard.models import CurrencyStatistics
 
 from dashboard.dashes.weather import OpenWeather
 from dashboard.dashes.currency import NBRBCurrency

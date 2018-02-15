@@ -10,7 +10,14 @@ from telegram.error import InvalidToken, TelegramError, BadRequest
 from .apps import TelegramBot
 
 
-my_telegram_id = '@master_gelios'
+my_telegram_nickname = '@mgelios'
+my_telegram_id = 396394358
+
+@csrf_exempt
+def test_endpoint(request):
+    bot = TelegramBot.bot
+    bot.send_message(chat_id=my_telegram_id, text='LOLed')
+    return JsonResponse({})
 
 @csrf_exempt
 def telegram_bot(request, bot_token):

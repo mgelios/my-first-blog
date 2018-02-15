@@ -26,6 +26,7 @@ ALLOWED_HOSTS = ['XX.XX.XX.XX', 'mgelios.pythonanywhere.com', 'localhost']
 # Application definition
 
 INSTALLED_APPS = (
+    'django.db.models',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

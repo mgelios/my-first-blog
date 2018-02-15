@@ -8,4 +8,5 @@ suffix = apps.TELEGRAM_BOT_SUFFIX
 
 urlpatterns = [
     url(r'{}(?P<bot_token>.+?)/$'.format(suffix), views.telegram_bot, name='telegram_bot'),
+    url(r'^bots/test/$', views.test_endpoint, name='test_endpoint'),
 ]

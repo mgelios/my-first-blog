@@ -7,6 +7,7 @@ DEBUG = True
 SECRET_KEY = 'local secret key'
 
 INSTALLED_APPS = (
+    'django.db.models',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

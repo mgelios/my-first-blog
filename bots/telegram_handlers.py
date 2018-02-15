@@ -24,7 +24,7 @@ chat_ids = set()
 
 def get_weather_message():
     OpenWeather.update_info()
-    weather = Weather.objects.filter(city_name='Minsk')
+    weather = Weather.objects.filter(city_name='Minsk')[0]
     final_string = ''
     header_string = 'Погода в городе {0} \n'.format(weather.city_name)
     temperature_string = 'Температура: {0} \n'.format(weather.temperature)

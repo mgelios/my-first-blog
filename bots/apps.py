@@ -21,12 +21,12 @@ class TelegramBot(AppConfig):
     webhook_started = False
 
     def ready(self):
+        import bots.telegram_handlers
         TelegramBot.updater = Updater(token=TELEGRAM_BOT_TOKEN)
         TelegramBot.bot = TelegramBot.updater.bot
         TelegramBot.dispatcher = TelegramBot.updater.dispatcher
         if settings.TELEGRAM_BOT_ALLOWED:
             try:
-                import bots.telegram_handlers
                 telegram_handlers.promote_handlers(TelegramBot.dispatcher)
                 TelegramBot.bot.setWebhook(url=TELEGRAM_BOT_WEBHOOK_ADDR+TELEGRAM_BOT_SUFFIX+TELEGRAM_BOT_TOKEN+'/')
                 TelegramBot.webhook_started = True

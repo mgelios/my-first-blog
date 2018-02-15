@@ -17,6 +17,8 @@ help_message_commands = 'На данный момент присутствуют
 
 chat_ids = set()
 
+
+
 def get_weather_message():
     OpenWeather.update_info()
     weather = Weather.objects.filter(city_name='Minsk')
@@ -34,8 +36,6 @@ def start(bot, update):
 def help(bot, update):
     bot.sendMessage(update.message.chat_id, text=help_message + help_message_commands)
 
-def error(bot, update, error):
-    logger.warn('Update "%s" caused error "%s"' % (update, error))
 
 def weather(bot, update):
     bot.sendMessage(update.message.chat_id, text=get_weather_message())
@@ -66,8 +66,6 @@ def crypto(bot, update):
     bot.sendMessage(update.message.chat_id, text=final_string)
 
 def promote_handlers(dispatcher):
-    logger.info("Loading handlers for telegram bot")
-
     print('telegrambot init')
     dispatcher.add_handler(CommandHandler("start", start))
     dispatcher.add_handler(CommandHandler("help", help))
@@ -79,7 +77,5 @@ def promote_handlers(dispatcher):
     dispatcher.add_handler(CommandHandler("криптовалюты", crypto))
     dispatcher.add_handler(CommandHandler("conversion", currency_conversions))
     dispatcher.add_handler(CommandHandler("конверсия", currency_conversions))
-
-    dispatcher.add_error_handler(error)
 
 

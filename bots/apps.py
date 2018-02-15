@@ -21,7 +21,7 @@ class TelegramBot(AppConfig):
     webhook_started = False
 
     def ready(self):
-        import bots.telegram_handlers
+        from bots import telegram_handlers
         TelegramBot.updater = Updater(token=TELEGRAM_BOT_TOKEN)
         TelegramBot.bot = TelegramBot.updater.bot
         TelegramBot.dispatcher = TelegramBot.updater.dispatcher

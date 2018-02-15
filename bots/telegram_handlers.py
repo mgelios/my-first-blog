@@ -65,7 +65,7 @@ def crypto(bot, update):
     currencies = CryptoCurrency.objects.order_by('rank')
     final_string = 'Курсы криптовалют:\n'
     for currency in currencies:
-        final_string = final_string + currency.rank + '. ' + currency.name + ': ' + currency.price_usd + '$\n'
+        final_string = final_string + str(currency.rank) + '. ' + currency.name + ': ' + str(currency.price_usd) + '$\n'
     bot.sendMessage(update.message.chat_id, text=final_string)
 
 def promote_handlers(dispatcher):

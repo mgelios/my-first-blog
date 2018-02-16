@@ -1,4 +1,5 @@
 :root, svg:root {
+    --blue-light-color: #2684FF;
     --blue-main-color: #0747a6;
     --blue-darker-color: #08357c;
     --light-main-color: white;
@@ -23,10 +24,50 @@
 body {
     min-height: 100vh;
     font-family: HelveticaNeueCyr-Roman;
+    overflow-x: hidden;
 }
 
 .container-fluid {
     min-height: 100%;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.sidebar{
+    background-color: var(--blue-main-color);
+    color: var(--light-main-color);
+    position: absolute;
+    top: 5em;
+    width: 30%;
+    right: 0;
+    height: 100vh;
+    z-index: 5;
+    padding: 2em;
+    transform: translateX(35em);
+    transition-duration: 0.3s;
+}
+
+.sidebar a, .sidebar a:hover, .sidebar a:active{
+    color: var(--light-main-color);
+    font-size: 1.4em;
+    text-decoration: none;
+}
+
+.sidebar-category {
+    display: inline-block;
+    background-color: var(--blue-light-color);
+    border-radius: 0.2em;
+}
+
+.sidebar-category div {
+    padding: 0.2em;
+    margin: 0.1em;
+}
+
+
+.tasklist-with-sidebar .sidebar{
+    transform: translateX(0em);
+    transition-duration: 0.3s;
 }
 
 #page-header {
@@ -35,6 +76,9 @@ body {
     vertical-align: middle;
     text-shadow: 0 2px 2px rgba(0,0,0,0.5);
     box-shadow: 0 2px 15px rgba(0,0,0,0.5);
+    z-index: 10;
+    padding-left: 1em;
+    padding-right: 1em;
 }
 
 #page-header a, #page-header a:hover, #page-header a:active{
@@ -42,15 +86,18 @@ body {
 }
 
 #page-header div {
-    padding: 1em;
-    padding-top: 2em;
+    padding: 0.5em;
+    padding-top: 0.7em;
     float: left;
 }
 
 #page-header .header-button {
-    padding: 1em;
     text-align: center;
-    font-size: 3em;
+    font-size: 2.5em;
+}
+
+#page-header .sidebar-icon {
+    float: right;
 }
 
 .category-heading {
@@ -62,6 +109,13 @@ body {
 .category-heading a {
     font-size: 3em;
     color: var(--blue-main-color);
+}
+
+.action-sheet{
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .action-sheet>div{

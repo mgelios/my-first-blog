@@ -6,12 +6,15 @@ from .models import Action, ActionCategory
 
 @login_required
 def task_list(request):
-    category = None
+    first_category = None
+    categories = None
     if (len(ActionCategory.objects.filter(author=request.user))>0):
-        category = ActionCategory.objects.filter(author=request.user)[0]
-    actions = Action.objects.filter(category=category)
+        categories = ActionCategory.objects.filter(author=request.user)
+        first_category = categories[0]
+    actions = Action.objects.filter(category=first_category)
     return render(request, 'todo/sheet.html',
         {
-        'actions': actions,
-        'active_category': category
+            'actions': actions,
+            'categories': categories,
+            'active_category': first_category
         })

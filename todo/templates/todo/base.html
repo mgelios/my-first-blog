@@ -1,13 +1,14 @@
 {% load staticfiles %}
+<!DOCTYPE HTML>
 <html>
     <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE-edge">
         <meta name="title" content="Tasklist, minimalistic">
         <meta name="keywords" content="minimalistic, tasklist, todo, task management">
         <meta name="description" content="Эта страница предназначена для упраления задачами. Минималистично">
 
         <title>Tasklist</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
         <link rel="stylesheet" href="{% static 'css/todo.css' %}" >
@@ -23,10 +24,37 @@
                 </div>
                 {% block title %}
                 {% endblock %}
+                <div class="sidebar-icon header-button">
+                    <a href="#" id="header__icon">
+                        <span class="glyphicon glyphicon-th-large"></span>
+                    </a>
+                </div>
             </header>
+            <div class="sidebar">
+                {% for category in categories %}
+                    <a href="#" class="sidebar-category">
+                        <div>{{category.name}}</div>
+                    </a>
+                {% endfor %}
+            </div>
 
             {% block content %}
             {% endblock %}
         </div>
+        <script>
+            $(document).ready(function(){
+                (function($) {
+                    $('#header__icon').click(function(e){
+                        e.preventDefault();
+                        $('.container-fluid').toggleClass('tasklist-with-sidebar');
+                    });
+                
+                    $('#some').click(function(e){
+                      $('.container-fluid').removeClass('tasklist-with-sidebar');
+                    });
+                })(jQuery);
+            });
+        </script>
     </body>
 </html>
+

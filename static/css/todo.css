@@ -47,6 +47,12 @@ body {
     transition-duration: 0.3s;
 }
 
+@media (max-width: 768px){
+    .sidebar {
+        width: 80%;
+    }
+}
+
 .sidebar a, .sidebar a:hover, .sidebar a:active{
     color: var(--light-main-color);
     font-size: 1.4em;

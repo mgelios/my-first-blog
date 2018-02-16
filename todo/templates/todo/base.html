@@ -32,6 +32,9 @@
                 </div>
             </header>
             <div class="sidebar">
+                <a href="{% url 'create_action_category' %}" class="sidebar-category">
+                    <div> <span class="glyphicon glyphicon-plus"></span> </div>
+                </a>
                 {% for category in categories %}
                     <a href="#" class="sidebar-category">
                         <div>{{category.name}}</div>

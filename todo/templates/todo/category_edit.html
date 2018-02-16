@@ -1,0 +1,15 @@
+{% extends 'todo/base.html' %}
+
+{% block title %}
+    <div>
+        <h2>New category</h2>
+    </div>
+{% endblock %}
+
+
+{% block content %}
+    <form method="POST" class="post-form" name="editform">{% csrf_token %}
+        {{ form.as_p }}
+        <a class="post-button" href="javascript:document.editform.submit()">Save</a>
+    </form>
+{% endblock %}

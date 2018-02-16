@@ -28,7 +28,7 @@ class Action(models.Model):
 
 
 class ActionCategory(models.Model):
-    author = models.ForeignKey('auth.User', on_delete=models.PROTECT, default=None)
+    author = models.ForeignKey('auth.User', on_delete=models.PROTECT, default=None, null=True)
     name = models.CharField(default='', max_length=200)
     last_updated = models.DateTimeField(default=timezone.now)
 

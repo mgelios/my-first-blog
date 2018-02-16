@@ -12,4 +12,4 @@ class ActionCategoryForm(forms.ModelForm):
 
     class Meta:
         model = ActionCategory
-        fields = ('author', 'name',)
+        fields = ('name',)

@@ -43,7 +43,7 @@ body {
     height: 100vh;
     z-index: 5;
     padding: 2em;
-    transform: translateX(35em);
+    transform: translateX(55em);
     transition-duration: 0.3s;
 }
 

@@ -11,7 +11,7 @@
 
 {% block content %}
     <div class="col-xs-12 col-md-12 category-heading">
-        <a href="#">
+        <a href="{% url 'create_action' %}">
             <span class="glyphicon glyphicon-plus"></span>
         </a>
     </div>
@@ -22,11 +22,15 @@
             </div>
             <div class="action-sheet-column">
                 {% for action in actions %}
-                    <div class="action-item">
-                        <h3>{{action.text}}</h3>
-                        <h4>{{action.get_status_display}}</h4>
-                        <h4>{{action.get_priority_display}}</h4>
-                    </div>
+                    {% if action.status == 0 %}
+                        <div class="action-item priority-{{action.priority}}">
+                            <a href="{% url 'update_action' pk=action.pk %}">
+                                <h3>{{action.text}}</h3>
+                            </a>
+                            <h4>{{action.get_status_display}}</h4>
+                            <h4>{{action.get_priority_display}}</h4>
+                        </div>
+                    {% endif%}
                 {% endfor %}
             </div>
         </div>
@@ -35,7 +39,17 @@
                 <h2>IN PROGRESS</h2>
             </div>
             <div class="action-sheet-column">
-                
+                {% for action in actions %}
+                    {% if action.status == 1 %}
+                        <div class="action-item priority-{{action.priority}}">
+                            <a href="{% url 'update_action' pk=action.pk %}">
+                                <h3>{{action.text}}</h3>
+                            </a>
+                            <h4>{{action.get_status_display}}</h4>
+                            <h4>{{action.get_priority_display}}</h4>
+                        </div>
+                    {% endif%}
+                {% endfor %}
             </div>
         </div>
         <div class="col-xs-12 col-md-4">
@@ -43,7 +57,17 @@
                 <h2>DONE</h2>
             </div>
             <div class="action-sheet-column">
-                
+                {% for action in actions %}
+                    {% if action.status == 2 %}
+                        <div class="action-item priority-{{action.priority}}">
+                            <a href="{% url 'update_action' pk=action.pk %}">
+                                <h3>{{action.text}}</h3>
+                            </a>
+                            <h4>{{action.get_status_display}}</h4>
+                            <h4>{{action.get_priority_display}}</h4>
+                        </div>
+                    {% endif%}
+                {% endfor %}
             </div>
         </div>
     </div>

@@ -36,7 +36,7 @@
                     <div> <span class="glyphicon glyphicon-plus"></span> </div>
                 </a>
                 {% for category in categories %}
-                    <a href="#" class="sidebar-category">
+                    <a href="{% url 'category_action_list' pk=category.pk %}" class="sidebar-category">
                         <div>{{category.name}}</div>
                     </a>
                 {% endfor %}

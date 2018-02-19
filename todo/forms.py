@@ -5,7 +5,7 @@ class ActionForm(forms.ModelForm):
 
     class Meta:
         model = Action
-        fields = ('text', 'category',)
+        fields = ('text', 'category', 'priority', 'status')
 
 
 class ActionCategoryForm(forms.ModelForm):

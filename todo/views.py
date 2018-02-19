@@ -15,7 +15,7 @@ def action_list(request):
     if (len(ActionCategory.objects.filter(author=request.user))>0):
         categories = ActionCategory.objects.filter(author=request.user)
         first_category = categories[0]
-    actions = Action.objects.filter(category=first_category)
+    actions = Action.objects.filter(category=first_category).order_by('-priority')
     return render(
         request, 
         'todo/sheet.html',
@@ -23,14 +23,43 @@ def action_list(request):
             'categories': categories,
             'active_category': first_category   })
 
-# @login_required
-# def update_action(request, pk):
-#     action = get_object_or_404(Action, pk=pk)
-#     if request.method == "POST":
+@login_required
+def category_action_list(request, pk):
+    category = get_object_or_404(ActionCategory, pk=pk)
+    categories = ActionCategory.objects.filter(author=request.user)
+    actions = Action.objects.filter(category=category).order_by('-priority')
+    return render(
+        request,
+        'todo/sheet.html',
+        {   'actions': actions,
+            'categories': categories,
+            'active_category': category
+        })
 
-#     else:
-#         return
-#     return 
+@login_required
+def update_action(request, pk):
+    action = get_object_or_404(Action, pk=pk)
+    if request.method == 'POST':
+        form = ActionForm(request.POST, instance=action)
+        if (form.is_valid):
+            action = form.save()
+            action.save()
+            return redirect('action_list')
+    else:
+        form = ActionForm(instance=action)
+    return render(request, 'todo/action_edit.html', {'form': form})
+
+@login_required
+def create_action(request):
+    if request.method == 'POST':
+        form = ActionForm(request.POST)
+        if (form.is_valid):
+            action = form.save()
+            action.save()
+            return redirect('action_list')
+    else:
+        form = ActionForm()
+    return render(request, 'todo/action_edit.html', {'form': form})
 
 @login_required
 def create_action_category(request):

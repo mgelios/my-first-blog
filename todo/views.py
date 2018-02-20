@@ -47,6 +47,7 @@ def update_action(request, pk):
             return redirect('action_list')
     else:
         form = ActionForm(instance=action)
+        form.fields['category'].queryset = ActionCategory.objects.filter(author=request.user)
     return render(request, 'todo/action_edit.html', {'form': form})
 
 @login_required
@@ -59,6 +60,7 @@ def create_action(request):
             return redirect('action_list')
     else:
         form = ActionForm()
+        form.fields['category'].queryset = ActionCategory.objects.filter(author=request.user)
     return render(request, 'todo/action_edit.html', {'form': form})
 
 @login_required

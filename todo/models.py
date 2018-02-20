@@ -19,7 +19,7 @@ class Action(models.Model):
     text = models.CharField(default='', max_length=200)
     date = models.DateTimeField(default=timezone.now)
     last_updated = models.DateTimeField(default=timezone.now)
-    category = models.ForeignKey('todo.ActionCategory', on_delete=models.PROTECT)
+    category = models.ForeignKey('todo.ActionCategory', on_delete=models.CASCADE)
     status = models.IntegerField(default=0, choices=ACTION_STATUSES)
     priority = models.IntegerField(default=2, choices=ACTION_PRIORITIES)
 
@@ -28,7 +28,7 @@ class Action(models.Model):
 
 
 class ActionCategory(models.Model):
-    author = models.ForeignKey('auth.User', on_delete=models.PROTECT, default=None, null=True)
+    author = models.ForeignKey('auth.User', on_delete=models.CASCADE, default=None, null=True)
     name = models.CharField(default='', max_length=200)
     last_updated = models.DateTimeField(default=timezone.now)
 

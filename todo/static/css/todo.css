@@ -104,6 +104,10 @@ body {
     font-size: 2.5em;
 }
 
+#page-header .title{
+    max-width: 60%;
+}
+
 #page-header .sidebar-icon {
     float: right;
 }
@@ -117,6 +121,9 @@ body {
 .category-heading a {
     font-size: 3em;
     color: var(--blue-main-color);
+    display: inline-block;
+    margin-right: 1em;
+    margin-left: 0.5em;
 }
 
 .action-sheet{
@@ -176,6 +183,14 @@ body {
 
 .form-wrapper .save-button {
     background-color: var(--blue-main-color);
+    color: var(--light-main-color);
+    padding: 0.5em;
+    border-radius: 0.5em;
+    text-decoration: none;
+}
+
+.form-wrapper .delete-button {
+    background-color: red;
     color: var(--light-main-color);
     padding: 0.5em;
     border-radius: 0.5em;

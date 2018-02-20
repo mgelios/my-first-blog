@@ -2,7 +2,7 @@
 
 
 {% block title %}
-<div>
+<div class="title">
     {% if active_category != None %}
         <h2>{{active_category.name}}</h2>
     {% endif %}
@@ -13,6 +13,9 @@
     <div class="col-xs-12 col-md-12 category-heading">
         <a href="{% url 'create_action' %}">
             <span class="glyphicon glyphicon-plus"></span>
+        </a>
+        <a href="{% url 'update_action_category' pk=active_category.pk %}">
+            <span class="glyphicon glyphicon-pencil"></span>
         </a>
     </div>
     <div class="col-xs-12 col-md-12 action-sheet">

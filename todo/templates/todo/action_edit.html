@@ -1,7 +1,7 @@
 {% extends 'todo/base.html' %}
 
 {% block title %}
-    <div>
+    <div class="title">
         <h2>Action</h2>
     </div>
 {% endblock %}
@@ -15,6 +15,9 @@
         <form method="POST" class="post-form" name="editform">{% csrf_token %}
             {{ form.as_p }}
             <a class="save-button" href="javascript:document.editform.submit()">Save</a>
+            {% if is_update %}
+                <a class="delete-button" href="{% url 'delete_action' pk=form.instance.pk %}">Delete</a>
+            {% endif %}
         </form>
     </div>
     <div class="col-xs-0 col-md-4">

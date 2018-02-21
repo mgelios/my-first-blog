@@ -272,6 +272,16 @@ footer a:visited, footer a:hover, footer a{
     color: var(--footer-text-color);
 }
 
+.footer .social img{
+    width: 4em;
+}
+
+.footer .social ul li {
+    display: inline-block;
+    margin: 1em;
+    background-color: white;
+    border-radius: 1em;
+}
 
 .about-page-main{
     font-family: GOST_BU;

@@ -77,22 +77,24 @@ def get_forecast_raw():
 
 def get_current_weather():
     weather_raw = get_current_weather_raw()
-    get_forecast_raw()
+    default_string = ''
+    default_int = -1
+    default_float = -1.0
 
     Weather.objects.filter(main_info__isnull=False).delete()
     weather = Weather.objects.create()
-    weather.main_info = weather_raw['weather'][0]['main']
-    weather.description = weather_raw['weather'][0]['description']
-    weather.icon_name = weather_raw['weather'][0]['icon']
-    weather.city_name = weather_raw['name']
-    weather.temperature = int(weather_raw['main']['temp'])
-    weather.humidity = int(weather_raw['main']['humidity'])
-    weather.pressure = int(weather_raw['main']['pressure'])
-    weather.visibility = int(weather_raw['visibility'])
-    weather.temperature_min = int(weather_raw['main']['temp_min'])
-    weather.temperature_max = int(weather_raw['main']['temp_max'])
-    weather.wind_speed = float(weather_raw['wind']['speed'])
-    weather.wind_deg = float(weather_raw['wind']['deg'])
+    weather.main_info = weather_raw['weather'][0].get('main', default_string)
+    weather.description = weather_raw['weather'][0].get('description', default_string)
+    weather.icon_name = weather_raw['weather'][0].get('icon', default_string)
+    weather.city_name = weather_raw.get('name', default_string)
+    weather.temperature = int(weather_raw['main'].get('temp', default_int))
+    weather.humidity = int(weather_raw['main'].get('humidity', default_int))
+    weather.pressure = int(weather_raw['main'].get('pressure', default_int))
+    weather.visibility = int(weather_raw.get('visibility', default_int))
+    weather.temperature_min = int(weather_raw['main'].get('temp_min', default_int))
+    weather.temperature_max = int(weather_raw['main'].get('temp_max', default_int))
+    weather.wind_speed = float(weather_raw['wind'].get('speed', default_float))
+    weather.wind_deg = float(weather_raw['wind'].get('deg', default_float))
     weather.sunrise = weather_raw['sys']['sunrise']
     weather.sunset = weather_raw['sys']['sunset']
     weather.date = weather_raw['dt']
@@ -103,21 +105,24 @@ def get_current_weather():
 
 def get_db_forecast():
     forecasts_raw = get_forecast_raw()
+    default_string = ''
+    default_int = -1
+    default_float = -1.0
 
     WeatherForecast.objects.filter(main_info__isnull=False).delete()
     for forecast_raw in forecasts_raw:
         forecast = WeatherForecast.objects.create()
 
-        forecast.main_info = forecast_raw['weather'][0]['main']
-        forecast.description = forecast_raw['weather'][0]['description']
-        forecast.icon_name = forecast_raw['weather'][0]['icon']
-        forecast.temperature = forecast_raw['main']['temp']
-        forecast.temperature_min = forecast_raw['main']['temp_min']
-        forecast.temperature_max = forecast_raw['main']['temp_max']
-        forecast.pressure = forecast_raw['main']['pressure']
-        forecast.humidity = forecast_raw['main']['humidity']
-        forecast.wind_speed = forecast_raw['wind']['speed']
-        forecast.wind_deg = forecast_raw['wind']['deg']
+        forecast.main_info = forecast_raw['weather'][0].get('main', default_string)
+        forecast.description = forecast_raw['weather'][0].get('description', default_string)
+        forecast.icon_name = forecast_raw['weather'][0].get('icon', default_string)
+        forecast.temperature = forecast_raw['main'].get('temp', default_int)
+        forecast.temperature_min = forecast_raw['main'].get('temp_min', default_int)
+        forecast.temperature_max = forecast_raw['main'].get('temp_max', default_int)
+        forecast.pressure = forecast_raw['main'].get('pressure', default_int)
+        forecast.humidity = forecast_raw['main'].get('humidity', default_int)
+        forecast.wind_speed = forecast_raw['wind'].get('speed', default_float)
+        forecast.wind_deg = forecast_raw['wind'].get('deg', default_float)
         forecast.date_time = forecast_raw['dt']
 
         forecast.save()

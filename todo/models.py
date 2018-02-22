@@ -16,7 +16,7 @@ ACTION_PRIORITIES = (
 )
 
 class Action(models.Model):
-    text = models.CharField(default='', max_length=200)
+    text = models.CharField(default='', max_length=1000)
     date = models.DateTimeField(default=timezone.now)
     last_updated = models.DateTimeField(default=timezone.now)
     category = models.ForeignKey('todo.ActionCategory', on_delete=models.CASCADE)

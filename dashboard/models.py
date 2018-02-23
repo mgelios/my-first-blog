@@ -2,6 +2,20 @@ from django.db import models
 from django.utils import timezone
 
 
+class RadiotArticle(models.Model):
+    title = models.CharField(max_length=400, default='')
+    content = models.TextField(default='')
+    snippet = models.TextField(default='')
+    main_pic = models.CharField(max_length=200, default='')
+    link = models.CharField(max_length=200, default='')
+    author = models.CharField(max_length=200, default='')
+    original_ts = models.DateTimeField(default=timezone.now)
+    radiot_ts = models.DateTimeField(default=timezone.now)
+    feed = models.TextField(default='')
+    slug = models.TextField(default='')
+    comments = models.IntegerField(default=0)
+    likes = models.IntegerField(default=0)
+
 class CryptoMarket(models.Model):
     total_usd = models.IntegerField(default=0.0)
     total_usd_day_volume = models.IntegerField(default=0.0)

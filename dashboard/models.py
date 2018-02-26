@@ -16,6 +16,12 @@ class RadiotArticle(models.Model):
     comments = models.IntegerField(default=0)
     likes = models.IntegerField(default=0)
 
+class DevByEvent(models.Model):
+    title = models.CharField(max_length=400, default='')
+    content = models.TextField(default='')
+    link = models.CharField(max_length=400, default='')
+    last_updated = models.DateTimeField(default=timezone.now)
+
 class CryptoMarket(models.Model):
     total_usd = models.IntegerField(default=0.0)
     total_usd_day_volume = models.IntegerField(default=0.0)

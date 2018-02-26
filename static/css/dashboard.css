@@ -188,6 +188,17 @@ body a, body a:hover, body a:active {
     background-repeat-y: repeat;
 }
 
+/* events page style */
+
+.events-wrapper{
+    padding-top: 2em;
+}
+
+.events-wrapper a{
+    color: var(--text-main-color);
+    text-decoration: underline;
+}
+
 /* charts styling */
 
 .ct-chart, .ct-chart-2 {

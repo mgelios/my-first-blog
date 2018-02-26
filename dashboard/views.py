@@ -12,10 +12,12 @@ import datetime
 from dashboard.dashes.weather import OpenWeather
 from dashboard.dashes.currency import NBRBCurrency
 from dashboard.dashes.crypto_currency import CryptoCurrencyInfo
+from dashboard.dashes.events import DevBy
 
 from .models import Weather, WeatherForecast
 from .models import Currency, CurrencyStatistics, CurrencyConversion
 from .models import CryptoCurrency, CryptoMarket
+from .models import DevByEvent
 
 from viberbot import Api
 from viberbot.api.messages.text_message import TextMessage
@@ -31,6 +33,11 @@ bot_configuration = BotConfiguration(
 
 viber = Api(bot_configuration)
 
+def deb_by_events_info(request):
+    DevBy.update_info()
+    events = DevByEvent.objects.order_by('last_updated')
+    return render(request, 'events.html', {'events': events})
+
 def weather_info(request):
     OpenWeather.update_info()
     weather = get_object_or_404(Weather, city_name='Minsk')
@@ -39,7 +46,6 @@ def weather_info(request):
     for info in forecast:
         if len(dates) == 0 or info.date_time.day != dates[len(dates) - 1]:
             dates.append(info.date_time.day)
-    print(dates)
     return render(request, 'weather.html', {'forecast': forecast, 'weather': weather, 'dates': dates})
 
 def currency_info(request):

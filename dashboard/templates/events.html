@@ -1,0 +1,21 @@
+{% extends './base.html' %}
+
+
+{% block header %}
+    <div class="col-xs-8 col-md-8">
+        <h1>Ближайшие события</h1>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="col-xs-0 col-md-2">
+    </div>
+    <div class="col-xs-12 col-md-8 events-wrapper">
+        {% for event in events %}
+            <h3>{{event.title}}</h3>
+            {{event.content|safe}}
+        {% endfor %}
+    </div>
+    <div class="col-xs-0 col-md-2">
+    </div>
+{% endblock %}

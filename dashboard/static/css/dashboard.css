@@ -93,7 +93,7 @@ body a, body a:hover, body a:active {
     background-image: url(../img/grain.png);
     background-repeat-x: repeat;
     background-repeat-y: repeat;
-    color: var(--text-invereted-color);
+    color: var(--text-inverted-color);
     text-shadow: 0 1px 1px rgba(0,0,0,0.2);
     box-shadow: 0 0 5px rgba(0,0,0,0.25);
 
@@ -137,14 +137,7 @@ body a, body a:hover, body a:active {
     padding: 0;
 }
 
-.wg-weather div:nth-child(even) .wg-forecast-unit:nth-child(even){
-    background-color: var(--paper-dark-color);
-    background-image: url(../img/grain.png);
-    background-repeat-x: repeat;
-    background-repeat-y: repeat;
-}
-
-.wg-weather div:nth-child(odd) .wg-forecast-unit:nth-child(odd){
+.wg-weather div:nth-child(even) .wg-forecast-unit{
     background-color: var(--paper-dark-color);
     background-image: url(../img/grain.png);
     background-repeat-x: repeat;

@@ -35,7 +35,12 @@ def weather_info(request):
     OpenWeather.update_info()
     weather = get_object_or_404(Weather, city_name='Minsk')
     forecast = WeatherForecast.objects.filter(date_time__isnull=False).order_by('date_time')
-    return render(request, 'weather.html', {'forecast': forecast, 'weather': weather})
+    dates = []
+    for info in forecast:
+        if len(dates) == 0 or info.date_time.day != dates[len(dates) - 1]:
+            dates.append(info.date_time.day)
+    print(dates)
+    return render(request, 'weather.html', {'forecast': forecast, 'weather': weather, 'dates': dates})
 
 def currency_info(request):
     NBRBCurrency.update_info()

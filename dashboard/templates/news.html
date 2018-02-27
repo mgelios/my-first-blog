@@ -1,0 +1,38 @@
+{% extends './base.html' %}
+
+
+{% block header %}
+    <div class="col-xs-8 col-md-8">
+        <h1>Новости от radio-t</h1>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="col-xs-0 col-md-2">
+    </div>
+    <div class="col-xs-12 col-md-8 news-wrapper">
+        {% for article in news %}
+            <h3>{{article.title}}</h3>
+            <article>
+                {% if article.main_pic != '' %}
+                    <aside class="image-wrapper">
+                        <img src="{{article.main_pic}}" />
+                    </aside>
+                {% endif %}
+                <div class="snippet-wrapper">
+                    <p>{{article.snippet}}</p>
+                </div>
+                <footer>
+                    <div class="link-wrapper">
+                        <a href="{{article.link}}">Read more</a>
+                        <span class="glyphicon glyphicon-heart"></span>
+                        {{article.likes}}    
+                        {{article.radiot_ts}}
+                    </div>
+                </footer>
+            </article>
+        {% endfor %}
+    </div>
+    <div class="col-xs-0 col-md-2">
+    </div>
+{% endblock %}

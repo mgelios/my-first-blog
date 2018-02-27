@@ -13,11 +13,13 @@ from dashboard.dashes.weather import OpenWeather
 from dashboard.dashes.currency import NBRBCurrency
 from dashboard.dashes.crypto_currency import CryptoCurrencyInfo
 from dashboard.dashes.events import DevBy
+from dashboard.dashes.news import Radiot
 
 from .models import Weather, WeatherForecast
 from .models import Currency, CurrencyStatistics, CurrencyConversion
 from .models import CryptoCurrency, CryptoMarket
 from .models import DevByEvent
+from .models import RadiotArticle
 
 from viberbot import Api
 from viberbot.api.messages.text_message import TextMessage
@@ -32,6 +34,11 @@ bot_configuration = BotConfiguration(
 )
 
 viber = Api(bot_configuration)
+
+def radiot_news(request):
+    Radiot.update_info()
+    news = RadiotArticle.objects.order_by('radiot_ts')
+    return render(request, 'news.html', {'news': news})
 
 def deb_by_events_info(request):
     DevBy.update_info()

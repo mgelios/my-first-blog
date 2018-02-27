@@ -15,6 +15,7 @@ class RadiotArticle(models.Model):
     slug = models.TextField(default='')
     comments = models.IntegerField(default=0)
     likes = models.IntegerField(default=0)
+    last_updated = models.DateTimeField(default=timezone.now)
 
 class DevByEvent(models.Model):
     title = models.CharField(max_length=400, default='')

@@ -199,6 +199,38 @@ body a, body a:hover, body a:active {
     text-decoration: underline;
 }
 
+/* news page style */
+
+.news-wrapper a{
+    color: var(--text-main-color);
+    text-decoration: underline;
+}
+
+.news-wrapper article{
+    overflow: auto;
+    padding-bottom: 2em;
+}
+
+.news-wrapper article .image-wrapper{
+    float: left;
+    max-width: 20%;
+}
+
+.news-wrapper article .image-wrapper img {
+    max-width: 100%;
+}
+
+.news-wrapper article .snippet-wrapper{
+    float: right;
+    max-width: 80%;
+    padding-left: 1em;
+}
+
+.news-wrapper footer{
+    float: left;
+    width: 100%;
+}
+
 /* charts styling */
 
 .ct-chart, .ct-chart-2 {

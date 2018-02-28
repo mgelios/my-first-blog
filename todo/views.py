@@ -12,10 +12,12 @@ from .forms import ActionForm, ActionCategoryForm
 def action_list(request):
     first_category = None
     categories = None
+    actions = None
     if (len(ActionCategory.objects.filter(author=request.user))>0):
         categories = ActionCategory.objects.filter(author=request.user)
         first_category = categories[0]
-    actions = Action.objects.filter(category=first_category).order_by('-priority')
+    if (first_category != None):
+        actions = Action.objects.filter(category=first_category).order_by('-priority')
     return render(
         request, 
         'todo/sheet.html',

@@ -1,4 +1,6 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
+
 from django.shortcuts import render
 from django.shortcuts import render, get_object_or_404
 from django.shortcuts import redirect
@@ -24,3 +26,13 @@ def secret_message_list(request):
 
 def info_about(request):
     return  render(request, 'about/base.html', {'versions' : versions})
+
+def register(request):
+    form = UserCreationForm()
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid:
+            new_user = form.save()
+            new_user.save()
+            return redirect('apps_list')
+    return render(request, 'registration/register.html', {'form': form})

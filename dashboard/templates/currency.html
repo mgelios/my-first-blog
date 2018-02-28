@@ -55,54 +55,51 @@
             <h2>График курсов</h2>
         </div>
         <div class="row">
-            <div class="col-xs-12 col-md-6 chart-wrapper">
-                <div class="row">
-                    <div class="col-xs-12 col-md-12">
-                        <h2>График USD:</h2>
-                    </div>
-                </div>
-                <div class="ct-chart ct-major-seventh"></div>
+            <div class="col-xs-12 col-md-6">
+                <canvas id="usdChart"></canvas>
             </div>
-
-            <div class="col-xs-12 col-md-6 chart-wrapper">
-                <div class="row">
-                    <div class="col-xs-12 col-md-12">
-                        <h2>График EUR:</h2>
-                    </div>
-                </div>
-                <div class="ct-chart-2 ct-major-seventh"></div>
+            <div class="col-xs-12 col-md-6">
+                <canvas id="eurChart"></canvas>
             </div>
-
             <script>
-                var data_0={
-                    series: [[
-                        {% for data in statistics_usd %}
-                            {{data.rate}},
-                        {% endfor %}
-                    ]],
-                };
-
-                var data_1={
-                    series: [[
-                        {% for data in statistics_eur %}
-                            {{data.rate}},
-                        {% endfor %}
-                    ]],
-                };
-
-                new Chartist.Line(
-                    '.ct-chart', 
-                    data_0, 
-                    {
-                        showArea: true
-                    });
-
-                new Chartist.Line(
-                    '.ct-chart-2', 
-                    data_1, 
-                    {
-                        showArea: true
-                    });
+                var usdCtx = document.getElementById("usdChart").getContext('2d');
+                var eurCtx = document.getElementById("eurChart").getContext('2d');
+                var usdChart = new Chart(usdCtx, {
+                    type: 'line',
+                    data: {
+                        labels: [
+                            {% for data in statistics_usd %}
+                                {{data.date|date:"d"}},
+                            {% endfor %}
+                        ],
+                        datasets:[{
+                            label: 'График USD',
+                            data: [
+                               {% for data in statistics_usd %}
+                                   {{data.rate}},
+                               {% endfor %}
+                            ],
+                        }]
+                    }
+                });
+                var eurChart = new Chart(eurCtx, {
+                    type: 'line',
+                    data: {
+                        labels: [
+                            {% for data in statistics_eur %}
+                                {{data.date|date:"d"}},
+                            {% endfor %}
+                        ],
+                        datasets:[{
+                            label: 'График EUR',
+                            data: [
+                               {% for data in statistics_eur %}
+                                   {{data.rate}},
+                               {% endfor %}
+                            ],
+                        }]
+                    }
+                });
             </script>
         </div>
     </div>

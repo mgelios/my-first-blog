@@ -32,23 +32,68 @@
             <h3>Закат: {{weather.sunset|date:"H:i"}}</h3>
         </div>
     </div>
-    <div class="col-xs-12 col-md-12 wg-weather">
-        {% for date in dates %}
-            <div class="col-xs-2 col-md-2">
-            {% for weather_info in forecast %}
-                {% if weather_info.date_time.day == date %}
-                    <div class="wg-forecast-unit">
-                        <h3>{{weather_info.date_time|date:"D, d"}}</h3>
-                        <h3>{{weather_info.date_time|date:"H:i"}}</h3>
-                        <h3>{{weather_info.main_info}}</h3>
-                        <img src="../../static/img/weather/{{weather_info.icon_name}}.svg">
-                        <h3>{{weather_info.temperature}}&deg;C</h3>
-                        <h3><span class="glyphicon glyphicon-tint"></span>: {{weather_info.humidity}}%</h3>
-                    </div>
-                {% endif %}
-            {% endfor %}
-            </div>
-        {% endfor %}
+    <div class="col-xs-12 col-md-12 wg-weather wg-forecast">
+        <div class="wg-forecast-header">
+            <h2>Прогноз погоды:</h2>
+        </div>
+        <canvas id="forecastChart"></canvas>
     </div>
+    <script>
+        var forecastCtx = document.getElementById("forecastChart").getContext('2d');
+        var forecastChart = new Chart(forecastCtx, {
+            type: 'line',
+            data: {
+                labels: [
+                    {% for data in forecast %}
+                        '{{data.1.date_time|date:"D d b"}}',
+                    {% endfor %}
+                ],
+                datasets:[{
+                    label: 'Min temp',
+                    data: [
+                       {% for data in forecast %}
+                           {{data.0.temperature}},
+                       {% endfor %}
+                    ],
+                    lineTension: 0,
+                    backgroundColor: '#7ac0c088',
+                    borderColor: '#7ac0c0',
+                    fill: 'start',
+                }, {
+                    label: 'Max temp',
+                    data: [
+                       {% for data in forecast %}
+                           {{data.1.temperature}},
+                       {% endfor %}
+                    ],
+                    lineTension: 0,
+                    backgroundColor: '#e6896688',
+                    borderColor: '#e68966',
+                    fill: '0',
+                }],
+            },
+            options: {
+                animation: {
+                    duration: 0,
+                },
+                hover: {
+                    animationDuration: 0,
+                },
+                responsiveAnimationDuration: 0,
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            min: {{min_temp}},
+                            max: {{max_temp}}
+                        }
+                    }]
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false
+                }
+            }
+        });
+    </script>
 
  {% endblock %}

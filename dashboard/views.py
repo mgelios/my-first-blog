@@ -50,10 +50,28 @@ def weather_info(request):
     weather = get_object_or_404(Weather, city_name='Minsk')
     forecast = WeatherForecast.objects.filter(date_time__isnull=False).order_by('date_time')
     dates = []
+    dates_forecast = []
     for info in forecast:
         if len(dates) == 0 or info.date_time.day != dates[len(dates) - 1]:
             dates.append(info.date_time.day)
-    return render(request, 'weather.html', {'forecast': forecast, 'weather': weather, 'dates': dates})
+    max_temp = -200
+    min_temp = 1000
+    for date in dates:
+        date_min = None
+        date_max = None
+        for info in forecast:
+            if (info.date_time.day==date and (date_min==None or date_min.temperature > info.temperature)):
+                date_min = info
+            if (info.date_time.day==date and (date_max==None or date_max.temperature < info.temperature)):
+                date_max = info
+            if (max_temp < info.temperature):
+                max_temp = info.temperature
+            if (min_temp > info.temperature):
+                min_temp = info.temperature
+        dates_forecast.append([date_min, date_max])
+
+    print(dates)
+    return render(request, 'weather.html', {'weather': weather, 'forecast': dates_forecast, 'min_temp': min_temp, 'max_temp': max_temp})
 
 def currency_info(request):
     NBRBCurrency.update_info()

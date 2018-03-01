@@ -32,10 +32,10 @@
             <h3>Закат: {{weather.sunset|date:"H:i"}}</h3>
         </div>
     </div>
-    <div class="col-xs-12 col-md-12 wg-weather wg-forecast">
-        <div class="wg-forecast-header">
-            <h2>Прогноз погоды:</h2>
-        </div>
+    <div class="wg-forecast-header">
+        <h2>Прогноз погоды:</h2>
+    </div>
+    <div class="col-xs-12 col-md-12 wg-weather wg-weather-canvas">
         <canvas id="forecastChart"></canvas>
     </div>
     <script>
@@ -91,7 +91,8 @@
                 tooltips: {
                     mode: 'index',
                     intersect: false
-                }
+                },
+                maintainAspectRatio: false,
             }
         });
     </script>

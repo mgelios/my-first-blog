@@ -132,8 +132,13 @@ body a, body a:hover, body a:active {
     padding-top: 1em;
 }
 
-.wg-forecast .wg-forecast-header{
+.wg-forecast-header{
     text-align: center;
+}
+
+.wg-weather-canvas{
+    position: relative;
+    height: 30em;
 }
 
 .wg-weather>div{
@@ -257,7 +262,12 @@ body a, body a:hover, body a:active {
     color: var(--paper-main-color);
 }
 
+
 @media (max-width: 990px) {
+    .wg-weather-canvas{
+        height: 60em;
+    }
+
     .news-wrapper article p{
         font-size: 1.5em;
     }

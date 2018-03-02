@@ -1,0 +1,25 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>MgeliOS's landing</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" >
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" >
+        <link rel="stylesheet" href="{% static 'css/greeting.css' %}" >
+        <meta name="theme-color" content="#b5b5b5">
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="block-heading">
+                <div class="block-heading-background">
+                </div>
+                <div class="block-heading-content">
+                    <div class="block-heading-wrapper">
+                        <p>Приветствую, {{user.first_name}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="block-content">
+            </div>
+        </div>
+    </body>
+</html>

@@ -11,7 +11,10 @@ from .common_settings import versions
 
 import urllib.request
 
-# Create your views here.
+
+def show_greeting(request):
+    return render(request, 'landing/greeting.html')
+
 def apps_list(request):
     return render(request, 'landing/main.html')
 

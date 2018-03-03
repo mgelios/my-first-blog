@@ -12,8 +12,8 @@
     </div>
     <div class="col-xs-12 col-md-8 news-wrapper">
         {% for article in news %}
-            <h3>{{article.title}}</h3>
-            <article>
+            <div class="col-xs-12 col-md-6 article">
+                <h3>{{article.title}}</h3>
                 {% if article.main_pic != '' %}
                     <aside class="image-wrapper">
                         <img src="{{article.main_pic}}" />
@@ -30,7 +30,7 @@
                         {{article.radiot_ts}}
                     </div>
                 </footer>
-            </article>
+            </div>
         {% endfor %}
     </div>
     <div class="col-xs-0 col-md-2">

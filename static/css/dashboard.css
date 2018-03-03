@@ -215,23 +215,22 @@ body a, body a:hover, body a:active {
     text-decoration: underline;
 }
 
-.news-wrapper article{
+.news-wrapper .article{
     overflow: auto;
     padding-bottom: 2em;
 }
 
-.news-wrapper article .image-wrapper{
-    float: left;
-    max-width: 20%;
+.news-wrapper .article .image-wrapper{
+    width: 100%;
 }
 
-.news-wrapper article .image-wrapper img {
-    max-width: 100%;
+.news-wrapper .article .image-wrapper img {
+    max-height: 10em;
 }
 
-.news-wrapper article .snippet-wrapper{
+.news-wrapper .article .snippet-wrapper{
     float: right;
-    max-width: 80%;
+    max-width: 100%;
     padding-left: 1em;
 }
 
@@ -268,15 +267,15 @@ body a, body a:hover, body a:active {
         height: 60em;
     }
 
-    .news-wrapper article p{
-        font-size: 1.5em;
+    .news-wrapper .article p{
+        font-size: 2.2em;
     }
 
-    .news-wrapper article h3 {
-        font-size: 2.5em;
+    .news-wrapper .article h3 {
+        font-size: 3em;
     }
 
-    .news-wrapper article footer {
+    .news-wrapper .article footer {
         font-size: 1.5em;
     }
 }

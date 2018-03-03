@@ -9,11 +9,23 @@ from django.utils import timezone
 from .models import SecretMessage
 from .common_settings import versions
 
+from dashboard.models import Weather
+from dashboard.models import Currency
+
+from dashboard.dashes.weather import OpenWeather
+from dashboard.dashes.currency import NBRBCurrency
+from dashboard.dashes.crypto_currency import CryptoCurrencyInfo
+
+
 import urllib.request
 
 
 def show_greeting(request):
-    return render(request, 'landing/greeting.html')
+    OpenWeather.update_info()
+    NBRBCurrency.update_info()
+    weather = get_object_or_404(Weather, city_name='Minsk')
+    currencies = Currency.objects.filter(scale__isnull=False)
+    return render(request, 'landing/greeting.html', {'weather': weather, 'currencies': currencies})
 
 def apps_list(request):
     return render(request, 'landing/main.html')

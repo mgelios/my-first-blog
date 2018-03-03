@@ -37,7 +37,7 @@ viber = Api(bot_configuration)
 
 def radiot_news(request):
     Radiot.update_info()
-    news = RadiotArticle.objects.order_by('radiot_ts')
+    news = RadiotArticle.objects.order_by('-radiot_ts')
     return render(request, 'news.html', {'news': news})
 
 def deb_by_events_info(request):

@@ -67,7 +67,7 @@
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: 990px) and (orientation:portrait) {
     h1 {font-size: 5em;} h2 {font-size: 4.2em;} h3 {font-size: 3.5em;} h4 {font-size: 2.8em;} h5 {font-size: 2em;} h6 {font-size: 1.5em;}
 
     .block-heading .block-heading-content .block-heading-wrapper{

@@ -36,7 +36,34 @@
                     </div>
                 </div>
             </div>
-            <div class="block-content">
+            <div class="block-apps">
+                <div class="block-apps-heading">
+                    <h2>Applications</h2>
+                </div>
+                <div class="block-apps-content">
+                    <a href="/blog/">
+                        <div>
+                            <img src="{% static 'img/blog_01.svg' %}">
+                        </div>
+                    </a>
+                    <a href="/dashboard/weather/">
+                        <div>
+                            <img src="{% static 'img/dashboard_01.svg' %}">
+                        </div>
+                    </a>
+                    {% if user.is_authenticated %}
+                        <a href="/todo/">
+                            <div>
+                                <img src="{% static 'img/tasklist_01.svg' %}">
+                            </div>
+                        </a>
+                    {% endif %}
+                    <a href="#">
+                        <div>
+                            <img src="{% static 'img/coming_soon_01.svg' %}">
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
     </body>

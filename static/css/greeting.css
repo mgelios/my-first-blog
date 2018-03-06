@@ -57,8 +57,40 @@
 
 .block-heading .block-heading-content .block-heading-wrapper{
     position: relative;
-    height: 100vh;
     top: 25%;
+}
+
+.block-apps-heading{
+    text-align: center;
+}
+
+.block-apps{
+    padding-bottom: 1em;
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
+.block-apps a {
+    margin: 1em;
+    padding: 1em;
+    display: inline-block;
+    height: 12em;
+    border: 1px solid gray;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+
+}
+
+.block-apps a:hover{
+    box-shadow: 0 0px 0px rgba(0,0,0,0.5);
+}
+
+.block-apps a div{
+    height: 100%;
+}
+
+.block-apps a div img{
+    height: 100%;
 }
 
 .block-content {

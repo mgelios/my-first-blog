@@ -2,16 +2,17 @@
 <html>
     <head>
         <title>MgeliOS's landing</title>
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" >
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" >
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" >
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css" >
         <link rel="stylesheet" href="{% static 'css/greeting.css' %}" >
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="{% static 'js/clock.js' %}"></script>
+        <script src="{% static 'js/scrolling.js' %}"></script>
         <meta name="theme-color" content="#b5b5b5">
     </head>
     <body>
         <div class="container-fluid">
-            <div class="block-heading">
+            <div id="block-heading">
                 <div class="block-heading-background">
                 </div>
                 <div class="block-heading-content">
@@ -35,8 +36,11 @@
                         </div>
                     </div>
                 </div>
+                <div id="block-heading-scroll">
+                    <span class="glyphicon glyphicon-menu-down"></span>
+                </div>
             </div>
-            <div class="block-apps">
+            <div id="block-apps">
                 <div class="block-apps-heading">
                     <h2>Applications</h2>
                 </div>
@@ -63,6 +67,9 @@
                             <img src="{% static 'img/coming_soon_01.svg' %}">
                         </div>
                     </a>
+                </div>
+                <div id="block-apps-scroll">
+                    <span class="glyphicon glyphicon-menu-down"></span>
                 </div>
             </div>
         </div>

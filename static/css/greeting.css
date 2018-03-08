@@ -145,6 +145,26 @@
     background-color: white;
 }
 
+#block-footer {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    background-color: black;
+    width: 100%;
+    overflow: auto;
+    color: white;
+}
+
+#block-footer a, #block-footer a:hover, #block-footer a:active{
+    color: white;
+    text-decoration: none;
+}
+
+
+#block-footer .block-footer-unit {
+    background-color: black;
+    margin: 0;
+}
+
 
 @media (max-width: 990px) and (orientation:portrait) {
     h1 {font-size: 5em;} h2 {font-size: 4.2em;} h3 {font-size: 3.5em;} h4 {font-size: 2.8em;} h5 {font-size: 2em;} h6 {font-size: 1.5em;}

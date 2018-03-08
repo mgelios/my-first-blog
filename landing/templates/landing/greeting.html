@@ -1,14 +1,14 @@
 {% load staticfiles %}
 <html>
     <head>
-        <title>MgeliOS's landing</title>
+        <title>welcome!</title>
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" >
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css" >
         <link rel="stylesheet" href="{% static 'css/greeting.css' %}" >
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="{% static 'js/clock.js' %}"></script>
         <script src="{% static 'js/scrolling.js' %}"></script>
-        <meta name="theme-color" content="#b5b5b5">
+        <meta name="theme-color" content="#01132e">
     </head>
     <body>
         <div class="container-fluid">
@@ -70,6 +70,17 @@
                 </div>
                 <div id="block-apps-scroll">
                     <span class="glyphicon glyphicon-menu-down"></span>
+                </div>
+            </div>
+            <div id="block-footer">
+                <div class="col-xs-12 col-md-6 block-footer-unit">
+                    <h2>Common:</h2>
+                    <div>
+                        <a href="{% url 'info_about' %}">About</a>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6 block-footer-unit">
+                    <h2>Social</h2>
                 </div>
             </div>
         </div>

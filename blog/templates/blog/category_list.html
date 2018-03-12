@@ -1,11 +1,22 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-    <div class="wrapper">
-        {% for category in categories %}
-            <div>
-                <h3>{{ category.name }}</h3>
-            </div>
-        {% endfor %}
+    <div class="container-fluid">
+        <div class="category-buttons-wrapper">
+            <a href="{% url 'category_new' %}" class="post-button">Add Category</a>
+            <a href="{% url 'category_bundle_new' %}" class="post-button">Add Category Bundle</a>
+        </div>
+        <div class="categories-wrapper">
+            {% for bundle in category_bundles %}
+                <div>
+                    <h3><a href="{% url 'category_bundle_edit' pk=bundle.pk %}">{{bundle.name}}</a></h3>
+                    {% for category in categories %}
+                        {% if category.bundle == bundle %}
+                            <h4><a href="{% url 'category_edit' pk=category.pk %}">{{category.name}}</a></h4>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}

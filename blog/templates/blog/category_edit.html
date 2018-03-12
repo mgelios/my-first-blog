@@ -1,0 +1,12 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <h2>New category</h2>
+    <form method="POST" class="post-form" name="editform">{% csrf_token %}
+        {{ form.as_p }}
+        <a class="post-button" href="javascript:document.editform.submit()">Save</a>
+        {% if is_update %}
+            <a class="post-button" href="{% url 'category_remove' pk=form.instance.pk %}">Delete</a>
+        {% endif %}
+    </form>
+{% endblock %}

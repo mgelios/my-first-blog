@@ -22,6 +22,15 @@ chat_ids = set()
 
 
 
+def news(bot, update):
+    final_string = ''
+    Radiot.update_info()
+    news = RadiotArticle.objects.order_by('-radiot_ts')
+    for article in news[0:5:1]:
+        final_string = final_string + article.title + '\n'
+        final_string = final_string + article.link + '\n\n'
+    bot.sendMessage(update.message.chat_id, text=final_string)
+
 def get_weather_message():
     OpenWeather.update_info()
     weather = Weather.objects.filter(city_name='Minsk')[0]
@@ -80,5 +89,7 @@ def promote_handlers(dispatcher):
     dispatcher.add_handler(CommandHandler("криптовалюты", crypto))
     dispatcher.add_handler(CommandHandler("conversion", currency_conversions))
     dispatcher.add_handler(CommandHandler("конверсия", currency_conversions))
+    dispatcher.add_handler(CommandHandler("news", news))
+    dispatcher.add_handler(CommandHandler("новости", news))
 
 

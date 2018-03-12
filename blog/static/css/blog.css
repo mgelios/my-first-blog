@@ -216,6 +216,20 @@ a.post-button:hover{
     color: var(--text-inverted-color);
 }
 
+.category-buttons-wrapper{
+    margin-left: 2em;
+    margin-right: 2em;
+}
+
+.categories-wrapper{
+    margin-left: 2em;
+    margin-right: 2em;
+}
+
+.categories-wrapper h3 a{
+    text-decoration: underline;
+}
+
 @media (max-width: 768px) {
     #sidebar {
         margin-left: -20em;

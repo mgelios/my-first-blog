@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404
 from django.shortcuts import redirect
 from django.utils import timezone
 from .models import Post, Comment, Category, CategoryBundle
-from .forms import PostForm, CommentForm
+from .forms import PostForm, CommentForm, CategoryForm, CategoryBundleForm
 
 
 #Post actions section
@@ -103,9 +103,75 @@ def comment_remove(request, pk):
 
 #category actions section
 @login_required
-def category_new(request, pk):
-    parent_category = get_object_or_404(Category, pk=pk)
+def category_new(request):
+    categories = get_category_list()
+    bundles = get_category_bundle_list()
+    if request.method == "POST":
+        form = CategoryForm(request.POST)
+        if (form.is_valid):
+            category = form.save(commit=False)
+            category.save()
+            return redirect('post_list')
+    else:
+        form = CategoryForm()
+    return render(request, 'blog/category_edit.html',{'form': form,'categories': categories,'category_bundles': bundles})
     
+@login_required
+def category_bundle_new(request):
+    categories = get_category_list()
+    bundles = get_category_bundle_list()
+    if request.method == "POST":
+        form = CategoryBundleForm(request.POST)
+        if (form.is_valid):
+            category_bundle = form.save(commit=False)
+            category_bundle.save()
+            return redirect('post_list')
+    else:
+        form = CategoryBundleForm()
+    return render(request, 'blog/category_bundle_edit.html',{'form': form,'categories': categories,'category_bundles': bundles})
+
+@login_required
+def category_edit(request, pk):
+    category = get_object_or_404(Category, pk=pk)
+    categories = get_category_list()
+    bundles = get_category_bundle_list()
+    if request.method == "POST":
+        form = CategoryForm(request.POST, instance=category)
+        if (form.is_valid()):
+            category = form.save(commit=False)
+            category.save()
+            return redirect('post_list')
+    else:
+        form = CategoryForm(instance=category)
+    return render(request, 'blog/category_edit.html', {'is_update':True,'form': form, 'categories': categories, 'category_bundles': bundles})
+
+@login_required
+def category_bundle_edit(request, pk):
+    category_bundle = get_object_or_404(CategoryBundle, pk=pk)
+    categories = get_category_list()
+    bundles = get_category_bundle_list()
+    if request.method == "POST":
+        form = CategoryBundleForm(request.POST, instance=category_bundle)
+        if (form.is_valid()):
+            category_bundle = form.save(commit=False)
+            category_bundle.save()
+            return redirect('post_list')
+    else:
+        form = CategoryBundleForm(instance=category_bundle)
+    return render(request, 'blog/category_bundle_edit.html', {'is_update':True,'form': form, 'categories': categories, 'category_bundles': bundles})
+
+@login_required
+def category_remove(request, pk):
+    category = get_object_or_404(Category, pk=pk)
+    category.delete()
+    return redirect('post_list')
+
+@login_required
+def category_bundle_remove(request, pk):
+    category_bundle = get_object_or_404(CategoryBundle, pk=pk)
+    category_bundle.delete()
+    return redirect('post_list')
+
 def category_list(request):
     categories = get_category_list()
     bundles = get_category_bundle_list()

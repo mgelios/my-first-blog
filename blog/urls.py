@@ -14,4 +14,10 @@ urlpatterns = [
     url(r'^blog/comment/(?P<pk>\d+)/remove/$', views.comment_remove, name='comment_remove'),
     url(r'^blog/categories/$', views.category_list, name='category_list'),
     url(r'^blog/category/(?P<pk>\d+)/$', views.category_posts, name='category'),
+    url(r'^blog/category/new/$', views.category_new, name='category_new'),
+    url(r'^blog/category/bundle/new/$', views.category_bundle_new, name='category_bundle_new'),
+    url(r'^blog/category/(?P<pk>\d+)/edit/$', views.category_edit, name='category_edit'),
+    url(r'^blog/category/bundle/(?P<pk>\d+)/edit/$', views.category_bundle_edit, name='category_bundle_edit'),
+    url(r'^blog/category/(?P<pk>\d+)/remove/$', views.category_remove, name='category_remove'),
+    url(r'^blog/category/bundle/(?P<pk>\d+)/remove/$', views.category_bundle_remove, name='category_bundle_remove'),
 ]

@@ -7,10 +7,12 @@ from dashboard.models import CryptoMarket
 from dashboard.models import CryptoCurrency
 from dashboard.models import CurrencyConversion
 from dashboard.models import CurrencyStatistics
+from dashboard.models import RadiotArticle
 
 from dashboard.dashes.weather import OpenWeather
 from dashboard.dashes.currency import NBRBCurrency
 from dashboard.dashes.crypto_currency import CryptoCurrencyInfo
+from dashboard.dashes.news import Radiot
 
 
 from telegram.ext import CommandHandler, MessageHandler, Filters, JobQueue

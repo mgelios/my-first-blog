@@ -9,29 +9,28 @@ from dashboard.models import Weather, WeatherForecast
 base_context = 'http://api.openweathermap.org/data/2.5/'
 weather_suffix = 'weather'
 forecast_suffix = 'forecast'
-cities = ['Minsk,by' ,'Kapyl,by']
 api_key = '0502d0f1f744a28dd8065598094fa1db'
 units = 'metric'
 lang = 'ru'
 LATENCY = 600
 
 
-def update_info():
+def update_info(requested_city='minsk'):
     test_weather = None
     try:
-        test_weather = Weather.objects.get()
+        test_weather = Weather.objects.filter(requested_city=requested_city).get()
     except Weather.DoesNotExist:
         test_weather = None
 
     if (test_weather == None):
-        get_current_weather()
-        get_db_forecast()
+        get_current_weather(requested_city)
+        get_db_forecast(requested_city)
     else:
         last_updated = test_weather.last_updated
         from_last_update = (datetime.now(timezone.utc) - last_updated).total_seconds()
         if (from_last_update >= LATENCY):
-            get_current_weather()
-            get_db_forecast()
+            get_current_weather(requested_city)
+            get_db_forecast(requested_city)
 
 def forecast():
     json_content = []
@@ -50,9 +49,8 @@ def forecast():
 
     return json_content
 
-def get_current_weather_raw():
+def get_current_weather_raw(city):
     context = base_context + weather_suffix
-    city = cities[0]
     query = '?' + 'q=' + city + '&appid=' + api_key + '&units=' + units + '&lang=' + lang
     json_content = urllib.request.urlopen(context + query).read().decode('utf-8')
     raw_object = json.loads(json_content)
@@ -63,30 +61,32 @@ def get_current_weather_raw():
 
     return raw_object
 
-def get_forecast_raw():
+def get_forecast_raw(city):
     context = base_context + forecast_suffix
-    city = cities[0]
     query = '?' + 'q=' + city + '&appid=' + api_key + '&units=' + units + '&lang=' + lang
     json_content = urllib.request.urlopen(context + query).read().decode('utf-8')
     raw_list = json.loads(json_content)['list']
 
     for list_unit in raw_list:
         list_unit['dt'] = datetime.fromtimestamp(list_unit['dt'])
+        list_unit['city'] = json.loads(json_content)['city']['name']
+        print(json.loads(json_content)['city'])
 
     return raw_list
 
-def get_current_weather():
-    weather_raw = get_current_weather_raw()
+def get_current_weather(requested_city='minsk'):
+    weather_raw = get_current_weather_raw(requested_city)
     default_string = ''
     default_int = -1
     default_float = -1.0
 
-    Weather.objects.filter(main_info__isnull=False).delete()
+    Weather.objects.filter(requested_city=requested_city).delete()
     weather = Weather.objects.create()
     weather.main_info = weather_raw['weather'][0].get('main', default_string)
     weather.description = weather_raw['weather'][0].get('description', default_string)
     weather.icon_name = weather_raw['weather'][0].get('icon', default_string)
     weather.city_name = weather_raw.get('name', default_string)
+    weather.requested_city = requested_city
     weather.temperature = int(weather_raw['main'].get('temp', default_int))
     weather.humidity = int(weather_raw['main'].get('humidity', default_int))
     weather.pressure = int(weather_raw['main'].get('pressure', default_int))
@@ -103,16 +103,18 @@ def get_current_weather():
 
     return Weather.objects
 
-def get_db_forecast():
-    forecasts_raw = get_forecast_raw()
+def get_db_forecast(requested_city='minsk'):
+    forecasts_raw = get_forecast_raw(requested_city)
     default_string = ''
     default_int = -1
     default_float = -1.0
 
-    WeatherForecast.objects.filter(main_info__isnull=False).delete()
+    WeatherForecast.objects.filter(requested_city=requested_city).delete()
     for forecast_raw in forecasts_raw:
         forecast = WeatherForecast.objects.create()
 
+        forecast.city = forecast_raw['city']
+        forecast.requested_city = requested_city
         forecast.main_info = forecast_raw['weather'][0].get('main', default_string)
         forecast.description = forecast_raw['weather'][0].get('description', default_string)
         forecast.icon_name = forecast_raw['weather'][0].get('icon', default_string)

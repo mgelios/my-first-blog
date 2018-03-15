@@ -60,6 +60,7 @@ class Weather(models.Model):
     description = models.CharField(max_length=200, default='')
     icon_name = models.CharField(max_length=200, default='')
     city_name = models.CharField(max_length=200, default='')
+    requested_city = models.CharField(max_length=200, default='')
     temperature = models.IntegerField(default=0)
     humidity = models.IntegerField(default=0)
     pressure = models.IntegerField(default=0)
@@ -75,6 +76,8 @@ class Weather(models.Model):
 
 
 class WeatherForecast(models.Model):
+    city = models.CharField(max_length=200, default='')
+    requested_city = models.CharField(max_length=200, default='')
     temperature = models.IntegerField(default=0)
     temperature_min = models.IntegerField(default=0)
     temperature_max = models.IntegerField(default=0)

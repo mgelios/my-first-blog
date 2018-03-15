@@ -50,8 +50,9 @@ def start(bot, update):
 def help(bot, update):
     bot.sendMessage(update.message.chat_id, text=help_message + help_message_commands)
 
-
-def weather(bot, update):
+def weather(bot, update, args):
+    print('args for bot')
+    print(args)
     bot.sendMessage(update.message.chat_id, text=get_weather_message())
 
 def currency(bot, update):
@@ -82,8 +83,8 @@ def crypto(bot, update):
 def promote_handlers(dispatcher):
     print('telegrambot init')
     dispatcher.add_handler(CommandHandler("start", start))
-    dispatcher.add_handler(CommandHandler("help", help))
-    dispatcher.add_handler(CommandHandler("weather", weather))
+    dispatcher.add_handler(CommandHandler("help",help))
+    dispatcher.add_handler(CommandHandler(command="weather", callback=weather, pass_args=True))
     dispatcher.add_handler(CommandHandler("погода", weather))
     dispatcher.add_handler(CommandHandler("currency", currency))
     dispatcher.add_handler(CommandHandler("курсы", currency))

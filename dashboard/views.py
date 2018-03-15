@@ -48,7 +48,7 @@ def deb_by_events_info(request):
 def weather_info(request):
     OpenWeather.update_info()
     weather = get_object_or_404(Weather, city_name='Minsk')
-    forecast = WeatherForecast.objects.filter(date_time__isnull=False).order_by('date_time')
+    forecast = WeatherForecast.objects.filter(city='Minsk').order_by('date_time')
     dates = []
     dates_forecast = []
     for info in forecast:

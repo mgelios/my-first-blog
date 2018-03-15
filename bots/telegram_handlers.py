@@ -33,9 +33,9 @@ def news(bot, update):
         final_string = final_string + article.link + '\n\n'
     bot.sendMessage(update.message.chat_id, text=final_string)
 
-def get_weather_message():
-    OpenWeather.update_info()
-    weather = Weather.objects.filter(city_name='Minsk')[0]
+def get_weather_message(requested_city='minsk'):
+    OpenWeather.update_info(requested_city)
+    weather = Weather.objects.filter(requested_city=requested_city)[0]
     final_string = ''
     header_string = 'Погода в городе {0} \n'.format(weather.city_name)
     temperature_string = 'Температура: {0} \n'.format(weather.temperature)
@@ -51,9 +51,12 @@ def help(bot, update):
     bot.sendMessage(update.message.chat_id, text=help_message + help_message_commands)
 
 def weather(bot, update, args):
-    print('args for bot')
-    print(args)
-    bot.sendMessage(update.message.chat_id, text=get_weather_message())
+    text = ''
+    if (len(args) == 0):
+        text = get_weather_message()
+    else:
+        text = get_weather_message(args[0])
+    bot.sendMessage(update.message.chat_id, text=text)
 
 def currency(bot, update):
     NBRBCurrency.update_info()

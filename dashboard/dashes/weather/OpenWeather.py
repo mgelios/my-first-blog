@@ -58,7 +58,6 @@ def get_current_weather_raw(city):
     raw_object['sys']['sunrise'] = datetime.fromtimestamp(raw_object['sys']['sunrise'])
     raw_object['sys']['sunset'] = datetime.fromtimestamp(raw_object['sys']['sunset'])
     raw_object['dt'] = datetime.fromtimestamp(raw_object['dt'])
-
     return raw_object
 
 def get_forecast_raw(city):

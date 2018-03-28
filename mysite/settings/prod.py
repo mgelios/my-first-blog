@@ -18,22 +18,12 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'rest_framework',
+    'rest_framework.authtoken',
     'blog',
     'landing',
     'dashboard',
     'todo',
     'bots',
-    # 'django_telegrambot',
 )
 
 TELEGRAM_BOT_ALLOWED = True
-
-# DJANGO_TELEGRAMBOT = {
-#     'MODE': 'WEBHOOK',
-#     'WEBHOOK_SITE': 'https://mgelios.pythonanywhere.com',
-#     'WEBHOOK_PREFIX': '/telegrambot',
-#     'WEBHOOK_CERTIFICATE': '',
-#     'BOTS': [{
-#         'TOKEN': '460933242:AAEh67xQVBeT37EwN84iudv80tbYBsOY1QA'
-#     }]
-# }

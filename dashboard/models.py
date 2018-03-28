@@ -1,6 +1,18 @@
 from django.db import models
 from django.utils import timezone
 
+class UtilitiesRecord(models.Model):
+    hot_water = models.IntegerField(default=0)
+    cold_water = models.IntegerField(default=0)
+    electricity = models.IntegerField(default=0)
+    date = models.DateTimeField(default=timezone.now)
+    place = models.ForeignKey('dashboard.LivingPlace', on_delete=models.CASCADE)
+
+class LivingPlace(models.Model):
+    name = models.CharField(max_length=200, default='')
+    address = models.TextField(default='')
+    author = models.ForeignKey('auth.User', on_delete=models.CASCADE, default=None, null=True)
+    last_updated = models.DateTimeField(default=timezone.now)
 
 class RadiotArticle(models.Model):
     title = models.CharField(max_length=400, default='')

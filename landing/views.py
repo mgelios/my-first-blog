@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 
@@ -5,6 +6,8 @@ from django.shortcuts import render
 from django.shortcuts import render, get_object_or_404
 from django.shortcuts import redirect
 from django.utils import timezone
+
+from rest_framework.authtoken.models import Token
 
 from .models import SecretMessage
 from .common_settings import versions

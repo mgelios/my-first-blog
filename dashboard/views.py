@@ -20,6 +20,7 @@ from .models import Currency, CurrencyStatistics, CurrencyConversion
 from .models import CryptoCurrency, CryptoMarket
 from .models import DevByEvent
 from .models import RadiotArticle
+from .models import LivingPlace, UtilitiesRecord
 
 from viberbot import Api
 from viberbot.api.messages.text_message import TextMessage
@@ -106,5 +107,40 @@ def crypto_currency_info(request):
             'crypto_market': crypto_market
         })
 
+@login_required
+def utilities_list(request):
+    utilities_records = UtilitiesRecord.objects.order_by('date')
+    living_places = LivingPlace.objects.order_by('last_updated')
+    return render(request, 'utilities.html', 
+        {
+            'utilities': utilities_records,
+            'living_places': living_places
+        })
 
+@login_required
+def utilities_create(request):
+    if request.method == 'POST':
+        form = UtilityRecordForm(request.POST)
+        if (form.is_valid):
+            utility_record = form.save()
+            utility_record.save()
+            return redirect('utilities_list', pk=utility_record.place.pk)
+    else:
+        form = UtilityRecordForm()
+        form.fields['place'].queryset = LivingPlace.objects.filter(author=request.user)
+    return render(request, 'utilities_edit.html', {'form': form})
+
+@login_required
+def utilities_update(request, pk):
+    utilities = get_object_or_404(UtilitiesRecord, pk=pk)
+    if request.method == 'POST':
+        form = UtilityRecordForm(request.POST)
+        if (form.is_valid):
+            utility_record = form.save()
+            utility_record.save()
+            return redirect('utilities_list', pk=utility_record.place.pk)
+    else:
+        form = UtilityRecordForm(instance=utilities)
+        form.fields['place'].queryset = LivingPlace.objects.filter(author=request.user)
+    return render(request, 'utilities_edit.html', {'form': form})
 

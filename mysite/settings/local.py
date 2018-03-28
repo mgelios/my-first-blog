@@ -16,20 +16,12 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'rest_framework',
+    'rest_framework.authtoken',
     'blog',
     'landing',
     'dashboard',
     'todo',
     'bots',
-    # 'django_telegrambot',
 )
 
 TELEGRAM_BOT_ALLOWED = False
-
-# DJANGO_TELEGRAMBOT = {
-#     'MODE': 'POLLING',
-#     'WEBHOOK_SITE': 'localhost',
-#     'BOTS': [{
-#         'TOKEN': '460933242:AAEh67xQVBeT37EwN84iudv80tbYBsOY1QA'
-#     }]
-# }

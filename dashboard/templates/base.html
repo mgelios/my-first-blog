@@ -51,6 +51,13 @@
                         <span class="glyphicon glyphicon-list-alt"></span>
                     </a>
                 </div>
+                {% if user.is_authenticated %}
+                    <div class="col-xs-4">
+                        <a href="{% url 'utilities_list' %}">
+                            <span class="glyphicon glyphicon-scale"></span>
+                        </a>
+                    </div>
+                {% endif %}
              </div>
             <div class="row" id="dashboard-header">
                 <div class="col-xs-1">

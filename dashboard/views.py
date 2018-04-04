@@ -111,6 +111,8 @@ def crypto_currency_info(request):
 def utilities_list(request):
     utilities_records = UtilitiesRecord.objects.order_by('date')
     living_places = LivingPlace.objects.order_by('last_updated')
+    print(living_places)
+    print(utilities_records)
     return render(request, 'utilities.html', 
         {
             'utilities': utilities_records,
@@ -138,9 +140,43 @@ def utilities_update(request, pk):
         if (form.is_valid):
             utility_record = form.save()
             utility_record.save()
-            return redirect('utilities_list', pk=utility_record.place.pk)
+            return redirect('utilities_list')
     else:
         form = UtilityRecordForm(instance=utilities)
         form.fields['place'].queryset = LivingPlace.objects.filter(author=request.user)
     return render(request, 'utilities_edit.html', {'form': form})
 
+@login_required
+def utilities_delete(request, pk):
+    utilities = get_object_or_404(UtilitiesRecord, pk=pk)
+    utilities.delete()
+
+@login_required
+def living_place_create(request):
+    if request.method == 'POST':
+        form = LivingPlaceForm(request.POST)
+        if (form.is_valid):
+            living_place_record = form.save()
+            living_place_record.save()
+            return redirect('utilities_list')
+    else:
+        form = LivingPlaceForm()
+    return render(request, 'living_place_edit.html', {'form': form})
+
+@login_required
+def living_place_update(request, pk):
+    living_place = get_object_or_404(LivingPlace, pk=pk)
+    if request.method == 'POST':
+        form = LivingPlaceForm(request.POST)
+        if (form.is_valid):
+            living_place_record = form.save()
+            living_place_record.save()
+            return redirect('utilities_list')
+    else:
+        form = LivingPlaceForm(instance=living_place)
+    return render(request, 'living_place_edit.html', {'form': form})
+
+@login_required
+def living_place_delete(request, pk):
+    living_place = get_object_or_404(LivingPlace, pk=pk)
+    living_place.delete()

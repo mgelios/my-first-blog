@@ -8,4 +8,15 @@
 {% endblock %}
 
 {% block content %}
+    {% for living_place in living_places %}
+        <h1>{{living_place.name}}</h1>
+        {% for utilities_item in utilities %}
+            {% if utilities_item.place == living_place %}
+                <h3>{{utilities_item.date}}</h3>
+                <h3>{{utilities_item.hot_water}}</h3>
+                <h3>{{utilities_item.cold_water}}</h3>
+                <h3>{{utilities_item.electricity}}</h3>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
 {% endblock %}

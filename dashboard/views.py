@@ -160,6 +160,7 @@ def living_place_create(request):
         form = LivingPlaceForm(request.POST)
         if (form.is_valid):
             living_place_record = form.save()
+            living_place_record.author = request.user
             living_place_record.save()
             return redirect('utilities_list')
     else:
@@ -173,6 +174,7 @@ def living_place_update(request, pk):
         form = LivingPlaceForm(request.POST)
         if (form.is_valid):
             living_place_record = form.save()
+            living_place_record.author = request.user
             living_place_record.save()
             return redirect('utilities_list')
     else:

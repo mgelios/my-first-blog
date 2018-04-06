@@ -1,0 +1,23 @@
+{% extends './base.html' %}
+
+
+{% block header %}
+    <div class="col-xs-8 col-md-8">
+        <h1>Коммунальные показатели</h1>
+    </div>
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="col-xs-12 col-md-4 form-wrapper">
+        <form method="POST" class="post-form" name="editform">{% csrf_token %}
+            {{ form.as_p }}
+            <a class="save-button" href="javascript:document.editform.submit()">Save</a>
+            {% if is_update %}
+                <a class="delete-button" href="{% url 'utilities_delete' pk=form.instance.pk %}">Delete</a>
+            {% endif %}
+        </form>
+    </div>
+
+{% endblock %}

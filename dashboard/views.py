@@ -22,6 +22,8 @@ from .models import DevByEvent
 from .models import RadiotArticle
 from .models import LivingPlace, UtilitiesRecord
 
+from .forms import UtilityRecordForm, LivingPlaceForm
+
 from viberbot import Api
 from viberbot.api.messages.text_message import TextMessage
 from viberbot.api.bot_configuration import BotConfiguration
@@ -126,7 +128,7 @@ def utilities_create(request):
         if (form.is_valid):
             utility_record = form.save()
             utility_record.save()
-            return redirect('utilities_list', pk=utility_record.place.pk)
+            return redirect('utilities_list')
     else:
         form = UtilityRecordForm()
         form.fields['place'].queryset = LivingPlace.objects.filter(author=request.user)
@@ -144,12 +146,13 @@ def utilities_update(request, pk):
     else:
         form = UtilityRecordForm(instance=utilities)
         form.fields['place'].queryset = LivingPlace.objects.filter(author=request.user)
-    return render(request, 'utilities_edit.html', {'form': form})
+    return render(request, 'utilities_edit.html', {'form': form, 'is_update': True})
 
 @login_required
 def utilities_delete(request, pk):
     utilities = get_object_or_404(UtilitiesRecord, pk=pk)
     utilities.delete()
+    return redirect('utilities_list')
 
 @login_required
 def living_place_create(request):
@@ -174,9 +177,12 @@ def living_place_update(request, pk):
             return redirect('utilities_list')
     else:
         form = LivingPlaceForm(instance=living_place)
-    return render(request, 'living_place_edit.html', {'form': form})
+    return render(request, 'living_place_edit.html', {'form': form, 'is_update': True})
 
 @login_required
 def living_place_delete(request, pk):
     living_place = get_object_or_404(LivingPlace, pk=pk)
     living_place.delete()
+    return redirect('utilities_list')
+
+

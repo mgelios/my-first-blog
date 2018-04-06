@@ -8,11 +8,21 @@
 {% endblock %}
 
 {% block content %}
+    <h1>
+        <a href="{% url 'utilities_create' %}">
+            Add utilities <span class="glyphicon glyphicon-plus"></span>
+        </a>
+    </h1>
+    <h1>
+        <a href="{% url 'living_place_create' %}">
+            Add living place <span class="glyphicon glyphicon-plus"></span>
+        </a>
+    </h1>
     {% for living_place in living_places %}
-        <h1>{{living_place.name}}</h1>
+        <h1><a href="{% url 'living_place_update' pk=living_place.pk %}">{{living_place.name}}</a></h1>
         {% for utilities_item in utilities %}
             {% if utilities_item.place == living_place %}
-                <h3>{{utilities_item.date}}</h3>
+                <h3><a href="{% url 'utilities_update' pk=utilities_item.pk %}">{{utilities_item.date}}</a></h3>
                 <h3>{{utilities_item.hot_water}}</h3>
                 <h3>{{utilities_item.cold_water}}</h3>
                 <h3>{{utilities_item.electricity}}</h3>

@@ -1,6 +1,35 @@
 from django.db import models
 from django.utils import timezone
 
+class IncomeRecord(models.Model):
+    amount = models.IntegerField(default=0)
+    date = models.DateTimeField(default=timezone.now)
+    name = models.CharField(max_length=400, default='')
+    comment = models.CharField(max_length=400, default='')
+    author = models.ForeignKey('auth.User', on_delete=models.CASCADE, default=None, null=True)
+
+    def __str__(self):
+        return self.name
+
+class ExpensesRecord(models.Model):
+    amount = models.IntegerField(default=0)
+    date = models.DateTimeField(default=timezone.now)
+    name = models.CharField(max_length=400, default='')
+    comment = models.CharField(max_length=400, default='')
+    category = models.ForeignKey('dashboard.ExpensesCategory', on_delete=models.CASCADE)
+    author = models.ForeignKey('auth.User', on_delete=models.CASCADE, default=None, null=True)
+
+    def __str__(self):
+        return self.name
+
+class ExpensesCategory(models.Model):
+    name = models.CharField(max_length=400, default='')
+    date = models.DateTimeField(default=timezone.now)
+    author = models.ForeignKey('auth.User', on_delete=models.CASCADE, default=None, null=True)
+
+    def __str__(self):
+        return self.name
+
 class UtilitiesRecord(models.Model):
     hot_water = models.IntegerField(default=0)
     cold_water = models.IntegerField(default=0)
@@ -13,6 +42,9 @@ class LivingPlace(models.Model):
     address = models.TextField(default='')
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE, default=None, null=True)
     last_updated = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.name
 
 class RadiotArticle(models.Model):
     title = models.CharField(max_length=400, default='')

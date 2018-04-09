@@ -21,8 +21,10 @@ from .models import CryptoCurrency, CryptoMarket
 from .models import DevByEvent
 from .models import RadiotArticle
 from .models import LivingPlace, UtilitiesRecord
+from .models import IncomeRecord, ExpensesRecord, ExpensesCategory
 
 from .forms import UtilityRecordForm, LivingPlaceForm
+from .forms import ExpensesCategoryForm, ExpensesRecordForm, IncomeRecordForm
 
 from viberbot import Api
 from viberbot.api.messages.text_message import TextMessage
@@ -112,9 +114,7 @@ def crypto_currency_info(request):
 @login_required
 def utilities_list(request):
     utilities_records = UtilitiesRecord.objects.order_by('date')
-    living_places = LivingPlace.objects.order_by('last_updated')
-    print(living_places)
-    print(utilities_records)
+    living_places = LivingPlace.objects.filter(author=request.user).order_by('last_updated')
     return render(request, 'utilities.html', 
         {
             'utilities': utilities_records,
@@ -186,5 +186,151 @@ def living_place_delete(request, pk):
     living_place = get_object_or_404(LivingPlace, pk=pk)
     living_place.delete()
     return redirect('utilities_list')
+
+#
+#
+# expenses part
+#
+#
+
+@login_required
+def expenses_list(request):
+    expenses_records = ExpensesRecord.objects.filter(author=request.user).order_by('date')
+    expenses_categories = ExpensesCategory.objects.filter(author=request.user)
+    income_records = IncomeRecord.objects.filter(author=request.user).order_by('date')
+    return render(request, 'expenses.html', 
+        {
+            'expenses': expenses_records,
+            'expenses_categories': expenses_categories,
+            'incomes' : income_records
+        })
+
+@login_required
+def expenses_record_delete(request, pk):
+    expenses_record = get_object_or_404(ExpensesRecord, pk=pk)
+    expenses_record.delete()
+    return redirect('expenses_list')
+
+@login_required
+def expenses_category_delete(request, pk):
+    expenses_category = get_object_or_404(ExpensesCategory, pk=pk)
+    expenses_category.delete()
+    return redirect('expenses_list')
+
+@login_required
+def income_record_delete(request, pk):
+    income_record = get_object_or_404(IncomeRecord, pk=pk)
+    income_record.delete()
+    return redirect('expenses_list')
+
+@login_required
+def expenses_category_create(request):
+    if request.method == 'POST':
+        form = ExpensesCategoryForm(request.POST)
+        if (form.is_valid):
+            expenses_category = form.save()
+            expenses_category.author = request.user
+            expenses_category.save()
+            return redirect('utilities_list')
+    else:
+        form = ExpensesCategoryForm()
+    return render(request, 'expenses_category_edit.html', {'form': form})
+
+@login_required
+def expenses_category_update(request, pk):
+    expenses_category = get_object_or_404(ExpensesCategory, pk=pk)
+    if request.method == 'POST':
+        form = ExpensesCategoryForm(request.POST)
+        if (form.is_valid):
+            expenses_category_record = form.save()
+            expenses_category_record.author = request.user
+            expenses_category_record.save()
+            return redirect('utilities_list')
+    else:
+        form = ExpensesCategoryForm(instance=expenses_category)
+    return render(request, 'expenses_category_edit.html', {'form': form, 'is_update': True})
+
+@login_required
+def expenses_category_create(request):
+    if request.method == 'POST':
+        form = ExpensesCategoryForm(request.POST)
+        if (form.is_valid):
+            expenses_category = form.save()
+            expenses_category.author = request.user
+            expenses_category.save()
+            return redirect('expenses_list')
+    else:
+        form = ExpensesCategoryForm()
+    return render(request, 'expenses_category_edit.html', {'form': form})
+
+@login_required
+def expenses_category_update(request, pk):
+    expenses_category = get_object_or_404(ExpensesCategory, pk=pk)
+    if request.method == 'POST':
+        form = ExpensesCategoryForm(request.POST)
+        if (form.is_valid):
+            expenses_category_record = form.save()
+            expenses_category_record.author = request.user
+            expenses_category_record.save()
+            return redirect('expenses_list')
+    else:
+        form = ExpensesCategoryForm(instance=expenses_category)
+    return render(request, 'expenses_category_edit.html', {'form': form, 'is_update': True})
+
+@login_required
+def expenses_record_create(request):
+    if request.method == 'POST':
+        form = ExpensesRecordForm(request.POST)
+        if (form.is_valid):
+            expenses_record = form.save()
+            expenses_record.author = request.user
+            expenses_record.save()
+            return redirect('expenses_list')
+    else:
+        form = ExpensesRecordForm()
+        form.fields['category'].queryset = ExpensesCategory.objects.filter(author=request.user)
+    return render(request, 'expenses_record_edit.html', {'form': form})
+
+@login_required
+def expenses_record_update(request, pk):
+    expenses_record = get_object_or_404(ExpensesRecord, pk=pk)
+    if request.method == 'POST':
+        form = ExpensesRecordForm(request.POST)
+        if (form.is_valid):
+            expenses_form_record = form.save()
+            expenses_form_record.author = request.user
+            expenses_form_record.save()
+            return redirect('expenses_list')
+    else:
+        form = ExpensesRecordForm(instance=expenses_record)
+        form.fields['category'].queryset = ExpensesCategory.objects.filter(author=request.user)
+    return render(request, 'expenses_record_edit.html', {'form': form, 'is_update': True})
+
+@login_required
+def income_record_create(request):
+    if request.method == 'POST':
+        form = IncomeRecordForm(request.POST)
+        if (form.is_valid):
+            income_record = form.save()
+            income_record.author = request.user
+            income_record.save()
+            return redirect('expenses_list')
+    else:
+        form = IncomeRecordForm()
+    return render(request, 'income_record_edit.html', {'form': form})
+
+@login_required
+def income_record_update(request, pk):
+    income_record = get_object_or_404(IncomeRecord, pk=pk)
+    if request.method == 'POST':
+        form = IncomeRecordForm(request.POST)
+        if (form.is_valid):
+            income_form_record = form.save()
+            income_form_record.author = request.user
+            income_form_record.save()
+            return redirect('expenses_list')
+    else:
+        form = IncomeRecordForm(instance=expenses_record)
+    return render(request, 'income_record_edit.html', {'form': form, 'is_update': True})
 
 

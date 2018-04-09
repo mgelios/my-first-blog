@@ -16,5 +16,15 @@ urlpatterns = [
     url(r'^dashboard/living_place/new/$', views.living_place_create, name='living_place_create'),
     url(r'^dashboard/living_place/update/(?P<pk>\d+)$', views.living_place_update, name='living_place_update'),
     url(r'^dashboard/living_place/delete/(?P<pk>\d+)$', views.living_place_delete, name='living_place_delete'),
+    url(r'^dashboard/expenses/list/$', views.expenses_list, name='expenses_list'),
+    url(r'^dashboard/expenses/new/$', views.expenses_record_create, name='expenses_record_create'),
+    url(r'^dashboard/expenses/update/(?P<pk>\d+)$', views.expenses_record_update, name='expenses_record_update'),
+    url(r'^dashboard/expenses/delete/(?P<pk>\d+)$', views.expenses_record_delete, name='expenses_record_delete'),
+    url(r'^dashboard/expenses_category/new/$', views.expenses_category_create, name='expenses_category_create'),
+    url(r'^dashboard/expenses_category/update/(?P<pk>\d+)$', views.expenses_category_update, name='expenses_category_update'),
+    url(r'^dashboard/expenses_category/delete/(?P<pk>\d+)$', views.expenses_category_delete, name='expenses_category_delete'),
+    url(r'^dashboard/income/new/$', views.income_record_create, name='income_record_create'),
+    url(r'^dashboard/income/update/(?P<pk>\d+)$', views.income_record_update, name='income_record_update'),
+    url(r'^dashboard/income/delete/(?P<pk>\d+)$', views.income_record_delete, name='income_record_delete'),
 ]
 

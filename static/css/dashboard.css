@@ -250,6 +250,15 @@ body a, body a:hover, body a:active {
     text-decoration: underline;
 }
 
+.expenses-wrapper {
+    padding-top: 1em;
+}
+
+.expenses-wrapper a, .expenses-wrapper a:active, .expenses-wrapper a:hover {
+    color: var(--text-main-color);
+    text-decoration: underline;
+}
+
 a.wg-button, a.wg-button:active, a.wg-button:hover{
     color: var(--text-inverted-color);
 }
@@ -257,7 +266,7 @@ a.wg-button, a.wg-button:active, a.wg-button:hover{
 .wg-button div {
     background-color: var(--dark-main-color);
     box-shadow: 0 0 5px rgba(0,0,0,0.25);
-    
+
     display: inline-block;
     padding: 0.5em;
     margin: 1em;

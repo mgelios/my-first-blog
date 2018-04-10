@@ -239,6 +239,34 @@ body a, body a:hover, body a:active {
     width: 100%;
 }
 
+/* utitlites section */
+
+.utilities-wrapper {
+    padding-top: 1em;
+}
+
+.utilities-wrapper a, .utilities-wrapper a:active, .utilites-wrapper a:hover {
+    color: var(--text-main-color);
+    text-decoration: underline;
+}
+
+a.wg-button, a.wg-button:active, a.wg-button:hover{
+    color: var(--text-inverted-color);
+}
+
+.wg-button div {
+    background-color: var(--dark-main-color);
+    box-shadow: 0 0 5px rgba(0,0,0,0.25);
+    
+    display: inline-block;
+    padding: 0.5em;
+    margin: 1em;
+}
+
+.wg-button h2 {
+    margin: 0.2em;
+}
+
 /* charts styling */
 
 .ct-chart, .ct-chart-2 {
@@ -260,7 +288,6 @@ body a, body a:hover, body a:active {
 .ct-labels .ct-label {
     color: var(--paper-main-color);
 }
-
 
 @media (max-width: 990px) {
     .wg-weather-canvas{

@@ -113,8 +113,8 @@ def crypto_currency_info(request):
 
 @login_required
 def utilities_list(request):
-    utilities_records = UtilitiesRecord.objects.order_by('date')
-    living_places = LivingPlace.objects.filter(author=request.user).order_by('last_updated')
+    utilities_records = UtilitiesRecord.objects.order_by('-date')
+    living_places = LivingPlace.objects.filter(author=request.user).order_by('-last_updated')
     return render(request, 'utilities.html', 
         {
             'utilities': utilities_records,
@@ -195,9 +195,9 @@ def living_place_delete(request, pk):
 
 @login_required
 def expenses_list(request):
-    expenses_records = ExpensesRecord.objects.filter(author=request.user).order_by('date')
+    expenses_records = ExpensesRecord.objects.filter(author=request.user).order_by('-date')
     expenses_categories = ExpensesCategory.objects.filter(author=request.user)
-    income_records = IncomeRecord.objects.filter(author=request.user).order_by('date')
+    income_records = IncomeRecord.objects.filter(author=request.user).order_by('-date')
     return render(request, 'expenses.html', 
         {
             'expenses': expenses_records,

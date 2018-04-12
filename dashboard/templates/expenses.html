@@ -24,6 +24,13 @@
                     </h2>
                 </div>
             </a>
+            <a href="{% url 'income_record_create' %}" class="wg-button">
+                <div>
+                    <h2>
+                        Доходы <span class="glyphicon glyphicon-plus"></span>
+                    </h2>
+                </div>
+            </a>
         </div>
         {% for expenses_category in expenses_categories %}
             <h1><a href="{% url 'expenses_category_update' pk=expenses_category.pk %}">{{expenses_category.name}}</a></h1>

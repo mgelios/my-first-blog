@@ -34,6 +34,7 @@ class UtilitiesRecord(models.Model):
     hot_water = models.IntegerField(default=0)
     cold_water = models.IntegerField(default=0)
     electricity = models.IntegerField(default=0)
+    gas = models.IntegerField(default=0)
     date = models.DateTimeField(default=timezone.now)
     place = models.ForeignKey('dashboard.LivingPlace', on_delete=models.CASCADE)
 

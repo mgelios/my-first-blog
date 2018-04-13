@@ -25,7 +25,7 @@ class UtilityRecordForm(forms.ModelForm):
 
     class Meta:
         model = UtilitiesRecord
-        fields = ('hot_water', 'cold_water', 'electricity', 'date', 'place',)
+        fields = ('hot_water', 'cold_water', 'electricity', 'gas', 'date', 'place',)
 
 
 class LivingPlaceForm(forms.ModelForm):

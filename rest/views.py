@@ -21,6 +21,7 @@ from dashboard.dashes.currency import NBRBCurrency
 from dashboard.dashes.crypto_currency import CryptoCurrencyInfo
 
 from .serializers import WeatherSerializer, WeatherForecastSerializer
+from .serializers import CurrencySerializer, CurrencyConversionSerializer, CurrencyStatisticsSerializer
 
 
 @api_view()
@@ -41,3 +42,27 @@ def obtain_weather(request):
     for forecast_item in forecast_db:
         forecast.append(WeatherForecastSerializer(forecast_item).data)
     return Response({'weather': weather, 'forecast': forecast})
+
+@api_view()
+def obtain_currencies(request):
+    NBRBCurrency.update_info()
+    currencies_db = Currency.objects.filter(scale__isnull=False)
+    statistics_eur_db = CurrencyStatistics.objects.filter(abbreviation='EUR').order_by('date')
+    statistics_usd_db = CurrencyStatistics.objects.filter(abbreviation='USD').order_by('date')
+    conversions_db = CurrencyConversion.objects.filter(value__isnull=False)
+
+    currencies = []
+    for currency_db in currencies_db:
+        currencies.append(CurrencySerializer(currency_db).data)
+    conversions = []
+    for conversion_db in conversions_db:
+        conversions.append(CurrencyConversionSerializer(conversion_db).data)
+
+    statistics_usd = CurrencyStatisticsSerializer(statistics_usd_db).data
+    statistics_eur = CurrencyStatisticsSerializer(statistics_eur_db).data
+    return Response({
+        'currencies': currencies, 
+        'conversions': conversions, 
+        'statistics_eur': statistics_eur,
+        'statistics_usd': statistics_usd
+    })

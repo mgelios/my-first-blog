@@ -7,7 +7,7 @@ from django.utils import timezone
 
 from django.http import HttpResponse
 
-import datetime
+from datetime import datetime, timedelta
 
 from dashboard.dashes.weather import OpenWeather
 from dashboard.dashes.currency import NBRBCurrency
@@ -195,14 +195,16 @@ def living_place_delete(request, pk):
 
 @login_required
 def expenses_list(request):
-    expenses_records = ExpensesRecord.objects.filter(author=request.user).order_by('-date')
+    fromDate = datetime.today() - timedelta(days=30)
+    expenses_records = ExpensesRecord.objects.filter(author=request.user).filter(date__gte=fromDate).order_by('-date')
     expenses_categories = ExpensesCategory.objects.filter(author=request.user)
-    income_records = IncomeRecord.objects.filter(author=request.user).order_by('-date')
+    income_records = IncomeRecord.objects.filter(author=request.user).filter(date__gte=fromDate).order_by('-date')
     return render(request, 'expenses.html', 
         {
             'expenses': expenses_records,
             'expenses_categories': expenses_categories,
-            'incomes' : income_records
+            'incomes' : income_records,
+            'scale' : 100
         })
 
 @login_required

@@ -199,12 +199,16 @@ def expenses_list(request):
     expenses_records = ExpensesRecord.objects.filter(author=request.user).filter(date__gte=fromDate).order_by('-date')
     expenses_categories = ExpensesCategory.objects.filter(author=request.user)
     income_records = IncomeRecord.objects.filter(author=request.user).filter(date__gte=fromDate).order_by('-date')
+    summary = 0
+    for expenses_record in expenses_records:
+        summary = summary + expenses_record.amount
     return render(request, 'expenses.html', 
         {
             'expenses': expenses_records,
             'expenses_categories': expenses_categories,
             'incomes' : income_records,
-            'scale' : 100
+            'scale' : 100,
+            'summary' : summary
         })
 
 @login_required

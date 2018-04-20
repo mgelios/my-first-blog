@@ -202,13 +202,21 @@ def expenses_list(request):
     summary = 0
     for expenses_record in expenses_records:
         summary = summary + expenses_record.amount
+    category_info = []
+    for expenses_category in expenses_categories:
+        summary = 0
+        for expenses_record in expenses_records:
+            if expenses_record.category == expenses_category:
+                summary = summary + expenses_record.amount
+        category_info.append({'name': expenses_category.name, 'amount': summary})
     return render(request, 'expenses.html', 
         {
             'expenses': expenses_records,
             'expenses_categories': expenses_categories,
             'incomes' : income_records,
             'scale' : 100,
-            'summary' : summary
+            'summary' : summary,
+            'category_info' : category_info
         })
 
 @login_required

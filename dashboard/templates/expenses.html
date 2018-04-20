@@ -41,8 +41,36 @@
                 {% endfor %}
             {% endfor %}
         </div>
-        <div>
+        <div class="col-md-8 col-xs-12">
             <h1>Total: {{summary}}</h1>
+            <div class="col-xs-12 col-md-12 wg-expenses-canvas">
+                <canvas id="expensesDonut"></canvas>
+            </div>
+            <script>
+                var expensesCtx = document.getElementById("expensesDonut").getContext('2d');
+                var expensesDonut = new Chart(expensesCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: [
+                            {% for category in category_info %}
+                                '{{category.name}}',
+                            {% endfor %}
+                        ],
+                        datasets:[{
+                            label: 'Amount',
+                            data: [
+                               {% for category in category_info %}
+                                   {{category.amount}},
+                               {% endfor %}
+                            ],
+                            backgroundColor:[
+                                '#7ac0c088','#e6896688','#82c07a88'
+                            ]
+                        }]
+                    }
+                });
+            </script>
+
         </div>
     </div>
 {% endblock %}

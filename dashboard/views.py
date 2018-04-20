@@ -195,20 +195,23 @@ def living_place_delete(request, pk):
 
 @login_required
 def expenses_list(request):
+    scale = 100.0
     fromDate = datetime.today() - timedelta(days=30)
     expenses_records = ExpensesRecord.objects.filter(author=request.user).filter(date__gte=fromDate).order_by('-date')
     expenses_categories = ExpensesCategory.objects.filter(author=request.user)
     income_records = IncomeRecord.objects.filter(author=request.user).filter(date__gte=fromDate).order_by('-date')
-    summary = 0
+    summary = 0.0
     for expenses_record in expenses_records:
         summary = summary + expenses_record.amount
+    summary = summary / scale
     category_info = []
     for expenses_category in expenses_categories:
-        summary = 0
+        category_summary = 0.0
         for expenses_record in expenses_records:
             if expenses_record.category == expenses_category:
-                summary = summary + expenses_record.amount
-        category_info.append({'name': expenses_category.name, 'amount': summary})
+                category_summary = category_summary + expenses_record.amount
+        category_summary = category_summary / scale
+        category_info.append({'name': expenses_category.name, 'amount': category_summary})
     return render(request, 'expenses.html', 
         {
             'expenses': expenses_records,

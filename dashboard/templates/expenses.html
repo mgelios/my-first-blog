@@ -9,38 +9,6 @@
 
 {% block content %}
     <div class="expenses-wrapper">
-        <div class="col-md-4 col-xs-12">
-            <a href="{% url 'expenses_category_create' %}" class="wg-button">
-                <div>
-                    <h2>
-                        Категория <span class="glyphicon glyphicon-plus"></span>
-                    </h2>
-                </div>
-            </a>
-            <a href="{% url 'expenses_record_create' %}" class="wg-button">
-                <div>
-                    <h2>
-                        Траты <span class="glyphicon glyphicon-plus"></span>
-                    </h2>
-                </div>
-            </a>
-            <a href="{% url 'income_record_create' %}" class="wg-button">
-                <div>
-                    <h2>
-                        Доходы <span class="glyphicon glyphicon-plus"></span>
-                    </h2>
-                </div>
-            </a>
-            {% for expenses_category in expenses_categories %}
-                <h1><a href="{% url 'expenses_category_update' pk=expenses_category.pk %}">{{expenses_category.name}}</a></h1>
-                {% for expenses_item in expenses %}
-                    {% if expenses_item.category == expenses_category %}
-                        <h3><a href="{% url 'expenses_record_update' pk=expenses_item.pk %}">{{expenses_item.date}}</a></h3>
-                        <h3>{{expenses_item.amount}} BYN</h3>
-                    {% endif %}
-                {% endfor %}
-            {% endfor %}
-        </div>
         <div class="col-md-8 col-xs-12">
             <h1>Total: {{summary}}</h1>
             <div class="col-xs-12 col-md-12 wg-expenses-canvas">
@@ -79,6 +47,38 @@
                 });
             </script>
 
+        </div>
+        <div class="col-md-4 col-xs-12">
+            <a href="{% url 'expenses_category_create' %}" class="wg-button">
+                <div>
+                    <h2>
+                        Категория <span class="glyphicon glyphicon-plus"></span>
+                    </h2>
+                </div>
+            </a>
+            <a href="{% url 'expenses_record_create' %}" class="wg-button">
+                <div>
+                    <h2>
+                        Траты <span class="glyphicon glyphicon-plus"></span>
+                    </h2>
+                </div>
+            </a>
+            <a href="{% url 'income_record_create' %}" class="wg-button">
+                <div>
+                    <h2>
+                        Доходы <span class="glyphicon glyphicon-plus"></span>
+                    </h2>
+                </div>
+            </a>
+            {% for expenses_category in expenses_categories %}
+                <h1><a href="{% url 'expenses_category_update' pk=expenses_category.pk %}">{{expenses_category.name}}</a></h1>
+                {% for expenses_item in expenses %}
+                    {% if expenses_item.category == expenses_category %}
+                        <h3><a href="{% url 'expenses_record_update' pk=expenses_item.pk %}">{{expenses_item.date}}</a></h3>
+                        <h3>{{expenses_item.amount}} BYN</h3>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
         </div>
     </div>
 {% endblock %}

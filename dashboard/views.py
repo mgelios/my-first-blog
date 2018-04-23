@@ -111,14 +111,35 @@ def crypto_currency_info(request):
             'crypto_market': crypto_market
         })
 
+# 
+# place for utilities section
+# 
+
 @login_required
 def utilities_list(request):
     utilities_records = UtilitiesRecord.objects.order_by('-date')
     living_places = LivingPlace.objects.filter(author=request.user).order_by('-last_updated')
+    electricity_in_one_day = 0.0
+    hot_water_in_one_day = 0.0
+    cold_water_in_one_day = 0.0
+    electricity_scale = 10.0
+    water_scale = 100.0
+    first_utilities_record = utilities_records[len(utilities_records) - 1]
+    last_utilities_record = utilities_records[0]
+    days = (last_utilities_record.date - first_utilities_record.date).days
+    electricity_in_one_day = (last_utilities_record.electricity - first_utilities_record.electricity)
+    hot_water_in_one_day = (last_utilities_record.hot_water - first_utilities_record.hot_water)
+    cold_water_in_one_day = (last_utilities_record.cold_water - first_utilities_record.cold_water)
+    electricity_in_one_day = electricity_in_one_day / (electricity_scale * days)
+    hot_water_in_one_day = hot_water_in_one_day / (water_scale * days)
+    cold_water_in_one_day = cold_water_in_one_day / (water_scale * days)
     return render(request, 'utilities.html', 
         {
             'utilities': utilities_records,
-            'living_places': living_places
+            'living_places': living_places,
+            'cold_water_in_one_day' : cold_water_in_one_day,
+            'hot_water_in_one_day' : hot_water_in_one_day,
+            'electricity_in_one_day' : electricity_in_one_day
         })
 
 @login_required

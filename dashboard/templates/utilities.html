@@ -9,23 +9,29 @@
 
 {% block content %}
     <div class="utilities-wrapper">
-        <div class="col-md-4 col-xs-12">
-            <a href="{% url 'utilities_create' %}" class="wg-button">
-                <div>
-                    <h2>
-                        Коммуналки <span class="glyphicon glyphicon-plus"></span>
-                    </h2>
-                </div>
-            </a>
-            <a href="{% url 'living_place_create' %}" class="wg-button">
-                <div>
-                    <h2>
-                        Место жительства <span class="glyphicon glyphicon-plus"></span>
-                    </h2>
-                </div>
-            </a>
-        </div>
         <div class="col-md-8 col-xs-12">
+            <h2>Срендний расход холодной воды в день: {{cold_water_in_one_day}}</h2>
+            <h2>Срендний расход горяей воды в день: {{hot_water_in_one_day}}</h2>
+            <h2>Срендний расход электричества в день: {{electricity_in_one_day}}</h2>
+        </div>
+        <div class="col-md-4 col-xs-12">
+            <div class="col-md-12 col-xs-12">
+                <a href="{% url 'utilities_create' %}" class="wg-button">
+                    <div>
+                        <h2>
+                            Коммуналки <span class="glyphicon glyphicon-plus"></span>
+                        </h2>
+                    </div>
+                </a>
+                <a href="{% url 'living_place_create' %}" class="wg-button">
+                    <div>
+                        <h2>
+                            Место жительства <span class="glyphicon glyphicon-plus"></span>
+                        </h2>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-12 col-xs-12">
             {% for living_place in living_places %}
                 <h1><a href="{% url 'living_place_update' pk=living_place.pk %}">{{living_place.name}}</a></h1>
                 {% for utilities_item in utilities %}
@@ -37,6 +43,7 @@
                     {% endif %}
                 {% endfor %}
             {% endfor %}
+            </div>
         </div>
     </div>
 {% endblock %}

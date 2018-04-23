@@ -123,7 +123,7 @@ def utilities_list(request):
     hot_water_in_one_day = 0.0
     cold_water_in_one_day = 0.0
     electricity_scale = 10.0
-    water_scale = 100.0
+    water_scale = 1000.0
     first_utilities_record = utilities_records[len(utilities_records) - 1]
     last_utilities_record = utilities_records[0]
     days = (last_utilities_record.date - first_utilities_record.date).days

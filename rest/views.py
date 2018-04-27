@@ -50,16 +50,18 @@ def obtain_currencies(request):
     statistics_eur_db = CurrencyStatistics.objects.filter(abbreviation='EUR').order_by('date')
     statistics_usd_db = CurrencyStatistics.objects.filter(abbreviation='USD').order_by('date')
     conversions_db = CurrencyConversion.objects.filter(value__isnull=False)
-
     currencies = []
+    conversions = []
+    statistics_usd = []
+    statistics_eur = []
     for currency_db in currencies_db:
         currencies.append(CurrencySerializer(currency_db).data)
-    conversions = []
     for conversion_db in conversions_db:
         conversions.append(CurrencyConversionSerializer(conversion_db).data)
-
-    statistics_usd = CurrencyStatisticsSerializer(statistics_usd_db).data
-    statistics_eur = CurrencyStatisticsSerializer(statistics_eur_db).data
+    for statistic_usd_db in statistics_usd_db:
+        statistics_usd.append(CurrencyStatisticsSerializer(statistic_usd_db).data)
+    for statistic_eur_db in statistics_eur_db:
+        statistics_eur.append(CurrencyStatisticsSerializer(statistic_eur_db).data)
     return Response({
         'currencies': currencies, 
         'conversions': conversions, 

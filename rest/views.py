@@ -22,6 +22,7 @@ from dashboard.dashes.crypto_currency import CryptoCurrencyInfo
 
 from .serializers import WeatherSerializer, WeatherForecastSerializer
 from .serializers import CurrencySerializer, CurrencyConversionSerializer, CurrencyStatisticsSerializer
+from .serializers import CryptoCurrencySerializer, CryptoMarketSerializer
 
 
 @api_view()
@@ -67,4 +68,18 @@ def obtain_currencies(request):
         'conversions': conversions, 
         'statistics_eur': statistics_eur,
         'statistics_usd': statistics_usd
+    })
+
+@api_view()
+def obtain_crypto_currencies(request):
+    CryptoCurrencyInfo.update_info()
+    crypto_currencies_db = CryptoCurrency.objects.order_by('rank')
+    crypto_market_db = CryptoMarket.objects.get()
+    crypto_currencies = []
+    crypto_market = CryptoMarketSerializer(crypto_market_db).data
+    for item in crypto_currencies_db:
+        crypto_currencies.append(CryptoCurrencySerializer(item).data)
+    return Response({
+        'market' : crypto_market,
+        'crypto_currencies' : crypto_currencies
     })

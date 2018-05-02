@@ -2,6 +2,22 @@ from datetime import datetime
 
 from rest_framework import serializers
 
+class CryptoMarketSerializer(serializers.Serializer):
+    total_usd = serializers.IntegerField(read_only=True)
+    total_usd_day_volume = serializers.IntegerField(read_only=True)
+    active_markets = serializers.IntegerField(read_only=True)
+    active_currencies = serializers.IntegerField(read_only=True)
+    bitcoin_percent = serializers.FloatField(read_only=True)
+    last_updated = serializers.DateTimeField(read_only=True)
+
+class CryptoCurrencySerializer(serializers.Serializer):
+    name = serializers.CharField(max_length=200, read_only=True)
+    symbol = serializers.CharField(max_length=200, read_only=True)
+    rank = serializers.IntegerField(read_only=True)
+    price_usd = serializers.FloatField(read_only=True)
+    price_btc = serializers.FloatField(read_only=True)
+    change_24h = serializers.FloatField(read_only=True)
+
 class CurrencyStatisticsSerializer(serializers.Serializer):
     abbreviation = serializers.CharField(max_length=200, read_only=True)
     rate = serializers.FloatField(read_only=True)

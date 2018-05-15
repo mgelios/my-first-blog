@@ -160,11 +160,19 @@ body {
     margin-top: 1em;
     margin-bottom: 1em;
     background-color: var(--light-main-color);
-    padding: 1em;
+    padding-left: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.2em;
+    padding-right: 1em;
     border-radius: 0.5em;
     border-left-style: solid;
     border-left-width: 0.5em;
     border-left-color: red;
+}
+
+.action-item h1, .action-item h2,.action-item h3,.action-item h4,.action-item h5,.action-item h6{
+    margin-top: 0.2em;
+    margin-bottom: 0.2em;
 }
 
 .form-wrapper{

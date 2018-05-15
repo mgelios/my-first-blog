@@ -200,6 +200,7 @@ body a p{
 
 input {
     color: var(--text-main-color);
+    text-align: center;
 }
 
 #landing-content {
